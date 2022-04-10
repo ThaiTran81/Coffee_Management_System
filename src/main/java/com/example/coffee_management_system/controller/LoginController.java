@@ -1,4 +1,4 @@
-package com.example.coffee_management_system;
+package com.example.coffee_management_system.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
