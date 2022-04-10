@@ -9,6 +9,8 @@ module com.example.coffee_management_system {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires com.jfoenix;
+    requires java.sql;
 
     opens com.example.coffee_management_system to javafx.fxml;
     exports com.example.coffee_management_system;

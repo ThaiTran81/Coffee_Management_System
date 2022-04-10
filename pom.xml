@@ -90,6 +90,16 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -113,7 +123,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.coffee_management_system/com.example.coffee_management_system.HelloApplication
+                                com.example.coffee_management_system/com.example.coffee_management_system.Main
                             </mainClass>
                         </configuration>
                     </execution>
