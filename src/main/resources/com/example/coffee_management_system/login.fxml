@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.LoginController">
+<BorderPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.LoginController">
    <left>
       <AnchorPane prefHeight="448.0" prefWidth="343.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="ivBrand" fitHeight="451.0" fitWidth="353.0" layoutX="-6.0" layoutY="-3.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../../../asset/logo.png" />
+                  <Image url="@asset/logo.png" />
                </image>
             </ImageView>
          </children>

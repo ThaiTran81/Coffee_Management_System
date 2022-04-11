@@ -11,6 +11,7 @@ module com.example.coffee_management_system {
     requires eu.hansolo.tilesfx;
     requires com.jfoenix;
     requires java.sql;
+    requires spring.security.crypto;
 
     opens com.example.coffee_management_system to javafx.fxml;
     exports com.example.coffee_management_system;

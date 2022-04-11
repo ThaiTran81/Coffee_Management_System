@@ -25,17 +25,18 @@ public class Main extends Application {
 //        }catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //        }
+
         System.setProperty("prism.lcdtext", "false");
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        try {
-            if(!AccountDAO.checkAdminExist()){
-                fxmlLoader = new FXMLLoader(Main.class.getResource("register.fxml"));
-            };
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
+//        try {
+//            if(!AccountDAO.checkAdminExist()){
+//                fxmlLoader = new FXMLLoader(Main.class.getResource("register.fxml"));
+//            };
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.initStyle(StageStyle.UNDECORATED);
