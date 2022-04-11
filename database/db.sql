@@ -1,3 +1,26 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : MySQL_Web
+ Source Server Type    : MySQL
+ Source Server Version : 50734
+ Source Host           : localhost:8889
+ Source Schema         : cms_db
+
+ Target Server Type    : MySQL
+ Target Server Version : 50734
+ File Encoding         : 65001
+
+ Date: 11/04/2022 15:14:12
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for account
+-- ----------------------------
+DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -6,6 +29,10 @@ CREATE TABLE `account` (
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for area
+-- ----------------------------
+DROP TABLE IF EXISTS `area`;
 CREATE TABLE `area` (
   `area_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -13,6 +40,10 @@ CREATE TABLE `area` (
   PRIMARY KEY (`area_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for attendance
+-- ----------------------------
+DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
   `user_id` int(11) NOT NULL,
   `check_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,6 +52,10 @@ CREATE TABLE `attendance` (
   CONSTRAINT `fk_attendance_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for bill
+-- ----------------------------
+DROP TABLE IF EXISTS `bill`;
 CREATE TABLE `bill` (
   `bill_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -39,6 +74,10 @@ CREATE TABLE `bill` (
   CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for billDetail
+-- ----------------------------
+DROP TABLE IF EXISTS `billDetail`;
 CREATE TABLE `billDetail` (
   `billDetail_id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(11) DEFAULT NULL,
@@ -54,6 +93,10 @@ CREATE TABLE `billDetail` (
   CONSTRAINT `fk_billDetail_itemDetail` FOREIGN KEY (`itemDetail_id`) REFERENCES `itemDetail` (`itemDetail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for billPromotion
+-- ----------------------------
+DROP TABLE IF EXISTS `billPromotion`;
 CREATE TABLE `billPromotion` (
   `billPromotion_id` int(11) NOT NULL AUTO_INCREMENT,
   `promotion_id` int(11) NOT NULL,
@@ -63,12 +106,20 @@ CREATE TABLE `billPromotion` (
   CONSTRAINT `fk_billPromotion_promotion` FOREIGN KEY (`promotion_id`) REFERENCES `promotion` (`promotion_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for customer
+-- ----------------------------
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) DEFAULT NULL,
@@ -78,6 +129,10 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for item
+-- ----------------------------
+DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -89,6 +144,10 @@ CREATE TABLE `item` (
   CONSTRAINT `fk_item_type` FOREIGN KEY (`type`) REFERENCES `type` (`type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for itemDetail
+-- ----------------------------
+DROP TABLE IF EXISTS `itemDetail`;
 CREATE TABLE `itemDetail` (
   `itemDetail_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
@@ -99,6 +158,10 @@ CREATE TABLE `itemDetail` (
   CONSTRAINT `fk_itemDetail_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for itemPromotion
+-- ----------------------------
+DROP TABLE IF EXISTS `itemPromotion`;
 CREATE TABLE `itemPromotion` (
   `itemPromotion_id` int(11) NOT NULL AUTO_INCREMENT,
   `promotion_id` int(11) NOT NULL,
@@ -111,6 +174,10 @@ CREATE TABLE `itemPromotion` (
   CONSTRAINT `fk_ itemPromotion_promotion` FOREIGN KEY (`promotion_id`) REFERENCES `promotion` (`promotion_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for promotion
+-- ----------------------------
+DROP TABLE IF EXISTS `promotion`;
 CREATE TABLE `promotion` (
   `promotion_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -123,6 +190,10 @@ CREATE TABLE `promotion` (
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for table
+-- ----------------------------
+DROP TABLE IF EXISTS `table`;
 CREATE TABLE `table` (
   `table_id` int(11) NOT NULL AUTO_INCREMENT,
   `area_id` int(11) DEFAULT NULL,
@@ -136,6 +207,10 @@ CREATE TABLE `table` (
   CONSTRAINT `fk_table_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for type
+-- ----------------------------
+DROP TABLE IF EXISTS `type`;
 CREATE TABLE `type` (
   `type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -145,6 +220,10 @@ CREATE TABLE `type` (
   CONSTRAINT `fk_type_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(45) DEFAULT NULL,
@@ -154,4 +233,6 @@ CREATE TABLE `user` (
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS = 1;
