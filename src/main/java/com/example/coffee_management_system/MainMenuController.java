@@ -23,10 +23,11 @@ public class MainMenuController implements Initializable {
         Image im = null;
         try {
             im = new Image(MainMenuController.class.getResource("asset/man.png").toURI().toString(), false);
+            myCircle.setFill(new ImagePattern(im));
+            myCircle.setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKGRAY));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        myCircle.setFill(new ImagePattern(im));
-        myCircle.setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKGRAY));
+
     }
 }

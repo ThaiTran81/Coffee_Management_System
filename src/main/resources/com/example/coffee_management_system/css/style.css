@@ -1,0 +1,25 @@
+.border-bottom {
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 1;
+    -fx-border-color: black;
+}
+
+.drop-shadow {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.1, 0.0, 0.0);
+}
+
+.border-color-grey {
+    -fx-border-color: rgba(102, 98, 100, 0.32);
+}
+
+.btn-menu-item {
+}
+
+.label-btn {
+
+}
+
+.btn-menu-item:hover, .btn-menu-item:hover .label-btn {
+    -fx-background-color: #64DFAA;
+    -fx-text-fill: white;
+}
