@@ -11,7 +11,7 @@
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 11/04/2022 15:14:12
+ Date: 14/04/2022 22:35:26
 */
 
 SET NAMES utf8mb4;
@@ -30,6 +30,12 @@ CREATE TABLE `account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of account
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for area
 -- ----------------------------
 DROP TABLE IF EXISTS `area`;
@@ -39,6 +45,12 @@ CREATE TABLE `area` (
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`area_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of area
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for attendance
@@ -51,6 +63,12 @@ CREATE TABLE `attendance` (
   PRIMARY KEY (`user_id`,`check_time`),
   CONSTRAINT `fk_attendance_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attendance
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for bill
@@ -75,23 +93,35 @@ CREATE TABLE `bill` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of bill
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for billDetail
 -- ----------------------------
 DROP TABLE IF EXISTS `billDetail`;
 CREATE TABLE `billDetail` (
   `billDetail_id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(11) DEFAULT NULL,
-  `itemDetail_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `note` varchar(100) DEFAULT NULL,
   `discount` float DEFAULT NULL,
   `price` float DEFAULT NULL,
   PRIMARY KEY (`billDetail_id`),
   KEY `fk_billDetail_bill_idx` (`bill_id`),
-  KEY `fk_billDetail_itemDetail_idx` (`itemDetail_id`),
+  KEY `fk_billDetail_item_idx` (`item_id`),
   CONSTRAINT `fk_billDetail_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_billDetail_itemDetail` FOREIGN KEY (`itemDetail_id`) REFERENCES `itemDetail` (`itemDetail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_billDetail_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of billDetail
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for billPromotion
@@ -107,14 +137,27 @@ CREATE TABLE `billPromotion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of billPromotion
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for category
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `icon_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of category
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for customer
@@ -130,6 +173,12 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of customer
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for item
 -- ----------------------------
 DROP TABLE IF EXISTS `item`;
@@ -137,26 +186,19 @@ CREATE TABLE `item` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
   PRIMARY KEY (`item_id`),
-  KEY `fk_item_type_idx` (`type`),
-  CONSTRAINT `fk_item_type` FOREIGN KEY (`type`) REFERENCES `type` (`type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_item_type_idx` (`category`),
+  CONSTRAINT `fk_item_type` FOREIGN KEY (`category`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for itemDetail
+-- Records of item
 -- ----------------------------
-DROP TABLE IF EXISTS `itemDetail`;
-CREATE TABLE `itemDetail` (
-  `itemDetail_id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `price` double DEFAULT '0',
-  PRIMARY KEY (`itemDetail_id`),
-  KEY `fk_itemDetail_item_idx` (`item_id`),
-  CONSTRAINT `fk_itemDetail_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for itemPromotion
@@ -175,6 +217,12 @@ CREATE TABLE `itemPromotion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of itemPromotion
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for promotion
 -- ----------------------------
 DROP TABLE IF EXISTS `promotion`;
@@ -189,6 +237,12 @@ CREATE TABLE `promotion` (
   PRIMARY KEY (`promotion_id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of promotion
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for table
@@ -208,17 +262,10 @@ CREATE TABLE `table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for type
+-- Records of table
 -- ----------------------------
-DROP TABLE IF EXISTS `type`;
-CREATE TABLE `type` (
-  `type_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`type_id`),
-  KEY `fk_type_category_idx` (`category_id`),
-  CONSTRAINT `fk_type_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for user
@@ -233,6 +280,12 @@ CREATE TABLE `user` (
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
