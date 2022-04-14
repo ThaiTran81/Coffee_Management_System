@@ -18,21 +18,21 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         System.setProperty("prism.lcdtext", "false");
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("item_managment.fxml"));
 
 //      Check whether admin account was registered or not
-        try {
-            if(!AccountDAO.checkAdminExist()){
-                fxmlLoader = new FXMLLoader(Main.class.getResource("register.fxml"));
-            };
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if(!AccountDAO.checkAdminExist()){
+//                fxmlLoader = new FXMLLoader(Main.class.getResource("register.fxml"));
+//            };
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         Scene scene = new Scene(fxmlLoader.load());
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.DECORATED);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.sizeToScene();

@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="mainContainer" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="btn-menu-item" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.CategoryItemController">
+<AnchorPane fx:id="mainContainer" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: #ffffff;" styleClass="btn-menu-item" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.CategoryItemController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="btn-menu-item" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="10.0" style="-fx-background-radius: 10px;" styleClass="btn-menu-item" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ivIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -21,7 +20,7 @@
                   <Image url="@asset/apple_red.png" />
                </image>
             </ImageView>
-            <Label styleClass="label-btn" stylesheets="@css/style.css" text="Label">
+            <Label fx:id="lbName" styleClass="label-btn" stylesheets="@css/style.css" text="Label">
                <font>
                   <Font name="Roboto Medium" size="14.0" />
                </font>
