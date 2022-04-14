@@ -25,7 +25,7 @@ public class AccountDAO {
     }
 
     public static boolean checkAdminExist() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT username FROM ACCOUNT WHERE username = 'admin'";
+        String sql = "SELECT username FROM ACCOUNT WHERE type = 0";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 

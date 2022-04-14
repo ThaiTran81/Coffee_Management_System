@@ -1,5 +1,6 @@
 package com.example.coffee_management_system.controller;
 
+import com.example.coffee_management_system.ultil.StageUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,42 +27,32 @@ public class LoginController implements Initializable {
     private Button btnCancel;
     @FXML
     private BorderPane parent;
+    @FXML
+    private Button btnLogin;
 
     private Double xOffset;
     private Double yOffset;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        File brandFile = new File("asset/logo.png");
-//        Image brandImage = new Image(brandFile.toURI().toString());
-//        ivBrand.setImage(brandImage);
-//        ivBrand.setSmooth(true);
+        StageUtils.makeStageDrageable(parent);
     }
 
-    private void makeStageDrageable(){
-        parent.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-//                lbNotification.setText("x:"+xOffset+"-"+"y:"+yOffset);
-            }
-        });
 
-        parent.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                stage.setX(event.getScreenX()-xOffset);
-                stage.setY(event.getScreenY()-yOffset);
-
-            }
-        });
-    }
-
+    @FXML
     public void onCancelButtonClick(ActionEvent event){
         Stage stage = (Stage)btnCancel.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void onLoginButtonClick(ActionEvent event){
+
+    }
+
+    boolean validate(){
+
+        return true;
     }
 
 

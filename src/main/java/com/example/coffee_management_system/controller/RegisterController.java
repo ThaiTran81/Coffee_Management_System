@@ -3,6 +3,7 @@ package com.example.coffee_management_system.controller;
 import com.example.coffee_management_system.DAO.AccountDAO;
 import com.example.coffee_management_system.DAO.UserDAO;
 import com.example.coffee_management_system.DTO.UserDTO;
+import com.example.coffee_management_system.ultil.StageUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,44 +44,18 @@ public class RegisterController implements Initializable {
     @FXML
     private Label lbNotification;
 
-    private Double xOffset = 0.0;
-    private Double yOffset = 0.0;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        File brandFile = new File("asset/logo.png");
-//        Image brandImage = new Image(brandFile.toURI().toString());
-//        ivBrand.setImage(brandImage);
-//        ivBrand.setSmooth(true);
-        makeStageDrageable();
+        StageUtils.makeStageDrageable(parent);
     }
 
-    private void makeStageDrageable(){
-        parent.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-                lbNotification.setText("x:"+xOffset+"-"+"y:"+yOffset);
-            }
-        });
-
-        parent.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                stage.setX(event.getScreenX()-xOffset);
-                stage.setY(event.getScreenY()-yOffset);
-
-            }
-        });
-    }
-
+    @FXML
     public void onCancelButtonClick(ActionEvent event){
         Stage stage = (Stage)btnCancel.getScene().getWindow();
         stage.close();
     }
 
+    @FXML
     public void onRegisterButtonClick(ActionEvent event){
         if(validate()){
             String password = BCrypt.hashpw(txtPassword.getText(), BCrypt.gensalt());
@@ -103,12 +78,12 @@ public class RegisterController implements Initializable {
         String password = txtPassword.getText();
         String confirmPassword = txtRePassword.getText();
 
-        if(password.isBlank() || confirmPassword.isBlank()){
+        if(password.isBlank() || confirmPassword.isBlank() || txtUsername.getText().isBlank()){
             lbNotification.setText("Vui lòng điền đầy đủ các trường!");
             return false;
         };
         if (!password.equals(confirmPassword)){
-            lbNotification.setText("Vui lòng điền đầy đủ các trường!");
+            lbNotification.setText("Mật khẩu xác nhận không khớp!");
             return false;
         }
         return true;
