@@ -10,7 +10,6 @@ public class CategoryItemController {
 
     CategoryItemController(){
 
-        mainContainer.Hover
     }
 
 
