@@ -25,9 +25,9 @@ public class CategoryItemController {
         try {
             ivIcon.setImage(new Image(Main.class.getResource("asset/"+category.getIcUrl()).toURI().toString()));
         } catch (URISyntaxException e) {
-
         }
     }
+
 
 
 }
