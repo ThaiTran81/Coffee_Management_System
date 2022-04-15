@@ -20,7 +20,11 @@
 
 }
 
-.btn-menu-item:hover, .btn-menu-item:hover .label-btn {
+.btn-menu-item:hover {
     -fx-background-color: #64DFAA;
+    -fx-text-fill: white;
+}
+
+.btn-menu-item:hover .label-btn{
     -fx-text-fill: white;
 }

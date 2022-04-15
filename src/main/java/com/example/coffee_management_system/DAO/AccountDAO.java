@@ -1,5 +1,6 @@
 package com.example.coffee_management_system.DAO;
 
+import com.example.coffee_management_system.values.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
@@ -7,7 +8,7 @@ import java.sql.*;
 public class AccountDAO {
 
     static public boolean authenticate(String username, String password) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT username, password FROM ACCOUNT WHERE username = 'admin'";
+        String sql = "SELECT username, password, type FROM ACCOUNT WHERE username = '"+username+"'";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
@@ -16,11 +17,9 @@ public class AccountDAO {
 
         if (rs.next()){
             stored_hash = rs.getString("password");
+            User.role = rs.getInt("type");
+            return BCrypt.checkpw(password, stored_hash);
         }
-        if (BCrypt.checkpw(password, stored_hash))
-            System.out.println("It matches");
-        else
-            System.out.println("It does not match");
         return false;
     }
 

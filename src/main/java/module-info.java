@@ -19,4 +19,6 @@ module com.example.coffee_management_system {
     opens com.example.coffee_management_system.controller to javafx.fxml;
     exports com.example.coffee_management_system.DTO;
     opens com.example.coffee_management_system.DTO to javafx.fxml;
+    exports com.example.coffee_management_system.values;
+    opens com.example.coffee_management_system.values to javafx.fxml;
 }
