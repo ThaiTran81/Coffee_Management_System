@@ -8,14 +8,17 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,9 @@ public class ManagmentMenuController {
 
     @FXML
     private JFXButton btnAdd;
+
+    @FXML
+    private StackPane contentArea;
 
     ComponentMenuListener addListener;
 
@@ -48,7 +54,7 @@ public class ManagmentMenuController {
         itemController.setData(title, img, obj, url);
         itemController.setClickListener(componentMenuListener);
         menuLayout.getChildren().add(anchorPane);
-        
+
     }
 
     public void setAddButton(String title, String img, Object obj, URL url, ComponentMenuListener componentMenuListener) {
@@ -58,7 +64,7 @@ public class ManagmentMenuController {
             btnAdd.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    componentMenuListener.onClickListener(url, obj);
+                    onAddButtonClick(componentMenuListener, url, obj);
                 }
             });
 
@@ -71,4 +77,23 @@ public class ManagmentMenuController {
         }
     }
 
+    void onAddButtonClick(ComponentMenuListener componentMenuListener, URL url, Object obj) {
+        try {
+            componentMenuListener.onClickListener(url, obj);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void setContentArea(URL url){
+        try {
+            Parent parent = FXMLLoader.load(url);
+            contentArea.getChildren().removeAll();
+            contentArea.getChildren().setAll(parent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

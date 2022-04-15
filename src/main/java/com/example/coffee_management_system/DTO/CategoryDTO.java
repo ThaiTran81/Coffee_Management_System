@@ -5,6 +5,12 @@ public class CategoryDTO {
     int id;
     String icUrl;
 
+    public CategoryDTO() {
+        name="";
+        id=-1;
+        icUrl="";
+    }
+
     public CategoryDTO(String name, int id) {
         this.name = name;
         this.id = id;

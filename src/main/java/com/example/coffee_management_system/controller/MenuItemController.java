@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 
 public class MenuItemController {
 
@@ -48,8 +49,13 @@ public class MenuItemController {
 
     @FXML
     void onClick(ActionEvent event) {
-        if (componentMenuListener != null)
-            componentMenuListener.onClickListener(url, obj);
+        if (componentMenuListener != null) {
+            try {
+                componentMenuListener.onClickListener(url, obj);
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

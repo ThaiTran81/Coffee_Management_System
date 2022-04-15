@@ -1,12 +1,19 @@
 package com.example.coffee_management_system.controller;
 
+import com.example.coffee_management_system.DAO.CategoryDAO;
+import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.Main;
+import com.example.coffee_management_system.ultil.ComponentMenuListener;
 import com.example.coffee_management_system.ultil.StageUtils;
 import com.example.coffee_management_system.values.Role;
 import com.example.coffee_management_system.values.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,10 +22,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import org.controlsfx.tools.Utils;
+import javafx.stage.StageStyle;
 
+
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 
 public class AdminMainMenuController implements Initializable {
@@ -33,6 +44,9 @@ public class AdminMainMenuController implements Initializable {
 
     @FXML
     private StackPane parent;
+
+    @FXML
+    private Button btnCategoryManagement;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,5 +70,43 @@ public class AdminMainMenuController implements Initializable {
     public void onCloseButtonClick(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
+    }
+
+
+    @FXML
+    void onCategoryManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("category_management.fxml"));
+
+            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
+                @Override
+                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
+//                    CategoryDTO categoryDTO = (CategoryDTO) obj;
+//                    CategoryDAO.insert(categoryDTO);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    FXMLLoader switchTo(URL url, ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        prevStage.hide();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.hide();
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+        return fxmlLoader;
     }
 }

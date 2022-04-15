@@ -122,7 +122,7 @@
                                     </StackPane>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="2">
+                              <JFXButton fx:id="btnCategoryManagement" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onCategoryManagementButtonClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="2">
                                  <graphic>
                                     <StackPane>
                                        <children>

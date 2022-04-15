@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainContainer" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: #ffffff;" styleClass="btn-menu-item" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.CategoryItemController">
+<AnchorPane fx:id="mainContainer" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: #ffffff;" styleClass="btn-menu-item" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.MenuItemController">
    <children>
       <JFXButton fx:id="button" onAction="#onClick" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <graphic>
