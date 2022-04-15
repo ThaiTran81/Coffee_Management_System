@@ -1,8 +1,6 @@
 package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.AreaDTO;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;

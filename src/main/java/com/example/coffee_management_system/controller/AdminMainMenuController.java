@@ -109,4 +109,23 @@ public class AdminMainMenuController implements Initializable {
 
         return fxmlLoader;
     }
+
+    public void onInfomationAdminClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("user_information.fxml"));
+
+            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
+                @Override
+                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
+//                    CategoryDTO categoryDTO = (CategoryDTO) obj;
+//                    CategoryDAO.insert(categoryDTO);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
