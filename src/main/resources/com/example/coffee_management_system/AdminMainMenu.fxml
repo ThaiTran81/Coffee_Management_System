@@ -18,14 +18,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.AdminMainMenuController">
+<StackPane fx:id="parent" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.AdminMainMenuController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="480.0" prefWidth="597.0" style="-fx-border-radius: 20px; -fx-background-color: #ffffff;">
          <top>
             <AnchorPane prefHeight="33.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnClosebtnClose" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" mnemonicParsing="false" style="-fx-background-color: no set;" text=" " AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" mnemonicParsing="false" onAction="#onCloseButtonClick" style="-fx-background-color: no set;" text=" " AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -123,7 +122,7 @@
                                     </StackPane>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="2">
+                              <JFXButton fx:id="btnCategoryManagement" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onCategoryManagementButtonClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="2">
                                  <graphic>
                                     <StackPane>
                                        <children>

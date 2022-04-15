@@ -20,7 +20,35 @@
 
 }
 
-.btn-menu-item:hover, .btn-menu-item:hover .label-btn {
+.btn-menu-item:hover {
     -fx-background-color: #64DFAA;
+    -fx-text-fill: white;
+}
+
+.btn-menu-item:hover .label-btn{
+    -fx-text-fill: white;
+}
+
+.transparent-background{
+    -fx-background-color: transparent;
+}
+
+.bg-green{
+    -fx-background-color: #60d394;
+}
+
+.bg-red{
+    -fx-background-color: #ee6055;
+}
+
+.txt-red{
+    -fx-text-fill: #ee6055;
+}
+
+.txt-green{
+    -fx-text-fill: #60d394;
+}
+
+.txt-white{
     -fx-text-fill: white;
 }
