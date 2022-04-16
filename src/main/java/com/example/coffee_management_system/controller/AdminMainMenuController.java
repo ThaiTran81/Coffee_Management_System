@@ -77,9 +77,11 @@ public class AdminMainMenuController implements Initializable {
     void onCategoryManagementButtonClick(ActionEvent event) {
         FXMLLoader fxmlLoader;
         try {
-            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            fxmlLoader = StageUtils.switchTo(Main.class.getResource("management_menu.fxml"), event, StageStyle.DECORATED);
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("category_management.fxml"));
+            managmentMenuController.hideAddButton();
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
 
             managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
                 @Override
@@ -94,19 +96,4 @@ public class AdminMainMenuController implements Initializable {
 
     }
 
-    FXMLLoader switchTo(URL url, ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        prevStage.hide();
-
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load());
-
-        stage.hide();
-        stage.initStyle(StageStyle.DECORATED);
-        stage.setScene(scene);
-        stage.show();
-
-        return fxmlLoader;
-    }
 }

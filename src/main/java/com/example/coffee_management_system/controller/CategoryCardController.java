@@ -36,6 +36,13 @@ public class CategoryCardController {
 
     @FXML
     void onUpdateButtonClick(ActionEvent event){
+        if (txtCategory.getText().equalsIgnoreCase(categoryDTO.getName()))
+        {
+            // add msg to notify the name existed
+            return;
+        }
+
+        categoryDTO.setName(txtCategory.getText());
         callback.update(categoryDTO);
     }
 

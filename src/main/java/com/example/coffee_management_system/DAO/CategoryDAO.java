@@ -45,4 +45,33 @@ public class CategoryDAO {
         Statement stmt = connection.createStatement();
         return stmt.executeUpdate(sql);
     }
+
+    public static CategoryDTO findByName(String name) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM category WHERE name='"+name+"'";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs = stmt.executeQuery(sql);
+        CategoryDTO categoryDTO = null;
+        if(rs.next()){
+            categoryDTO = new CategoryDTO();
+            categoryDTO.setName(rs.getString("name"));
+            categoryDTO.setId(rs.getInt("category_id"));
+            categoryDTO.setIcUrl(rs.getString("icon_url"));
+        }
+
+        return categoryDTO;
+    }
+
+    public static int update(CategoryDTO categoryDTO) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE category\n" +
+                "SET name = ?\n" +
+                "WHERE category_id = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setString(1, categoryDTO.getName());
+        stmt.setInt(2, categoryDTO.getId());
+        return stmt.executeUpdate();
+    }
 }

@@ -20,7 +20,7 @@
                <top>
                   <VBox spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton alignment="CENTER" graphicTextGap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="225.0" style="-fx-background-color: #EF674C#EF674C; -fx-font-size: 15px; -fx-background-radius: 10px;" text="Quay về menu chính" textFill="WHITE" wrapText="true">
+                        <JFXButton fx:id="btnBackToMainMenu" alignment="CENTER" graphicTextGap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onBackToMainMenuButtonClick" prefHeight="52.0" prefWidth="225.0" style="-fx-background-color: #EF674C#EF674C; -fx-font-size: 15px; -fx-background-radius: 10px;" text="Quay về menu chính" textFill="WHITE" wrapText="true">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
