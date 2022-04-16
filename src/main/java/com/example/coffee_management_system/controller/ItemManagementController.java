@@ -1,5 +1,6 @@
 package com.example.coffee_management_system.controller;
 
+import com.example.coffee_management_system.DAO.ItemDAO;
 import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.Main;
 import javafx.beans.value.ChangeListener;
@@ -16,7 +17,7 @@ import javafx.scene.layout.FlowPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,13 +32,10 @@ public class ItemManagementController implements Initializable {
     List<ItemDTO> itemList;
 
     void getData(){
-        itemList = new ArrayList<ItemDTO>();
-        ItemDTO itemDTO ;
-        int i=10;
-        while(i>=0){
-            i--;
-            itemDTO = new ItemDTO(1,"Cafe","Mô tả cà phê", 1, 25000);
-            itemList.add(itemDTO);
+        try {
+            itemList = ItemDAO.getAll();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
     @Override

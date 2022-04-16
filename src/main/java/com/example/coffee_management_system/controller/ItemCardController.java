@@ -40,6 +40,6 @@ public class ItemCardController implements Initializable {
     void setData(ItemDTO itemDTO){
         lbTitle.setText(itemDTO.getName());
         lbDescription.setText(itemDTO.getDescription());
-        lbPrice.setText(String.valueOf(itemDTO.getPrice()));
+        lbPrice.setText(String.valueOf(itemDTO.getPrice())+"VNĐ");
     }
 }
