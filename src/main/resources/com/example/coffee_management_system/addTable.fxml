@@ -73,7 +73,7 @@
                   </HBox>
                   <StackPane alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="342.0">
                      <children>
-                         <JFXButton fx:id="btnLogin" alignment="CENTER" layoutX="25.0" layoutY="241.0" maxHeight="-Infinity" onAction="" prefHeight="20.0" prefWidth="102.0" style="-fx-background-color: #E15648#E15648;" text="Thêm" textFill="WHITE" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                         <JFXButton fx:id="btnLogin" alignment="CENTER" layoutX="25.0" layoutY="241.0" maxHeight="-Infinity" prefHeight="20.0" prefWidth="102.0" style="-fx-background-color: #E15648#E15648;" text="Thêm" textFill="WHITE" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                              <font>
                                  <Font name="Roboto" size="16.0" />
                              </font>
