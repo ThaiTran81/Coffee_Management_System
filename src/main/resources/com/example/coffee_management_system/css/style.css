@@ -41,6 +41,10 @@
     -fx-background-color: #ee6055;
 }
 
+.bg-blue{
+    -fx-background-color: #4361ee;
+}
+
 .txt-red{
     -fx-text-fill: #ee6055;
 }
