@@ -40,14 +40,14 @@
                               </Label>
                               <HBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="301.0">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="292.0" promptText="Tìm theo tên...">
+                                    <TextField fx:id="txtSearch" prefHeight="25.0" prefWidth="292.0" promptText="Tìm theo tên...">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </TextField>
                                  </children>
                               </HBox>
-                              <JFXButton styleClass="bg-green" stylesheets="@css/style.css" text="Tìm" textFill="WHITE">
+                              <JFXButton fx:id="btnSearch" onAction="#onSearchButtonClick" styleClass="bg-green" stylesheets="@css/style.css" text="Tìm" textFill="WHITE">
                                  <font>
                                     <Font name="Roboto Medium" size="18.0" />
                                  </font>
@@ -64,7 +64,7 @@
                                     <Font name="Roboto Medium" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox prefHeight="25.0" prefWidth="214.0" />
+                              <JFXComboBox fx:id="cbCategory" onAction="#onCategoryCBClick" prefHeight="25.0" prefWidth="214.0" />
                            </children>
                            <padding>
                               <Insets left="5.0" />

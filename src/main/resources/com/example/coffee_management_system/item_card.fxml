@@ -52,8 +52,8 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <JFXButton fx:id="btnUpdate" styleClass="bg-green" text="Cập nhật" textFill="WHITE" />
-                  <JFXButton fx:id="btnDelete" styleClass="bg-red" text="Xoá" textFill="WHITE" />
+                  <JFXButton fx:id="btnUpdate" onAction="#onUpdateButtonClick" styleClass="bg-green" text="Cập nhật" textFill="WHITE" />
+                  <JFXButton fx:id="btnDelete" onAction="#onDeleteButtonClick" styleClass="bg-red" text="Xoá" textFill="WHITE" />
                </children>
             </HBox>
          </children>

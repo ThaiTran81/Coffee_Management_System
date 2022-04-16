@@ -16,6 +16,11 @@ public class CategoryDTO {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public CategoryDTO(String name, int id, String icUrl) {
         this.name = name;
         this.id = id;
@@ -45,4 +50,6 @@ public class CategoryDTO {
     public void setIcUrl(String icUrl) {
         this.icUrl = icUrl;
     }
+
+
 }
