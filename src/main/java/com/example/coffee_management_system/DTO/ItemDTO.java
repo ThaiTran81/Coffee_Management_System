@@ -7,6 +7,9 @@ public class ItemDTO {
     int category;
     double price;
 
+    public ItemDTO() {
+    }
+
     public ItemDTO(int item_id, String name, String description, int category, double price) {
         this.item_id = item_id;
         this.name = name;

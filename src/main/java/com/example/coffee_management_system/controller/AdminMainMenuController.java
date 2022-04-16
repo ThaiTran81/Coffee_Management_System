@@ -67,6 +67,28 @@ public class AdminMainMenuController implements Initializable {
         stage.close();
     }
 
+    @FXML
+    void onUserManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = StageUtils.switchTo(Main.class.getResource("management_menu.fxml"), event, StageStyle.DECORATED);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("user_management.fxml"));
+            managmentMenuController.hideAddButton();
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
+
+//            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
+//                @Override
+//                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
+////                    CategoryDTO categoryDTO = (CategoryDTO) obj;
+////                    CategoryDAO.insert(categoryDTO);
+//                }
+//            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @FXML
     void onCategoryManagementButtonClick(ActionEvent event) {
@@ -114,6 +136,8 @@ public class AdminMainMenuController implements Initializable {
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("user_information.fxml"));
 
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
+
             managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
                 @Override
                 public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
@@ -133,6 +157,7 @@ public class AdminMainMenuController implements Initializable {
             fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("item_management.fxml"));
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
