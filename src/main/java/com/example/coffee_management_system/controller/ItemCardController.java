@@ -56,6 +56,6 @@ public class ItemCardController implements Initializable {
 
     @FXML
     void onUpdateButtonClick(ActionEvent event) {
-
+        callback.update(m_itemDTO);
     }
 }

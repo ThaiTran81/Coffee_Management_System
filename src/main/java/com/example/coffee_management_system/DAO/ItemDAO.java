@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ItemDAO {
     public static List<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM item WHERE item_id > 0 OR item_id IS NULL";
+        String sql = "SELECT * FROM item WHERE `status` > 0 OR `status` IS NULL";
         Connection connection = DBConnection.getDbConnection().getConnection();
 
         Statement stmt = connection.createStatement();
@@ -33,7 +33,7 @@ public class ItemDAO {
     }
 
     public static List<ItemDTO> getByCategory(int catID) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM item WHERE category="+catID+" AND (item_id > 0 OR item_id IS NULL)";
+        String sql = "SELECT * FROM item WHERE category="+catID+" AND (`status` > 0 OR `status` IS NULL)";
         Connection connection = DBConnection.getDbConnection().getConnection();
 
         Statement stmt = connection.createStatement();

@@ -75,6 +75,9 @@
                </children>
             </AnchorPane>
          </top>
+         <right>
+            <VBox fx:id="rightLayout" BorderPane.alignment="CENTER" />
+         </right>
       </BorderPane>
    </children>
    <padding>

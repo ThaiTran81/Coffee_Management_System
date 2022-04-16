@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ManagmentMenuController {
     @FXML
-    private VBox menuLayout;
+    private VBox sideContentArea;
 
     private List<CategoryDTO> categories = new ArrayList<CategoryDTO>();
 
@@ -61,8 +61,22 @@ public class ManagmentMenuController {
 
         itemController.setData(title, img, obj, url);
         itemController.setClickListener(componentMenuListener);
-        menuLayout.getChildren().add(anchorPane);
+        sideContentArea.getChildren().add(anchorPane);
 
+    }
+
+    FXMLLoader addItem(URL url){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(url);
+        AnchorPane anchorPane = null;
+        try {
+            anchorPane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        sideContentArea.getChildren().add(anchorPane);
+        return fxmlLoader;
     }
 
     public void setAddButton(String title, String img, Object obj, URL url, ComponentMenuListener componentMenuListener) {
