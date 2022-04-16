@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="259.0" prefWidth="214.0" styleClass="transparent-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ItemCardController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="244.0" prefWidth="210.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane>
+               <children>
+                  <ImageView fx:id="imgAvatar" fitHeight="162.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@asset/food.jpeg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <VBox>
+               <children>
+                  <AnchorPane prefHeight="42.0" prefWidth="218.0">
+                     <children>
+                        <Label fx:id="lbTitle" alignment="TOP_LEFT" prefHeight="41.0" prefWidth="218.0" text="Top Title Top TitleTop TitleTop TitleTop TitleTop TitleTop TitleTop TitleTop Title" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Roboto Medium" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <Label fx:id="lbDescription" text="The Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="228.0">
+               <children>
+                  <Label fx:id="lbPrice" text="35.000 VNĐ" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <JFXButton fx:id="btnUpdate" styleClass="bg-green" text="Cập nhật" textFill="WHITE" />
+                  <JFXButton fx:id="btnDelete" styleClass="bg-red" text="Xoá" textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

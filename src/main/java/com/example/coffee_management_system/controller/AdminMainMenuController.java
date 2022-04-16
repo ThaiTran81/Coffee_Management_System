@@ -1,7 +1,5 @@
 package com.example.coffee_management_system.controller;
 
-import com.example.coffee_management_system.DAO.CategoryDAO;
-import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.ComponentMenuListener;
 import com.example.coffee_management_system.ultil.StageUtils;
@@ -12,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,12 +21,10 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.EventListener;
 import java.util.ResourceBundle;
 
 public class AdminMainMenuController implements Initializable {
@@ -129,5 +124,18 @@ public class AdminMainMenuController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void onItemManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("item_management.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
