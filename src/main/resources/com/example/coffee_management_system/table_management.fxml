@@ -15,7 +15,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="626.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" stylesheets="@css/style.css">
                     <children>
-                        <Label text="Thêm danh mục mới:">
+                        <Label text="Thêm bàn mới:">
                             <font>
                                 <Font name="Roboto" size="17.0" />
                             </font>

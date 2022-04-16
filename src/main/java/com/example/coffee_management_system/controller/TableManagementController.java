@@ -1,35 +1,24 @@
 package com.example.coffee_management_system.controller;
 
-import com.example.coffee_management_system.DAO.AreaDAO;
-import com.example.coffee_management_system.DAO.CategoryDAO;
 import com.example.coffee_management_system.DAO.TableDAO;
-import com.example.coffee_management_system.DTO.AreaDTO;
-import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.DTO.TableDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDTableHandler;
 import com.jfoenix.controls.JFXButton;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -43,6 +32,7 @@ public class TableManagementController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         udTableHandler = new UDTableHandler() {
             @Override
             public void update(TableDTO tableDTO) {

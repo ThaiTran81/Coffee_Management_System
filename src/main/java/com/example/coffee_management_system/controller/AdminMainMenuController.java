@@ -138,4 +138,15 @@ public class AdminMainMenuController implements Initializable {
         }
 
     }
+
+    public void onTableManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("table_management.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

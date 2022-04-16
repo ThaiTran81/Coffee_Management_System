@@ -184,7 +184,7 @@
                                     </StackPane>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.rowIndex="1">
+                              <JFXButton onAction="#onTableManagementButtonClick" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.rowIndex="1">
                                  <graphic>
                                     <StackPane>
                                        <children>

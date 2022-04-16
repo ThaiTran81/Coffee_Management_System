@@ -43,4 +43,20 @@ public class UserDAO {
         }
         return null;
     }
+
+    public static int update(UserDTO newUser) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `user`\n" +
+                "SET fullname = ?, dob = ?, email = ?, address = ?, phone = ?\n" +
+                "WHERE user_id = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setString(1, newUser.getFullname());
+        stmt.setDate(2, (java.sql.Date) newUser.getDob());
+        stmt.setString(3, newUser.getEmail());
+        stmt.setString(4, newUser.getAddress());
+        stmt.setString(5, newUser.getPhone());
+        stmt.setInt(6, newUser.getUserID());
+        return stmt.executeUpdate();
+    }
 }

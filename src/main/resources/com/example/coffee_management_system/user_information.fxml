@@ -24,7 +24,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nameTf" editable="false" text="Nguyễn Văn A">
+                  <TextField fx:id="nameTf" text="Nguyễn Văn A">
                      <VBox.margin>
                         <Insets left="10.0" right="20.0" />
                      </VBox.margin>
@@ -34,7 +34,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="dataPk">
+                  <DatePicker fx:id="datePk">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
@@ -44,7 +44,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="addrTf" editable="false" text="235 Nguyễn Văn Cừ, q5, tp.HCM">
+                  <TextField fx:id="addrTf" text="235 Nguyễn Văn Cừ, q5, tp.HCM">
                      <VBox.margin>
                         <Insets left="10.0" right="20.0" />
                      </VBox.margin>
@@ -54,7 +54,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="emailTf" editable="false" text="nva@gmail.com">
+                  <TextField fx:id="emailTf" text="nva@gmail.com">
                      <VBox.margin>
                         <Insets left="10.0" right="20.0" />
                      </VBox.margin>
@@ -64,7 +64,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="phoneTf" editable="false" text="0123456789">
+                  <TextField fx:id="phoneTf" text="0123456789">
                      <VBox.margin>
                         <Insets left="10.0" right="20.0" />
                      </VBox.margin>
