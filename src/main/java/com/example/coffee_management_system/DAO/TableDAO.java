@@ -1,24 +1,24 @@
 package com.example.coffee_management_system.DAO;
 
-import com.example.coffee_management_system.DTO.AreaDTO;
 import com.example.coffee_management_system.DTO.TableDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TableDAO {
-    public static ArrayList<TableDTO> findAll() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM table";
+    public static List<TableDTO> findAll() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM `table`";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
         ResultSet rs = stmt.executeQuery(sql);
 
-        ArrayList<TableDTO> listArea = new ArrayList<TableDTO>();
-        if (rs.next()){
+        List<TableDTO> listArea = new ArrayList<TableDTO>();
+        while (rs.next()){
             listArea.add(new TableDTO(rs.getInt(1),
                     rs.getInt(2),
-                    rs.getInt(3),
+                    rs.getString(3),
                     rs.getInt(4),
                     rs.getInt(5)
             ));
@@ -27,7 +27,7 @@ public class TableDAO {
         return listArea;
     }
 
-    public static ArrayList<TableDTO> findByAreaId(int id) throws SQLException, ClassNotFoundException {
+    public static List<TableDTO> findByAreaId(int id) throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT * FROM table where table_id = ?";
         Connection connection = DBConnection.getDbConnection().getConnection();
@@ -35,16 +35,67 @@ public class TableDAO {
         preparedStatement.setInt(1,id);
         ResultSet rs = preparedStatement.executeQuery();
 
-        ArrayList<TableDTO> listAreaName = new ArrayList<TableDTO>();
+        List<TableDTO> listAreaName = new ArrayList<TableDTO>();
         if (rs.next()){
             listAreaName.add(new TableDTO(rs.getInt(1),
                     rs.getInt(2),
-                    rs.getInt(3),
+                    rs.getString(3),
                     rs.getInt(4),
                     rs.getInt(5))
             );
         }
 
         return listAreaName;
+    }
+
+    public static TableDTO findByName(String name) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM `table` WHERE name='"+name+"'";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs = stmt.executeQuery(sql);
+        TableDTO tableDTO = null;
+        if(rs.next()){
+            tableDTO = new TableDTO(rs.getInt("table_id"),
+                    rs.getInt("area_id"),
+                    rs.getString("name"),
+                    rs.getInt("bill_id"),
+                    rs.getInt("status"));
+        }
+
+        return tableDTO;
+    }
+
+    public static int insert(TableDTO tableDTO) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO `table`(area_id, name, bill_id, status) VALUES(?,?,?,?)";
+        System.out.println(tableDTO.getName());
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1,tableDTO.getArea_id());
+        stmt.setString(2,tableDTO.getName());
+        stmt.setInt(3, tableDTO.getBill_id());
+        stmt.setInt(4, tableDTO.getStatus());
+
+        return stmt.executeUpdate();
+    }
+
+    public static int update(TableDTO tableDTO) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `table`\n" +
+                "SET name = ?\n" +
+                "WHERE table_id = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setString(1, tableDTO.getName());
+        stmt.setInt(2, tableDTO.getTable_id());
+        return stmt.executeUpdate();
+    }
+
+    public static int delete(TableDTO tableDTO) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM `table` WHERE table_id = "+ tableDTO.getTable_id();
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+        return stmt.executeUpdate(sql);
     }
 }

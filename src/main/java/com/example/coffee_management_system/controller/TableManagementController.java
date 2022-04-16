@@ -1,18 +1,28 @@
 package com.example.coffee_management_system.controller;
 
 import com.example.coffee_management_system.DAO.AreaDAO;
+import com.example.coffee_management_system.DAO.CategoryDAO;
+import com.example.coffee_management_system.DAO.TableDAO;
 import com.example.coffee_management_system.DTO.AreaDTO;
+import com.example.coffee_management_system.DTO.CategoryDTO;
+import com.example.coffee_management_system.DTO.TableDTO;
 import com.example.coffee_management_system.Main;
+import com.example.coffee_management_system.ultil.Toast;
+import com.example.coffee_management_system.ultil.UDTableHandler;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,16 +30,94 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableManagementController implements Initializable {
-    public ComboBox areaCb;
-    public JFXButton addBtn;
+    public JFXButton btnAddNew;
+    public VBox layout;
+    public TextField txtNewTable;
+
+    private List<TableDTO> tables;
+    private UDTableHandler udTableHandler;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        udTableHandler = new UDTableHandler() {
+            @Override
+            public void update(TableDTO tableDTO) {
+                try {
+                    TableDAO.update(tableDTO);
+                    reload();
+                    Toast.showToast(Toast.TOAST_SUCCESS, txtNewTable, "Đã cập nhật thành công");
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void delete(TableDTO tableDTO) {
+                try {
+                    TableDAO.delete(tableDTO);
+                    reload();
+                    Toast.showToast(Toast.TOAST_SUCCESS, txtNewTable, "Đã xoá bàn " + tableDTO.getName() + " thành công");
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        pullData();
+        setData();
+    }
+
+    public void onAddButtonClick(ActionEvent event) {
+        if (validate()) {
+            TableDTO tableDTO = new TableDTO();
+
+            tableDTO.setName(txtNewTable.getText());
+            tableDTO.setArea_id(1);
+            tableDTO.setBill_id(1);
+            tableDTO.setStatus(0);
+            try {
+
+                if (TableDAO.findByName(tableDTO.getName()) != null) {
+                    Toast.showToast(Toast.TOAST_SUCCESS, txtNewTable, "Bàn đã tồn tại");
+                    return;
+                }
+
+                TableDAO.insert(tableDTO);
+                reload();
+                txtNewTable.setText("");
+                Toast.showToast(Toast.TOAST_SUCCESS, txtNewTable, "Đã thêm bàn "+ tableDTO.getName()+ " thành công");
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    void setData(){
+        for (TableDTO item : tables) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(Main.class.getResource("table_card.fxml"));
+            AnchorPane anchorPane = null;
+            try {
+                anchorPane = fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            TableCardController itemController = fxmlLoader.getController();
+
+            itemController.setData(item, udTableHandler);
+            layout.getChildren().add(anchorPane);
+        }
+
+    }
+
+    void pullData(){
         try {
-            setAreaCb();
+            tables = TableDAO.findAll();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -37,30 +125,20 @@ public class TableManagementController implements Initializable {
         }
     }
 
-    public void setAreaCb() throws SQLException, ClassNotFoundException {
-        ArrayList<String> listArea = AreaDAO.findAllAreaName();
-        ObservableList<String> valueCb = FXCollections.observableArrayList(listArea);
-        areaCb.setItems(valueCb);
-        areaCb.getSelectionModel().selectFirst();
+    void reload() {
+        layout.getChildren().clear();
+        pullData();
+        setData();
+
     }
 
-    public void addTable(MouseEvent mouseEvent) {
-        try {
-
-            Stage addTable = new Stage();
-            Parent root = FXMLLoader.load(Main.class.getResource("addTable.fxml"));
-            Scene scene = new Scene(root);
-            addTable.setScene(scene);
-            addTable.initModality(Modality.APPLICATION_MODAL);
-            addTable.showAndWait();
-            addTable.setResizable(false);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    boolean validate() {
+        if (txtNewTable.getText().isBlank()) {
+            return false;
         }
+        return true;
     }
 
     public void deleteTable(MouseEvent mouseEvent) {
-
     }
 }

@@ -1,110 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.UserInfomationController">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Họ và tên">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.UserInfomationController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Họ và tên">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameTf" editable="false" text="Nguyễn Văn A">
+                     <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Ngày sinh">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dataPk">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <Label text="Địa chỉ">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="addrTf" editable="false" text="235 Nguyễn Văn Cừ, q5, tp.HCM">
+                     <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Email">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailTf" editable="false" text="nva@gmail.com">
+                     <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Số điện thoại">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phoneTf" editable="false" text="0123456789">
+                     <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="10.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="changeInfoBtn" onAction="#changeInfoClick" text="Thay đổi thông tin cá nhân">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton onAction="#changePasswordClick" text="Đổi mật khẩu">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <Label text="Thông tin người sử dụng" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="14.0" />
+                  <Font size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="nameTf" editable="false" text="Nguyễn Văn A">
-               <VBox.margin>
-                  <Insets left="10.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Ngày sinh">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="dataTf" editable="false" text="01/01/2000">
-               <VBox.margin>
-                  <Insets left="10.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Địa chỉ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="addrTf" editable="false" text="235 Nguyễn Văn Cừ, q5, tp.HCM">
-               <VBox.margin>
-                  <Insets left="10.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Email">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="emailTf" editable="false" text="nva@gmail.com">
-               <VBox.margin>
-                  <Insets left="10.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Số điện thoại">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="phoneTf" editable="false" text="0123456789">
-               <VBox.margin>
-                  <Insets left="10.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-         </children>
-         <BorderPane.margin>
-            <Insets left="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Thay đổi thông tin cá nhân">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" text="Đổi mật khẩu">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
-   <top>
-      <Label text="Thông tin người sử dụng" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-   </top>
-   <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="avaIv" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Button mnemonicParsing="false" text="Change Avatar" />
-         </children>
-      </VBox>
-   </left>
-</BorderPane>
+         </top>
+         <left>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="avaIv" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button mnemonicParsing="false" text="Change Avatar" />
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+      <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

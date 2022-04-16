@@ -3,14 +3,14 @@ package com.example.coffee_management_system.DTO;
 public class TableDTO {
     private int table_id;
     private int area_id;
-    private int name;
+    private String name;
     private int bill_id;
     private int status;
 
     public TableDTO() {
     }
 
-    public TableDTO(int table_id, int area_id, int name, int bill_id, int status) {
+    public TableDTO(int table_id, int area_id, String name, int bill_id, int status) {
         this.table_id = table_id;
         this.area_id = area_id;
         this.name = name;
@@ -34,11 +34,11 @@ public class TableDTO {
         this.area_id = area_id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
