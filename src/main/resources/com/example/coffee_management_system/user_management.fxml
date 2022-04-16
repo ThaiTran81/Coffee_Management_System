@@ -22,7 +22,7 @@
                                 <Font size="14.0" />
                             </font>
                         </TextField>
-                        <JFXButton fx:id="btnSearch" onAction="#onAddButtonClick" prefHeight="25.0" prefWidth="95.0" styleClass="bg-green" text="Tìm" textFill="WHITE">
+                        <JFXButton fx:id="btnSearch" onAction="#onSearchButtonClick" prefHeight="25.0" prefWidth="95.0" styleClass="bg-green" text="Tìm" textFill="WHITE">
                             <font>
                                 <Font size="14.0" />
                             </font>

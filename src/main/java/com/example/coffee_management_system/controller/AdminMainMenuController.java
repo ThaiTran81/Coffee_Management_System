@@ -77,13 +77,13 @@ public class AdminMainMenuController implements Initializable {
             managmentMenuController.hideAddButton();
             managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
 
-            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
-                @Override
-                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
-//                    CategoryDTO categoryDTO = (CategoryDTO) obj;
-//                    CategoryDAO.insert(categoryDTO);
-                }
-            });
+//            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
+//                @Override
+//                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
+////                    CategoryDTO categoryDTO = (CategoryDTO) obj;
+////                    CategoryDAO.insert(categoryDTO);
+//                }
+//            });
         } catch (IOException e) {
             e.printStackTrace();
         }
