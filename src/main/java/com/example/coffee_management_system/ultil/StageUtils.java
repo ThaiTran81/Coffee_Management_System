@@ -45,7 +45,6 @@ public class StageUtils {
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load());
 
-        stage.hide();
         stage.initStyle(stageStyle);
         stage.setScene(scene);
         stage.show();
