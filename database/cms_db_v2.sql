@@ -1,17 +1,17 @@
 /*
- Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
  Source Server         : conn
  Source Server Type    : MySQL
- Source Server Version : 100421
+ Source Server Version : 100424
  Source Host           : localhost:3306
  Source Schema         : cms_db
 
  Target Server Type    : MySQL
- Target Server Version : 100421
+ Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 16/04/2022 13:36:34
+ Date: 17/04/2022 23:53:37
 */
 
 SET NAMES utf8mb4;
@@ -27,11 +27,14 @@ CREATE TABLE `account`  (
   `type` int NULL DEFAULT 0,
   `create_time` timestamp NULL DEFAULT current_timestamp,
   PRIMARY KEY (`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
+INSERT INTO `account` VALUES ('19127494', '$2a$10$nmT8WiNKULrghK4phPPrIeYBTblimHiSno5.scnef4lN9Ncx0pjzO', 1, '2022-04-17 23:02:14');
+INSERT INTO `account` VALUES ('19127541', '$2a$10$cTvB8666lmssOa1M9ZCJIetE/bO87hWOnIcqi37UjwZenRcYNfCIu', 1, '2022-04-17 23:07:01');
+INSERT INTO `account` VALUES ('19127546', '$2a$10$QVDTjX00U2GInpofg59sMeRmyc45O4g/RFY9t9k1VpepsKfG1b9ru', 1, '2022-04-17 23:05:55');
 INSERT INTO `account` VALUES ('admin', '$2a$10$mCLTJ6/8dq6DO2O5jWXnjeiPtzHwqWzSQf2Th.K5tmxprevxlQA.K', 0, '2022-04-15 09:26:53');
 
 -- ----------------------------
@@ -43,7 +46,7 @@ CREATE TABLE `area`  (
   `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` int NULL DEFAULT NULL,
   PRIMARY KEY (`area_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of area
@@ -62,7 +65,7 @@ CREATE TABLE `attendance`  (
   `type` int NOT NULL,
   PRIMARY KEY (`user_id`, `check_time`) USING BTREE,
   CONSTRAINT `fk_attendance_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attendance
@@ -81,7 +84,7 @@ CREATE TABLE `bill`  (
   `payment_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `status` int NULL DEFAULT NULL,
   `promotion` int NULL DEFAULT NULL,
-	`total` float(255, 0) NULL DEFAULT NULL,
+  `total` float(255, 0) NULL DEFAULT NULL,
   PRIMARY KEY (`bill_id`) USING BTREE,
   INDEX `fk_customer_id`(`customer_id`) USING BTREE,
   INDEX `fk_bill_promotion_idx`(`promotion`) USING BTREE,
@@ -89,11 +92,26 @@ CREATE TABLE `bill`  (
   CONSTRAINT `fk_bill_promotion` FOREIGN KEY (`promotion`) REFERENCES `promotion` (`promotion_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_bill_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bill
 -- ----------------------------
+INSERT INTO `bill` VALUES (1, 2, '2022-03-01 10:30:24', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (2, 3, '2022-03-04 10:30:24', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (3, 4, '2022-03-06 10:30:24', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (4, 2, '2022-03-08 11:30:25', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (5, 3, '2022-03-17 17:30:25', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (6, 4, '2022-03-18 19:30:25', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (7, 2, '2022-03-19 22:30:26', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (8, 3, '2022-03-22 19:30:26', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (9, 4, '2022-03-24 15:30:26', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (10, 2, '2022-03-30 16:30:28', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (11, 3, '2022-04-17 23:34:14', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (12, 4, '2022-04-17 23:34:14', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (13, 2, '2022-04-17 23:34:15', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (14, 3, '2022-04-17 23:34:15', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (15, 4, '2022-04-17 23:34:15', NULL, NULL, NULL, 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for billdetail
@@ -112,11 +130,57 @@ CREATE TABLE `billdetail`  (
   INDEX `fk_billDetail_item_idx`(`item_id`) USING BTREE,
   CONSTRAINT `fk_billDetail_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_billDetail_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of billdetail
 -- ----------------------------
+INSERT INTO `billdetail` VALUES (1, 1, 59, 5, NULL, NULL, 145000);
+INSERT INTO `billdetail` VALUES (2, 1, 30, 4, NULL, NULL, 144000);
+INSERT INTO `billdetail` VALUES (3, 1, 6, 2, NULL, NULL, 48000);
+INSERT INTO `billdetail` VALUES (4, 1, 12, 2, NULL, NULL, 68000);
+INSERT INTO `billdetail` VALUES (5, 1, 18, 3, NULL, NULL, 60000);
+INSERT INTO `billdetail` VALUES (6, 2, 32, 4, NULL, NULL, 116000);
+INSERT INTO `billdetail` VALUES (7, 2, 14, 3, NULL, NULL, 84000);
+INSERT INTO `billdetail` VALUES (8, 3, 30, 1, NULL, NULL, 36000);
+INSERT INTO `billdetail` VALUES (9, 3, 33, 4, NULL, NULL, 116000);
+INSERT INTO `billdetail` VALUES (10, 3, 40, 1, NULL, NULL, 29000);
+INSERT INTO `billdetail` VALUES (11, 3, 18, 4, NULL, NULL, 80000);
+INSERT INTO `billdetail` VALUES (12, 3, 52, 1, NULL, NULL, 19000);
+INSERT INTO `billdetail` VALUES (13, 4, 46, 4, NULL, NULL, 48000);
+INSERT INTO `billdetail` VALUES (14, 4, 50, 1, NULL, NULL, 19000);
+INSERT INTO `billdetail` VALUES (15, 5, 4, 1, NULL, NULL, 24000);
+INSERT INTO `billdetail` VALUES (16, 6, 33, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (17, 7, 8, 2, NULL, NULL, 68000);
+INSERT INTO `billdetail` VALUES (18, 7, 53, 3, NULL, NULL, 117000);
+INSERT INTO `billdetail` VALUES (19, 7, 17, 3, NULL, NULL, 60000);
+INSERT INTO `billdetail` VALUES (20, 7, 7, 3, NULL, NULL, 102000);
+INSERT INTO `billdetail` VALUES (21, 8, 21, 4, NULL, NULL, 80000);
+INSERT INTO `billdetail` VALUES (22, 8, 31, 1, NULL, NULL, 29000);
+INSERT INTO `billdetail` VALUES (23, 8, 54, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (24, 8, 42, 3, NULL, NULL, 30000);
+INSERT INTO `billdetail` VALUES (25, 8, 36, 1, NULL, NULL, 29000);
+INSERT INTO `billdetail` VALUES (26, 9, 31, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (27, 10, 53, 2, NULL, NULL, 78000);
+INSERT INTO `billdetail` VALUES (28, 10, 19, 1, NULL, NULL, 20000);
+INSERT INTO `billdetail` VALUES (29, 11, 6, 3, NULL, NULL, 72000);
+INSERT INTO `billdetail` VALUES (30, 11, 41, 4, NULL, NULL, 116000);
+INSERT INTO `billdetail` VALUES (31, 11, 21, 2, NULL, NULL, 40000);
+INSERT INTO `billdetail` VALUES (32, 12, 1, 1, NULL, NULL, 20000);
+INSERT INTO `billdetail` VALUES (33, 12, 19, 2, NULL, NULL, 40000);
+INSERT INTO `billdetail` VALUES (34, 12, 31, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (35, 12, 44, 3, NULL, NULL, 30000);
+INSERT INTO `billdetail` VALUES (36, 13, 60, 2, NULL, NULL, 64000);
+INSERT INTO `billdetail` VALUES (37, 13, 46, 3, NULL, NULL, 36000);
+INSERT INTO `billdetail` VALUES (38, 13, 55, 1, NULL, NULL, 29000);
+INSERT INTO `billdetail` VALUES (39, 13, 45, 2, NULL, NULL, 20000);
+INSERT INTO `billdetail` VALUES (40, 13, 40, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (41, 14, 37, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (42, 14, 19, 2, NULL, NULL, 40000);
+INSERT INTO `billdetail` VALUES (43, 14, 32, 3, NULL, NULL, 87000);
+INSERT INTO `billdetail` VALUES (44, 15, 25, 2, NULL, NULL, 64000);
+INSERT INTO `billdetail` VALUES (45, 15, 61, 2, NULL, NULL, 70000);
+INSERT INTO `billdetail` VALUES (46, 15, 10, 3, NULL, NULL, 93000);
 
 -- ----------------------------
 -- Table structure for billpromotion
@@ -129,7 +193,7 @@ CREATE TABLE `billpromotion`  (
   PRIMARY KEY (`billPromotion_id`) USING BTREE,
   INDEX `fk_billPromotion_promotion_idx`(`promotion_id`) USING BTREE,
   CONSTRAINT `fk_billPromotion_promotion` FOREIGN KEY (`promotion_id`) REFERENCES `promotion` (`promotion_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of billpromotion
@@ -144,7 +208,7 @@ CREATE TABLE `category`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `icon_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
@@ -168,7 +232,7 @@ CREATE TABLE `customer`  (
   `point` int NULL DEFAULT NULL,
   `dob` date NULL DEFAULT NULL,
   PRIMARY KEY (`customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customer
@@ -198,7 +262,7 @@ CREATE TABLE `item`  (
   PRIMARY KEY (`item_id`) USING BTREE,
   INDEX `fk_item_type_idx`(`category`) USING BTREE,
   CONSTRAINT `fk_item_type` FOREIGN KEY (`category`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of item
@@ -279,7 +343,7 @@ CREATE TABLE `itempromotion`  (
   INDEX `fk_ itemPromotion_promotion_idx`(`promotion_id`) USING BTREE,
   CONSTRAINT `fk_ itemPromotion_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ itemPromotion_promotion` FOREIGN KEY (`promotion_id`) REFERENCES `promotion` (`promotion_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of itempromotion
@@ -299,7 +363,7 @@ CREATE TABLE `promotion`  (
   `status` int NULL DEFAULT NULL,
   PRIMARY KEY (`promotion_id`) USING BTREE,
   UNIQUE INDEX `name_UNIQUE`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of promotion
@@ -320,7 +384,7 @@ CREATE TABLE `table`  (
   INDEX `fk_table_area_idx`(`area_id`) USING BTREE,
   CONSTRAINT `fk_table_area` FOREIGN KEY (`area_id`) REFERENCES `area` (`area_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_table_bill` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of table
@@ -362,11 +426,14 @@ CREATE TABLE `user`  (
   `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `email_UNIQUE`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, '', '2022-04-15', 'admin', '', '');
+INSERT INTO `user` VALUES (2, 'Đỗ Minh Nhật', '2001-11-04', '19127494', 'TP.HCM', '123456789');
+INSERT INTO `user` VALUES (3, 'Trần Hoàng Thái', '2001-09-11', '19127546', 'TP.HCM', '1357902468');
+INSERT INTO `user` VALUES (4, 'Nguyễn Thái Sơn', '2001-03-09', '19127541', 'TP.HCM', '987654321');
 
 SET FOREIGN_KEY_CHECKS = 1;

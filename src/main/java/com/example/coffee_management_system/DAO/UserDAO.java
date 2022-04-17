@@ -1,12 +1,38 @@
 package com.example.coffee_management_system.DAO;
 
+import com.example.coffee_management_system.DTO.CategoryDTO;
+import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.DTO.UserDTO;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class UserDAO {
+
+    public static List<UserDTO> getAll() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM user JOIN account ON user.email = account.username WHERE account.type > 0";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs = stmt.executeQuery(sql);
+        List<UserDTO> lst = new ArrayList<UserDTO>();
+
+        while (rs.next()){
+            UserDTO user = new UserDTO();
+            user.setFullname(rs.getString("fullname"));
+            user.setDob(rs.getDate("dob"));
+            user.setPhone(rs.getString("phone"));
+            user.setEmail(rs.getString("email"));
+            user.setAddress(rs.getString("address"));
+            user.setType(rs.getInt("type"));
+
+            lst.add(user);
+        }
+        return lst;
+    }
 
     public static int insert(UserDTO userDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO user(fullname, dob, email, address, phone) VALUES(?,?,?,?,?)";

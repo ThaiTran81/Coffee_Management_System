@@ -1,5 +1,7 @@
 package com.example.coffee_management_system.DAO;
 
+import com.example.coffee_management_system.DTO.ItemDTO;
+import com.example.coffee_management_system.DTO.UserDTO;
 import com.example.coffee_management_system.values.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -43,6 +45,16 @@ public class AccountDAO {
         stmt.setInt(3,type);
 
         return stmt.executeUpdate();
+    }
+
+    public static int delete(UserDTO userDTO) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `account`\n" +
+                "SET type = -1\n" +
+                "WHERE username = '" + userDTO.getEmail() + "'";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+
+        return stmt.executeUpdate(sql);
     }
 
     public static int updateByEmail(String oldEmail, String newEmail) throws SQLException, ClassNotFoundException {

@@ -2,11 +2,11 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -14,60 +14,6 @@
 <AnchorPane prefHeight="579.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ManagmentMenuController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <BorderPane prefHeight="569.0" prefWidth="238.0" style="-fx-background-color: #ffffff;" styleClass="drop-shadow" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
-               <top>
-                  <VBox alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <JFXButton fx:id="btnBackToMainMenu" alignment="CENTER" graphicTextGap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onBackToMainMenuButtonClick" prefHeight="52.0" prefWidth="225.0" style="-fx-background-color: #EF674C#EF674C; -fx-font-size: 15px; -fx-background-radius: 10px;" text="Quay về menu chính" textFill="WHITE" wrapText="true">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@asset/arrow_left.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font name="Roboto" size="18.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="btnAdd" prefHeight="46.0" prefWidth="226.0" style="-fx-background-radius: 10px; -fx-background-color: #3B94E1#3B94E1; -fx-font-size: 15px;" text="Thêm món" textFill="WHITE">
-                           <font>
-                              <Font name="Roboto" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fx:id="imgAddButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@asset/plus.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </VBox>
-               </top>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <BorderPane.margin>
-                  <Insets bottom="10.0" />
-               </BorderPane.margin>
-               <center>
-                  <AnchorPane BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox fx:id="sideContentArea" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
-                           <children>
-                              <Separator prefWidth="200.0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </center>
-            </BorderPane>
-         </left>
          <center>
             <StackPane fx:id="contentArea" prefHeight="150.0" prefWidth="546.0" BorderPane.alignment="CENTER">
                <padding>
@@ -75,6 +21,28 @@
                </padding>
             </StackPane>
          </center>
+         <top>
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" spacing="10.0" />
+                  <JFXButton fx:id="btnBackToMainMenu" alignment="CENTER" graphicTextGap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onBackToMainMenuButtonClick" prefHeight="52.0" prefWidth="225.0" style="-fx-background-color: #EF674C#EF674C; -fx-font-size: 15px; -fx-background-radius: 10px;" text="Quay về menu chính" textFill="WHITE" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@asset/arrow_left.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Roboto" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </top>
       </BorderPane>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </AnchorPane>
