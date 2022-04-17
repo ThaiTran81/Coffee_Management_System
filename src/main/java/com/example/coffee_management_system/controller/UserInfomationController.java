@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 import org.w3c.dom.CDATASection;
@@ -106,6 +107,7 @@ public class UserInfomationController implements Initializable {
                 Stage changePassword = new Stage();
                 Parent root = FXMLLoader.load(Main.class.getResource("change_password.fxml"));
                 Scene scene = new Scene(root);
+                changePassword.initStyle(StageStyle.UNDECORATED);
                 changePassword.setScene(scene);
                 changePassword.showAndWait();
                 changePassword.setResizable(false);

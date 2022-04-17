@@ -9,16 +9,16 @@ import java.util.List;
 
 public class AreaDAO {
 
-    public static ArrayList<AreaDTO> findAll() throws SQLException, ClassNotFoundException {
+    public static List<AreaDTO> findAll() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM area";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
         ResultSet rs = stmt.executeQuery(sql);
 
-        ArrayList<AreaDTO> listArea = new ArrayList<AreaDTO>();
+        List<AreaDTO> listArea = new ArrayList<AreaDTO>();
         if (rs.next()){
-            listArea.add(new AreaDTO(rs.getInt(0),rs.getString(1),rs.getInt(2)));
+            listArea.add(new AreaDTO(rs.getInt(1),rs.getString(2),rs.getInt(3)));
         }
 
         return listArea;

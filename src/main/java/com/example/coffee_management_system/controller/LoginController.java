@@ -83,9 +83,13 @@ public class LoginController implements Initializable {
             Parent root=null;
             Stage stage;
             Scene scene ;
-
-            if(User.role == 0){
+            User.userInfo.setType(User.role);
+            if(User.userInfo.getType() == 0){
                 root = FXMLLoader.load(Main.class.getResource("AdminMainMenu.fxml"));
+                System.out.println("hi");
+            }else{
+                root = FXMLLoader.load(Main.class.getResource("UserMainMenu.fxml"));
+                System.out.println("hello");
             }
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             assert root != null;
