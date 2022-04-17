@@ -6,9 +6,13 @@ import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDCategoryHandler;
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -25,7 +29,10 @@ public class CategoryManagementController implements Initializable {
     private JFXButton btnAddNew;
 
     @FXML
-    private VBox layout;
+    private VBox lst_layout;
+
+    @FXML
+    private ScrollPane scroll;
 
     @FXML
     private TextField txtNewCategory;
@@ -35,6 +42,14 @@ public class CategoryManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        scroll.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
+            @Override
+            public void changed(ObservableValue<? extends Bounds> ov, Bounds oldBounds, Bounds bounds) {
+                lst_layout.setPrefWidth(bounds.getWidth());
+                lst_layout.setPrefHeight(bounds.getHeight());
+            }
+        });
 
         udCategoryHandler = new UDCategoryHandler() {
             @Override
@@ -78,7 +93,7 @@ public class CategoryManagementController implements Initializable {
             CategoryCardController itemController = fxmlLoader.getController();
 
             itemController.setData(item, udCategoryHandler);
-            layout.getChildren().add(anchorPane);
+            lst_layout.getChildren().add(anchorPane);
         }
 
     }
@@ -95,7 +110,7 @@ public class CategoryManagementController implements Initializable {
     }
 
     void reload() {
-        layout.getChildren().clear();
+        lst_layout.getChildren().clear();
         pullData();
         setData();
     }

@@ -7,9 +7,9 @@ public class DBConnection {
     private static DBConnection dbConnection = null;
     private Connection conn;
 
-    String url ="jdbc:mysql://localhost:3306/cms_db";
+    String url ="jdbc:mysql://localhost:8889/cms_db";
     String user = "root";
-    String password = "09032001";
+    String password = "root";
 
     public DBConnection() throws SQLException, ClassNotFoundException {
 //        Class.forName("com.mysql.cj.jdbc.Driver");

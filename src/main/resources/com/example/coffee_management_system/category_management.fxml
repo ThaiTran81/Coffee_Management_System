@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -38,11 +39,19 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
-            <VBox fx:id="layout" prefHeight="105.0" prefWidth="646.0" spacing="5.0" styleClass="transparent-background" stylesheets="@css/style.css" VBox.vgrow="ALWAYS">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
+            <ScrollPane fx:id="scroll" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <VBox fx:id="lst_layout" prefHeight="306.0" prefWidth="631.0" spacing="5.0" styleClass="transparent-background" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
       </VBox>
    </children>
