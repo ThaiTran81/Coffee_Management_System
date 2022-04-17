@@ -8,10 +8,7 @@ import com.example.coffee_management_system.DTO.UserDTO;
 import com.example.coffee_management_system.ultil.Toast;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -78,12 +75,13 @@ public class AddUserController implements Initializable {
                 String password = BCrypt.hashpw(userDTO.createPassword(), BCrypt.gensalt());
                 AccountDAO.insert(userDTO.getEmail(), password, type);
 
+                Toast.showToast(Toast.TOAST_SUCCESS, txtStaffAddress, "Đã thêm Nhân viên "+ userDTO.getFullname()+ " thành công");
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
-            Stage stage = (Stage) btnAddNew.getScene().getWindow();
-            stage.close();
+//            Stage stage = (Stage) btnAddNew.getScene().getWindow();
+//            stage.close();
         }
     }
 

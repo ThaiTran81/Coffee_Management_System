@@ -40,11 +40,11 @@
                         <Insets bottom="10.0" />
                     </VBox.margin>
                 </HBox>
-                <VBox fx:id="layout" prefHeight="105.0" prefWidth="646.0" spacing="5.0" styleClass="transparent-background" stylesheets="@css/style.css" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </VBox>
+                <ScrollPane fx:id="scroll" fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+                    <content>
+                        <FlowPane fx:id="flow" nodeOrientation="LEFT_TO_RIGHT" prefHeight="512.0" prefWidth="695.0" prefWrapLength="800.0" />
+                    </content>
+                </ScrollPane>
             </children>
         </VBox>
     </children>
