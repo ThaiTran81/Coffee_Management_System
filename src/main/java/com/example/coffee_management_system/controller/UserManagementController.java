@@ -1,6 +1,8 @@
 package com.example.coffee_management_system.controller;
 
+import com.example.coffee_management_system.DAO.AccountDAO;
 import com.example.coffee_management_system.DAO.CategoryDAO;
+import com.example.coffee_management_system.DAO.ItemDAO;
 import com.example.coffee_management_system.DAO.UserDAO;
 import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.DTO.ItemDTO;
@@ -13,6 +15,7 @@ import com.example.coffee_management_system.ultil.UDUserHandler;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,7 +56,7 @@ public class UserManagementController implements Initializable {
     private JFXButton btnAddNew;
 
     private List<UserDTO> users;
-    private UDHandler itemHandler;
+    private UDHandler userHandle;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,6 +76,34 @@ public class UserManagementController implements Initializable {
                 flow.setPrefHeight(bounds.getHeight());
             }
         });
+        
+        userHandle = new UDHandler() {
+            @Override
+            public void update(Object obj, ActionEvent event) {
+                
+            }
+
+            @Override
+            public void delete(Object obj, ActionEvent event) {
+                UserDTO userDTO = (UserDTO) obj;
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Xác nhận");
+                alert.setHeaderText("Xác nhận xóa " + userDTO.getFullname() + "?");
+
+                if (alert.showAndWait().get() == ButtonType.OK) {
+                    try {
+                        AccountDAO.delete(userDTO);
+                        users.remove(userDTO);
+                        setData2Grid(users);
+                        Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Đã xoá " + userDTO.getFullname() + " khỏi danh sách nhân viên");
+                    } catch (SQLException | ClassNotFoundException e) {
+                        Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể xoá " + userDTO.getFullname() + " khỏi danh sách nhân viên vào lúc này");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
 
         pullData();
         setData2Grid(users);
@@ -87,7 +118,7 @@ public class UserManagementController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 UserCardController userCardController = fxmlLoader.getController();
-                userCardController.setData(userDTO, itemHandler);
+                userCardController.setData(userDTO, userHandle);
 
                 flow.getChildren().add(anchorPane);
             }

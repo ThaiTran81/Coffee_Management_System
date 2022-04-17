@@ -1,6 +1,7 @@
 package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.CategoryDTO;
+import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.DTO.UserDTO;
 
 import java.sql.*;
@@ -12,7 +13,7 @@ import java.util.List;
 public class UserDAO {
 
     public static List<UserDTO> getAll() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM user JOIN account ON user.email = account.username WHERE account.type <> 0";
+        String sql = "SELECT * FROM user JOIN account ON user.email = account.username WHERE account.type > 0";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
