@@ -74,6 +74,7 @@ public class AddUserController implements Initializable {
                 if (Objects.equals(staffType, "Nhân viên bếp")) {
                     type = 2;
                 }
+                System.out.println(userDTO.createPassword());
                 String password = BCrypt.hashpw(userDTO.createPassword(), BCrypt.gensalt());
                 AccountDAO.insert(userDTO.getEmail(), password, type);
 

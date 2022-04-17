@@ -73,7 +73,6 @@ public class ItemManagementController implements Initializable {
             categories = CategoryDAO.getAll();
 
             for (int i = 0; i < categories.size(); i++) {
-                CategoryDTO categoryDTO = categories.get(i);
                 options.add(categories.get(i));
             }
         } catch (SQLException | ClassNotFoundException e) {
