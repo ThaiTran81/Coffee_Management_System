@@ -5,7 +5,6 @@ import com.example.coffee_management_system.DAO.ItemDAO;
 import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.Main;
-import com.example.coffee_management_system.ultil.SimpleHandler;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDHandler;
 import com.jfoenix.controls.JFXButton;
@@ -23,9 +22,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -36,6 +36,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ItemManagementController implements Initializable {
+
+    @FXML
+    private JFXButton btnAddNewItem;
 
     @FXML
     private FlowPane flow;
@@ -52,15 +55,18 @@ public class ItemManagementController implements Initializable {
     @FXML
     VBox rightLayout;
 
+    @FXML
+    VBox leftLayout;
 
     @FXML
     private TextField txtSearch;
 
-    SimpleHandler simpleHandler;
 
     List<ItemDTO> itemList;
     ObservableList<CategoryDTO> options = FXCollections.observableArrayList();
     UDHandler itemHandler;
+    UDHandler itemDetailHandler;
+    UDHandler newItemHandler;
 
     void getData() {
         List<CategoryDTO> categories;
@@ -97,13 +103,56 @@ public class ItemManagementController implements Initializable {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);    // Vertical scroll bar
         scroll.setContent(flow);
 
-        simpleHandler = new SimpleHandler() {
-            @Override
-            public void handle() {
-                rightLayout.getChildren().clear();
-                rightLayout.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            }
-        };
+       itemDetailHandler = new UDHandler() {
+           @Override
+           public void update(Object obj, ActionEvent event) {
+
+               ItemDTO itemDTO = (ItemDTO) obj;
+               try {
+                   ItemDAO.update(itemDTO);
+                   Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Cập nhật thành công");
+                   onCategoryCBClick(null);
+               } catch (SQLException | ClassNotFoundException e) {
+                   e.printStackTrace();
+                   Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể cập nhật " + itemDTO.getName() + " vào thực đơn lúc này");
+
+               }
+           }
+
+           @Override
+           public void delete(Object obj, ActionEvent event) {
+                leftLayout.getChildren().clear();
+           }
+       };
+
+       newItemHandler = new UDHandler() {
+           @Override
+           public void update(Object obj, ActionEvent event) {
+               ItemDTO itemDTO  = (ItemDTO) obj;
+               try {
+                   List<ItemDTO> check_lst = ItemDAO.getByCategoryAndName(itemDTO.getCategory(), itemDTO.getName());
+                   if(check_lst.size()>0){
+                       Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Món " + itemDTO.getName() + " đã tồn tại trong thực đơn");
+                       return;
+                   }
+
+
+                   ItemDAO.insert(itemDTO);
+                   onCategoryCBClick(null);
+                   Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Đã thêm "+itemDTO.getName()+" thành công");
+                   leftLayout.getChildren().clear();
+               } catch (SQLException | ClassNotFoundException e) {
+                   e.printStackTrace();
+                   Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể thêm " + itemDTO.getName() + " vào thực đơn lúc này");
+
+               }
+           }
+
+           @Override
+           public void delete(Object obj, ActionEvent event) {
+               leftLayout.getChildren().clear();
+           }
+       };
 
         scroll.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
@@ -115,21 +164,21 @@ public class ItemManagementController implements Initializable {
 
         itemHandler = new UDHandler() {
             @Override
-            public void update(Object obj) {
+            public void update(Object obj, ActionEvent event) {
                 ItemDTO itemDTO = (ItemDTO) obj;
                 FXMLLoader fxmlLoader = addItem(Main.class.getResource("item_detail.fxml"));
                 ItemDetailController itemDetailController = fxmlLoader.getController();
-                itemDetailController.setData(itemDTO, simpleHandler);
+                itemDetailController.setData(itemDTO, itemDetailHandler);
             }
 
             @Override
-            public void delete(Object obj) {
+            public void delete(Object obj, ActionEvent event) {
                 ItemDTO itemDTO = (ItemDTO) obj;
                 try {
                     ItemDAO.delete(itemDTO);
-                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Đã xoá " + itemDTO.getName() + " khỏi thực đơn");
                     itemList.remove(itemDTO);
                     setData2Grid(itemList);
+                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Đã xoá " + itemDTO.getName() + " khỏi thực đơn");
                 } catch (SQLException | ClassNotFoundException e) {
                     Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể xoá " + itemDTO.getName() + " khỏi thực đơn vào lúc này");
                     e.printStackTrace();
@@ -193,9 +242,25 @@ public class ItemManagementController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        rightLayout.getChildren().clear();
-//        rightLayout.setPrefWidth(anchorPane.getWidth());
-        rightLayout.getChildren().add(anchorPane);
+        leftLayout.getChildren().clear();
+        leftLayout.getChildren().add(anchorPane);
         return fxmlLoader;
     }
+
+    @FXML
+    void onAddNewItemButton(ActionEvent event) {
+        FXMLLoader fxmlLoader = addItem(Main.class.getResource("item_detail.fxml"));
+        ItemDetailController itemDetailController = fxmlLoader.getController();
+        itemDetailController.setData(null, newItemHandler);
+        itemDetailController.setUpdateButtonLabel("Thêm món");
+    }
+
+    @FXML
+    void onSearchTextFieldKeyPress(KeyEvent event) {
+        if( event.getCode() == KeyCode.ENTER ) {
+            onSearchButtonClick(null);
+        }
+    }
+
+
 }

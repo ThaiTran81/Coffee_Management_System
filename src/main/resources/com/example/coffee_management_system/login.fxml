@@ -45,7 +45,7 @@
                   <Font name="Roboto Light" size="16.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtPassword" layoutX="112.0" layoutY="189.0" onAction="#onInputChange" prefHeight="25.0" prefWidth="154.0" AnchorPane.rightAnchor="20.0" />
+            <PasswordField fx:id="txtPassword" layoutX="112.0" layoutY="189.0" onAction="#onLoginButtonClick" prefHeight="25.0" prefWidth="154.0" AnchorPane.rightAnchor="20.0" />
             <JFXButton fx:id="btnLogin" alignment="CENTER" layoutX="25.0" layoutY="262.0" onAction="#onLoginButtonClick" prefHeight="30.0" prefWidth="230.0" style="-fx-background-color: #E15648#E15648;" text="Đăng nhập" textFill="WHITE" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                <font>
                   <Font name="Roboto" size="16.0" />

@@ -51,11 +51,11 @@ public class ItemCardController implements Initializable {
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) {
-        callback.delete(m_itemDTO);
+        callback.delete(m_itemDTO, event);
     }
 
     @FXML
     void onUpdateButtonClick(ActionEvent event) {
-        callback.update(m_itemDTO);
+        callback.update(m_itemDTO, event);
     }
 }
