@@ -6,7 +6,6 @@ import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.StageUtils;
 import com.example.coffee_management_system.values.User;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,14 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -50,9 +46,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private Label lbNotification;
-
-    private Double xOffset;
-    private Double yOffset;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

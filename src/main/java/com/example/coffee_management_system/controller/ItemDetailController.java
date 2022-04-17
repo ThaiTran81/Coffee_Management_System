@@ -3,7 +3,7 @@ package com.example.coffee_management_system.controller;
 import com.example.coffee_management_system.DAO.CategoryDAO;
 import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.DTO.ItemDTO;
-import com.example.coffee_management_system.ultil.SimpleHandler;
+import com.example.coffee_management_system.ultil.UDHandler;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -42,7 +42,7 @@ public class ItemDetailController implements Initializable {
     @FXML
     private TextField txtPrice;
 
-    SimpleHandler callback;
+    UDHandler callback;
 
     private ItemDTO m_item;
     ObservableList<CategoryDTO> options;
@@ -63,26 +63,48 @@ public class ItemDetailController implements Initializable {
 
     @FXML
     void onCancelButton(ActionEvent event) {
-        callback.handle();
+        callback.delete(null, event);
     }
 
     @FXML
     void onUpdateButton(ActionEvent event) {
 
-    }
-
-    public void setData(ItemDTO itemDTO, SimpleHandler callback){
-        m_item = itemDTO;
-        this.callback =callback;
-        txtName.setText(m_item.getName());
-        taDescription.setText(m_item.getDescription());
-        txtPrice.setText(String.valueOf(m_item.getPrice()));
-
-        for(CategoryDTO categoryDTO: options){
-            if(categoryDTO.getId()==m_item.getCategory())
-                cbCategory.getSelectionModel().select(categoryDTO);
+        if (!validate()) {
+            return;
         }
+        CategoryDTO categoryDTO = cbCategory.getSelectionModel().getSelectedItem();
+        ItemDTO item = new ItemDTO();
+        if(m_item!=null)
+            item.setItem_id(m_item.getItem_id());
+        item.setName(txtName.getText());
+        item.setPrice(Double.parseDouble(txtPrice.getText()));
+        item.setCategory(categoryDTO.getId());
+        item.setDescription(taDescription.getText());
+
+        callback.update(item, event);
+
     }
 
+    boolean validate() {
+        return !txtName.getText().isBlank() && !txtPrice.getText().isBlank();
+    }
 
+    public void setData(ItemDTO itemDTO, UDHandler callback) {
+        if (itemDTO != null) {
+            m_item = itemDTO;
+
+            txtName.setText(m_item.getName());
+            taDescription.setText(m_item.getDescription());
+            txtPrice.setText(String.valueOf(m_item.getPrice()));
+            for (CategoryDTO categoryDTO : options) {
+                if (categoryDTO.getId() == m_item.getCategory())
+                    cbCategory.getSelectionModel().select(categoryDTO);
+            }
+        }
+        this.callback = callback;
+    }
+
+    void setUpdateButtonLabel(String label){
+        btnUpdate.setText(label);
+    }
 }

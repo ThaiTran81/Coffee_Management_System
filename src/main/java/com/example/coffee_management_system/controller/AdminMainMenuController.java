@@ -62,8 +62,11 @@ public class AdminMainMenuController implements Initializable {
 
     @FXML
     public void onCloseButtonClick(ActionEvent event) {
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
+        try {
+            StageUtils.switchTo(Main.class.getResource("login.fxml"), event, StageStyle.UNDECORATED);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
