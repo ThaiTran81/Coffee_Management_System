@@ -1,5 +1,9 @@
 package com.example.coffee_management_system.DTO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class UserDTO {
@@ -10,6 +14,15 @@ public class UserDTO {
     String phone="";
     int type;
     Date dob=new java.util.Date();
+
+    public UserDTO() {
+        this.userID = -1;
+        this.fullname = "";
+        this.email = "";
+        this.address = "";
+        this.phone = "";
+        this.dob = null;
+    }
 
     public UserDTO(int userID, String fullname, String email, String address, String phone, Date dob) {
         this.userID = userID;
@@ -86,5 +99,12 @@ public class UserDTO {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public void setDob(LocalDate value) { this.dob = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant()); }
+
+    public String createPassword() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return dateFormat.format(this.dob).replace("-", "");
     }
 }

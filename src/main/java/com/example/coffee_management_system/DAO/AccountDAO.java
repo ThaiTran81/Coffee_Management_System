@@ -44,4 +44,31 @@ public class AccountDAO {
 
         return stmt.executeUpdate();
     }
+
+    public static int updateByEmail(String oldEmail, String newEmail) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `account`\n" +
+                "SET username = ?\n" +
+                "WHERE username = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setString(1, newEmail);
+        stmt.setString(2, oldEmail);
+        return stmt.executeUpdate();
+    }
+
+    public static int updatePassword(String email, String password, int type) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `account`\n" +
+                "SET password = ?\n" +
+                "WHERE username = ? and type = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        String hashed_password = BCrypt.hashpw(password, BCrypt.gensalt());
+        System.out.println(hashed_password);
+        stmt.setString(1, hashed_password);
+        stmt.setString(2, email);
+        stmt.setInt(3,type);
+        return stmt.executeUpdate();
+    }
 }

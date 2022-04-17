@@ -80,13 +80,13 @@ public class AdminMainMenuController implements Initializable {
             managmentMenuController.hideAddButton();
             managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
 
-            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
-                @Override
-                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
-//                    CategoryDTO categoryDTO = (CategoryDTO) obj;
-//                    CategoryDAO.insert(categoryDTO);
-                }
-            });
+//            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
+//                @Override
+//                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
+////                    CategoryDTO categoryDTO = (CategoryDTO) obj;
+////                    CategoryDAO.insert(categoryDTO);
+//                }
+//            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -165,5 +165,16 @@ public class AdminMainMenuController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    public void onTableManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("table_management.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

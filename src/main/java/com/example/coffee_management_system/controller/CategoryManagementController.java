@@ -98,7 +98,6 @@ public class CategoryManagementController implements Initializable {
         layout.getChildren().clear();
         pullData();
         setData();
-
     }
 
     @FXML
