@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="126.5" prefWidth="242.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ItemBillCardController">
+   <children>
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.5" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="12.5">
+         <image>
+            <Image url="@asset/food.jpeg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="87.0" layoutY="12.0" prefHeight="75.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lbNameItem" alignment="CENTER" prefHeight="60.0" prefWidth="150.0" text="Label" wrapText="true" />
+            <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="186.0">
+               <children>
+                  <Label prefHeight="22.0" text="Số lượng:">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tfQuantityItem" prefHeight="22.0" prefWidth="54.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="200.0">
+               <children>
+                  <Label text="Đơn giá:" />
+                  <Label fx:id="lbPriceItem" text="Label">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <JFXButton layoutX="24.0" layoutY="88.0" onMouseClicked="#onDeleteButtonClick" styleClass="bg-red" stylesheets="@css/style.css" text="Xóa" AnchorPane.topAnchor="90.0" />
+      <Line endX="242.0" endY="125.0" startY="125.0" />
+   </children>
+</AnchorPane>
