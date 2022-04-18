@@ -151,4 +151,17 @@ public class AdminMainMenuController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void onStatsManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("revenue_statistics.fxml"));
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -8,10 +8,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.VBox;
 
@@ -128,9 +125,9 @@ public class RevenueStatisticsController implements Initializable {
             CategoryAxis uyAxis = new CategoryAxis();
             uyAxis.setLabel("Món");
 
-            BarChart<Number, String> bc_usage = new BarChart<>(uxAxis, uyAxis);
+            BarChart<Number, String> bc_usage = new BarChart<Number, String>(uxAxis, uyAxis);
 
-            XYChart.Series uSeries = new XYChart.Series();
+            XYChart.Series<Number, String> uSeries = new XYChart.Series();
 
             for(ItemUsage item: lst_usage){
                 uSeries.getData().add(new XYChart.Data(item.getUsage(), item.getName()));
