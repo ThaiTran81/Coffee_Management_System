@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,21 +15,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="538.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.RevenueStatistics">
+<AnchorPane prefHeight="538.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.RevenueStatisticsController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox minHeight="-Infinity" prefHeight="50.0" prefWidth="794.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Thống kê theo:">
+                  <Label text="Thống kê từ:">
                      <font>
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
                   </Label>
-                  <JFXComboBox prefHeight="25.0" prefWidth="209.0" />
-                  <HBox prefHeight="0.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <JFXButton styleClass="bg-green" stylesheets="@css/style.css" text="Thống kê" textFill="WHITE">
+                  <DatePicker fx:id="dpStartTime" />
+                  <Label text="đến:">
+                     <font>
+                        <Font name="Roboto Medium" size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpEndTine" />
+                  <JFXButton fx:id="btnStatistic" styleClass="bg-green" stylesheets="@css/style.css" text="Thống kê" textFill="WHITE">
                      <font>
                         <Font name="Roboto Medium" size="14.0" />
                      </font>
@@ -57,7 +62,7 @@
                                     <Font name="Roboto Medium" size="16.0" />
                                  </font>
                               </Label>
-                              <LineChart>
+                              <LineChart fx:id="lcProfit">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
@@ -81,7 +86,8 @@
                                     <Font name="Roboto Medium" size="16.0" />
                                  </font>
                               </Label>
-                              <BarChart legendSide="TOP" nodeOrientation="LEFT_TO_RIGHT">
+                              <PieChart fx:id="pcUsage" />
+                              <BarChart fx:id="bcUsage" legendSide="TOP" nodeOrientation="LEFT_TO_RIGHT">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>

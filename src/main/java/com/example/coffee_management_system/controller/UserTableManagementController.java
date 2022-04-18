@@ -1,18 +1,12 @@
 package com.example.coffee_management_system.controller;
 
 import com.example.coffee_management_system.DAO.AreaDAO;
-import com.example.coffee_management_system.DAO.CategoryDAO;
-import com.example.coffee_management_system.DAO.ItemDAO;
 import com.example.coffee_management_system.DAO.TableDAO;
 import com.example.coffee_management_system.DTO.AreaDTO;
-import com.example.coffee_management_system.DTO.CategoryDTO;
-import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.DTO.TableDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.SimpleHandler;
-import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDHandler;
-import com.example.coffee_management_system.ultil.UDTableHandler;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.value.ChangeListener;
@@ -28,7 +22,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
@@ -37,7 +30,6 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -103,7 +95,7 @@ public class UserTableManagementController implements Initializable {
 
         simpleHandler = new SimpleHandler() {
             @Override
-            public void handle() {
+            public void handle(Object[] obj) {
                 rightLayout.getChildren().clear();
                 rightLayout.setPrefWidth(Region.USE_COMPUTED_SIZE);
             }

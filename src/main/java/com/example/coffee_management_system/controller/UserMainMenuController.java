@@ -1,7 +1,6 @@
 package com.example.coffee_management_system.controller;
 
 import com.example.coffee_management_system.Main;
-import com.example.coffee_management_system.ultil.ComponentMenuListener;
 import com.example.coffee_management_system.ultil.StageUtils;
 import com.example.coffee_management_system.values.Role;
 import com.example.coffee_management_system.values.User;
@@ -24,7 +23,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class UserMainMenuController implements Initializable {
@@ -93,13 +91,6 @@ public class UserMainMenuController implements Initializable {
 
             managmentMenuController.setBackSatge(Main.class.getResource("UserMainMenu.fxml"));
 
-            managmentMenuController.setAddButton("Thêm danh mục mới", null, null, null, new ComponentMenuListener() {
-                @Override
-                public void onClickListener(URL url, Object obj) throws SQLException, ClassNotFoundException {
-//                    CategoryDTO categoryDTO = (CategoryDTO) obj;
-//                    CategoryDAO.insert(categoryDTO);
-                }
-            });
         } catch (IOException e) {
             e.printStackTrace();
         }
