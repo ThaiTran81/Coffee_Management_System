@@ -25,6 +25,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -32,10 +34,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class UserManagementController implements Initializable {
 
@@ -226,8 +225,21 @@ public class UserManagementController implements Initializable {
         userEditorController.setUpdateButtonLabel("Thêm");
     }
 
+
+
+    @FXML
+    void onSearchTextFieldKeyPress(KeyEvent event) {
+        if( event.getCode() == KeyCode.ENTER ) {
+            onSearchButtonClick();
+        }
+    }
+
     @FXML
     void onSearchButtonClick() {
+        List<UserDTO> copy = new ArrayList<>(users);
+        String key = txtSearch.getText();
+        copy.removeIf(item -> !key.isBlank() && !item.getFullname().toLowerCase().contains(key.toLowerCase()));
 
+        setData2Grid(copy);
     }
 }
