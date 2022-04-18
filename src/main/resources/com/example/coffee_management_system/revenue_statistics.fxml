@@ -2,11 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -33,7 +28,7 @@
                      </font>
                   </Label>
                   <DatePicker fx:id="dpEndTine" />
-                  <JFXButton fx:id="btnStatistic" styleClass="bg-green" stylesheets="@css/style.css" text="Thống kê" textFill="WHITE">
+                  <JFXButton fx:id="btnStatistic" onAction="#onStatisticButtonClick" styleClass="bg-green" stylesheets="@css/style.css" text="Thống kê" textFill="WHITE">
                      <font>
                         <Font name="Roboto Medium" size="14.0" />
                      </font>
@@ -55,21 +50,13 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" stylesheets="@css/style.css" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox fx:id="profitLayout" alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label text="Thống kê số tiền thu được">
                                  <font>
                                     <Font name="Roboto Medium" size="16.0" />
                                  </font>
                               </Label>
-                              <LineChart fx:id="lcProfit">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis side="LEFT" />
-                                </yAxis>
-                              </LineChart>
                            </children>
                            <padding>
                               <Insets top="10.0" />
@@ -79,22 +66,13 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" stylesheets="@css/style.css" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox fx:id="usageLayout" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label text="Thống kê số lượng tiêu thụ món">
                                  <font>
                                     <Font name="Roboto Medium" size="16.0" />
                                  </font>
                               </Label>
-                              <PieChart fx:id="pcUsage" />
-                              <BarChart fx:id="bcUsage" legendSide="TOP" nodeOrientation="LEFT_TO_RIGHT">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis side="LEFT" />
-                                </yAxis>
-                              </BarChart>
                            </children>
                            <padding>
                               <Insets top="10.0" />
