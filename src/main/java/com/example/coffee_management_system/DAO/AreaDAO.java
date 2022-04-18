@@ -17,7 +17,7 @@ public class AreaDAO {
         ResultSet rs = stmt.executeQuery(sql);
 
         List<AreaDTO> listArea = new ArrayList<AreaDTO>();
-        if (rs.next()){
+        while (rs.next()){
             listArea.add(new AreaDTO(rs.getInt(1),rs.getString(2),rs.getInt(3)));
         }
 

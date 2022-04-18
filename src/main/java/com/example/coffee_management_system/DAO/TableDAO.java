@@ -29,14 +29,14 @@ public class TableDAO {
 
     public static List<TableDTO> findByAreaId(int id) throws SQLException, ClassNotFoundException {
 
-        String sql = "SELECT * FROM table where table_id = ?";
+        String sql = "SELECT * FROM `table` where area_id = ?";
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         ResultSet rs = preparedStatement.executeQuery();
 
         List<TableDTO> listAreaName = new ArrayList<TableDTO>();
-        if (rs.next()){
+        while (rs.next()){
             listAreaName.add(new TableDTO(rs.getInt(1),
                     rs.getInt(2),
                     rs.getString(3),

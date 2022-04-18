@@ -11,16 +11,26 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserTableCardController implements Initializable {
+    @FXML
+    private Label tfNameTable;
+    @FXML
+    private AnchorPane layoutTable;
 
-    public Label tfNameTable;
-    public AnchorPane layoutTable;
-
+    private TableDTO tableDTO;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
     public void setData(TableDTO tableDTO){
+        this.tableDTO = tableDTO;
         tfNameTable.setText(tableDTO.getName());
+        if(tableDTO.getStatus()==0){
+            layoutTable.setStyle("-fx-background-color: #70e000");
+        }else{
+            layoutTable.setStyle("-fx-background-color: #d90429");
+        }
     }
+
+
 }

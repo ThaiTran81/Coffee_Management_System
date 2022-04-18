@@ -54,7 +54,6 @@ public class UserTableManagementController implements Initializable {
     @FXML
     private TextField txtSearch;
 
-    SimpleHandler simpleHandler;
 
     List<TableDTO> itemList;
     ObservableList<AreaDTO> options = FXCollections.observableArrayList();
@@ -131,8 +130,25 @@ public class UserTableManagementController implements Initializable {
     }
 
     public void onSearchButtonClick(ActionEvent event) {
+        List<TableDTO> copy = new ArrayList<>(itemList);
+        String key = txtSearch.getText();
+        copy.removeIf(item -> !key.isBlank() && !item.getName().toLowerCase().contains(key.toLowerCase()));
+
+        setData2Grid(copy);
     }
 
     public void onCategoryCBClick(ActionEvent event) {
+        AreaDTO areaDTO = cbArea.getSelectionModel().getSelectedItem();
+
+        try {
+            if (areaDTO.getId() == 0) itemList = TableDAO.findAll();
+            else itemList = TableDAO.findByAreaId(areaDTO.getId());
+
+            if (!txtSearch.getText().isBlank()) {
+                onSearchButtonClick(event);
+            } else setData2Grid(itemList);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
