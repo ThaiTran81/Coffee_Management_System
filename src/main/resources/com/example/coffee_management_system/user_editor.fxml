@@ -97,7 +97,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="381.0">
                <children>
-                         <JFXButton fx:id="btnAddNew" onAction="#onEditButtonClick" prefHeight="30.0" prefWidth="100.0" styleClass="bg-blue" text="Thêm" textFill="WHITE">
+                         <JFXButton fx:id="btnAddNew" onAction="#onEditButtonClick" prefHeight="30.0" prefWidth="100.0" styleClass="bg-blue" text="Cập nhật" textFill="WHITE">
                              <font>
                                  <Font size="14.0" />
                              </font>

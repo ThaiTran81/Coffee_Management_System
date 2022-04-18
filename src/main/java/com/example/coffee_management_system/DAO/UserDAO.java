@@ -22,6 +22,7 @@ public class UserDAO {
 
         while (rs.next()){
             UserDTO user = new UserDTO();
+            user.setUserID(rs.getInt("user_id"));
             user.setFullname(rs.getString("fullname"));
             user.setDob(rs.getDate("dob"));
             user.setPhone(rs.getString("phone"));
@@ -70,19 +71,21 @@ public class UserDAO {
         return null;
     }
 
-    public static int update(UserDTO newUser) throws SQLException, ClassNotFoundException {
+    public static int update(UserDTO userDTO) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE `user`\n" +
                 "SET fullname = ?, dob = ?, email = ?, address = ?, phone = ?\n" +
                 "WHERE user_id = ?";
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
 
-        stmt.setString(1, newUser.getFullname());
-        stmt.setDate(2, (java.sql.Date) newUser.getDob());
-        stmt.setString(3, newUser.getEmail());
-        stmt.setString(4, newUser.getAddress());
-        stmt.setString(5, newUser.getPhone());
-        stmt.setInt(6, newUser.getUserID());
+        java.sql.Date dob = new java.sql.Date(userDTO.getDob().getTime());
+
+        stmt.setString(1, userDTO.getFullname());
+        stmt.setDate(2, dob);
+        stmt.setString(3, userDTO.getEmail());
+        stmt.setString(4, userDTO.getAddress());
+        stmt.setString(5, userDTO.getPhone());
+        stmt.setInt(6, userDTO.getUserID());
         return stmt.executeUpdate();
     }
 }

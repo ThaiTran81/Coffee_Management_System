@@ -62,8 +62,9 @@ public class UserEditorController implements Initializable {
             Toast.showToast(Toast.TOAST_SUCCESS, txtStaffAddress, "Vui lòng điền đầy đủ các trường!");
             return;
         }
-
         UserDTO userDTO = new UserDTO();
+        if(m_user!=null)
+            userDTO.setUserID(m_user.getUserID());
         userDTO.setFullname(txtStaffName.getText());
         userDTO.setDob(txtStaffDob.getValue());
         userDTO.setAddress(txtStaffAddress.getText());
@@ -93,15 +94,15 @@ public class UserEditorController implements Initializable {
             txtStaffAddress.setText(m_user.getAddress());
             txtStaffEmail.setText(m_user.getEmail());
             txtStaffPhoneNumber.setText(m_user.getPhone());
-            txtStaffType.getSelectionModel().select(m_user.getType());
+            txtStaffType.getSelectionModel().select(m_user.getType()-1);
 
         }
         this.callback = callback;
     }
 
-//    void setUpdateButtonLabel(String label){
-//        btnUpdate.setText(label);
-//    }
+    void setUpdateButtonLabel(String label){
+        btnAddNew.setText(label);
+    }
 
     boolean validate() {
         if (txtStaffDob.getValue() == null) {

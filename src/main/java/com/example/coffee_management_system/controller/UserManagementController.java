@@ -65,6 +65,8 @@ public class UserManagementController implements Initializable {
     UDHandler userEditorHandler;
     UDHandler newUserHandler;
 
+    String email;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         flow.setPadding(new Insets(5, 5, 5, 5));
@@ -97,6 +99,7 @@ public class UserManagementController implements Initializable {
 
                     String password = BCrypt.hashpw(userDTO.createPassword(), BCrypt.gensalt());
                     AccountDAO.insert(userDTO.getEmail(), password, userDTO.getType());
+                    reload();
                     Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Đã thêm "+userDTO.getFullname()+" thành công");
                     editor_layout.getChildren().clear();
                 } catch (SQLException | ClassNotFoundException e) {
@@ -114,17 +117,16 @@ public class UserManagementController implements Initializable {
         userEditorHandler = new UDHandler() {
             @Override
             public void update(Object obj, ActionEvent event) {
-
-//                ItemDTO itemDTO = (ItemDTO) obj;
-//                try {
-//                    ItemDAO.update(itemDTO);
-//                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Cập nhật thành công");
-//                    onCategoryCBClick(null);
-//                } catch (SQLException | ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể cập nhật " + itemDTO.getName() + " vào thực đơn lúc này");
-//
-//                }
+                UserDTO userDTO = (UserDTO) obj;
+                try {
+                    UserDAO.update(userDTO);
+                    AccountDAO.updateByEmail(email, userDTO.getEmail());
+                    AccountDAO.updateType(userDTO.getEmail(), userDTO.getType());
+                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Cập nhật thành công");
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể cập nhật vào lúc này");
+                }
             }
 
             @Override
@@ -136,7 +138,11 @@ public class UserManagementController implements Initializable {
         userHandle = new UDHandler() {
             @Override
             public void update(Object obj, ActionEvent event) {
-                
+                UserDTO userDTO = (UserDTO) obj;
+                email = userDTO.getEmail();
+                FXMLLoader fxmlLoader = addItem(Main.class.getResource("user_editor.fxml"));
+                UserEditorController userEditorController = fxmlLoader.getController();
+                userEditorController.setData(userDTO, userEditorHandler);
             }
 
             @Override
@@ -150,8 +156,8 @@ public class UserManagementController implements Initializable {
                 if (alert.showAndWait().get() == ButtonType.OK) {
                     try {
                         AccountDAO.delete(userDTO);
-                        users.remove(userDTO);
-                        setData2Grid(users);
+
+                        reload();
                         Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Đã xoá " + userDTO.getFullname() + " khỏi danh sách nhân viên");
                     } catch (SQLException | ClassNotFoundException e) {
                         Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể xoá " + userDTO.getFullname() + " khỏi danh sách nhân viên vào lúc này");
@@ -161,8 +167,7 @@ public class UserManagementController implements Initializable {
             }
         };
 
-        pullData();
-        setData2Grid(users);
+        reload();
     }
 
     private void setData2Grid(List<UserDTO> list) {
@@ -194,11 +199,10 @@ public class UserManagementController implements Initializable {
         }
     }
 
-//    void reload() {
-//        lst_layout.getChildren().clear();
-//        pullData();
-//        setData();
-//    }
+    void reload() {
+        pullData();
+        setData2Grid(users);
+    }
 
     FXMLLoader addItem(URL url) {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -219,7 +223,7 @@ public class UserManagementController implements Initializable {
         FXMLLoader fxmlLoader = addItem(Main.class.getResource("user_editor.fxml"));
         UserEditorController userEditorController = fxmlLoader.getController();
         userEditorController.setData(null, newUserHandler);
-//        userEditorController.setUpdateButtonLabel("Thêm món");
+        userEditorController.setUpdateButtonLabel("Thêm");
     }
 
     @FXML

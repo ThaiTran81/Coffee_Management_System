@@ -2,6 +2,7 @@ package com.example.coffee_management_system.DTO;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -90,7 +91,9 @@ public class UserDTO {
     }
 
     public LocalDate getDobAsLocalDate() {
-        return dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return Instant.ofEpochMilli(dob.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 
     public void setDob(Date dob) {
