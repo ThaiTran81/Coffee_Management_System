@@ -27,11 +27,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -47,6 +49,9 @@ public class UserManagementController implements Initializable {
     private ScrollPane scroll;
 
     @FXML
+    private VBox editor_layout;
+
+    @FXML
     private TextField txtSearch;
 
     @FXML
@@ -56,7 +61,9 @@ public class UserManagementController implements Initializable {
     private JFXButton btnAddNew;
 
     private List<UserDTO> users;
-    private UDHandler userHandle;
+    UDHandler userHandle;
+    UDHandler userEditorHandler;
+    UDHandler newUserHandler;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -76,6 +83,55 @@ public class UserManagementController implements Initializable {
                 flow.setPrefHeight(bounds.getHeight());
             }
         });
+
+        newUserHandler = new UDHandler() {
+            @Override
+            public void update(Object obj, ActionEvent event) {
+                UserDTO userDTO  = (UserDTO) obj;
+                try {
+                    if (UserDAO.findUserByUsername(userDTO.getEmail()) != null) {
+                        Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Nhân viên " + userDTO.getFullname() + " đã tồn tại!");
+                        return;
+                    }
+                    UserDAO.insert(userDTO);
+
+                    String password = BCrypt.hashpw(userDTO.createPassword(), BCrypt.gensalt());
+                    AccountDAO.insert(userDTO.getEmail(), password, userDTO.getType());
+                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Đã thêm "+userDTO.getFullname()+" thành công");
+                    editor_layout.getChildren().clear();
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể thêm nhân viên" + userDTO.getFullname() + " vào lúc này!");
+                }
+            }
+
+            @Override
+            public void delete(Object obj, ActionEvent event) {
+                editor_layout.getChildren().clear();
+            }
+        };
+
+        userEditorHandler = new UDHandler() {
+            @Override
+            public void update(Object obj, ActionEvent event) {
+
+//                ItemDTO itemDTO = (ItemDTO) obj;
+//                try {
+//                    ItemDAO.update(itemDTO);
+//                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Cập nhật thành công");
+//                    onCategoryCBClick(null);
+//                } catch (SQLException | ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể cập nhật " + itemDTO.getName() + " vào thực đơn lúc này");
+//
+//                }
+            }
+
+            @Override
+            public void delete(Object obj, ActionEvent event) {
+                editor_layout.getChildren().clear();
+            }
+        };
         
         userHandle = new UDHandler() {
             @Override
@@ -144,17 +200,26 @@ public class UserManagementController implements Initializable {
 //        setData();
 //    }
 
-    @FXML
-    void onAddButtonClick()  {
+    FXMLLoader addItem(URL url) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(url);
+        AnchorPane anchorPane = null;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("add_user.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch(Exception e) {
+            anchorPane = fxmlLoader.load();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        editor_layout.getChildren().clear();
+        editor_layout.getChildren().add(anchorPane);
+        return fxmlLoader;
+    }
+
+    @FXML
+    void onAddButtonClick()  {
+        FXMLLoader fxmlLoader = addItem(Main.class.getResource("user_editor.fxml"));
+        UserEditorController userEditorController = fxmlLoader.getController();
+        userEditorController.setData(null, newUserHandler);
+//        userEditorController.setUpdateButtonLabel("Thêm món");
     }
 
     @FXML

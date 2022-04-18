@@ -71,7 +71,7 @@ public class AdminMainMenuController implements Initializable {
     void onUserManagementButtonClick(ActionEvent event) {
         FXMLLoader fxmlLoader;
         try {
-            fxmlLoader = StageUtils.switchTo(Main.class.getResource("management_menu.fxml"), event, StageStyle.DECORATED);
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("user_management.fxml"));
             managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
@@ -79,7 +79,6 @@ public class AdminMainMenuController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML

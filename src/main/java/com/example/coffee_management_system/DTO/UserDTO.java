@@ -89,6 +89,10 @@ public class UserDTO {
         return dob;
     }
 
+    public LocalDate getDobAsLocalDate() {
+        return dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
     public void setDob(Date dob) {
         this.dob = dob;
     }
