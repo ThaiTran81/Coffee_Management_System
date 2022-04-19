@@ -1,17 +1,11 @@
 package com.example.coffee_management_system.controller;
 
 import com.example.coffee_management_system.DAO.AccountDAO;
-import com.example.coffee_management_system.DAO.CategoryDAO;
-import com.example.coffee_management_system.DAO.ItemDAO;
 import com.example.coffee_management_system.DAO.UserDAO;
-import com.example.coffee_management_system.DTO.CategoryDTO;
-import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.DTO.UserDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.Toast;
-import com.example.coffee_management_system.ultil.UDCategoryHandler;
 import com.example.coffee_management_system.ultil.UDHandler;
-import com.example.coffee_management_system.ultil.UDUserHandler;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,13 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.io.IOException;
