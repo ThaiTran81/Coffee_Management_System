@@ -78,9 +78,9 @@ public class PromotionDTO {
                 .toLocalDate();
     }
 
-    public void setstartDate(LocalDate value) { this.startDate = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant()); }
+    public void setStartDate(LocalDate value) { this.startDate = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant()); }
 
-    public void setendDate(LocalDate value) { this.endDate = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant()); }
+    public void setEndDate(LocalDate value) { this.endDate = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant()); }
 
 
     public int getPromotionID() {

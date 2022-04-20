@@ -1,6 +1,7 @@
 package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.PromotionDTO;
+import com.example.coffee_management_system.DTO.UserDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 public class PromotionDAO {
 
     public static List<PromotionDTO> getAll() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM promotion";
+        String sql = "SELECT * FROM promotion WHERE promotion.status > -1";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
@@ -94,5 +95,15 @@ public class PromotionDAO {
         stmt.setInt(8, promotionDTO.getPromotionID());
 
         return stmt.executeUpdate();
+    }
+
+    public static int delete(PromotionDTO promotionDTO) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `promotion`\n" +
+                "SET status = -1\n" +
+                "WHERE promotion_id = '" + promotionDTO.getPromotionID() + "'";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+
+        return stmt.executeUpdate(sql);
     }
 }
