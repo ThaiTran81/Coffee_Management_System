@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 19/04/2022 21:08:17
+ Date: 21/04/2022 23:48:36
 */
 
 SET NAMES utf8mb4;
@@ -103,21 +103,21 @@ CREATE TABLE `bill`  (
 -- ----------------------------
 -- Records of bill
 -- ----------------------------
-INSERT INTO `bill` VALUES (1, 2, '2022-03-01 10:30:24', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (2, 3, '2022-03-04 10:30:24', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (3, 4, '2022-03-06 10:30:24', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (4, 2, '2022-03-08 11:30:25', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (5, 3, '2022-03-17 17:30:25', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (6, 4, '2022-03-18 19:30:25', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (7, 2, '2022-03-19 22:30:26', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (8, 3, '2022-03-22 19:30:26', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (9, 4, '2022-03-24 15:30:26', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (10, 2, '2022-03-30 16:30:28', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (11, 3, '2022-04-17 23:34:14', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (12, 4, '2022-04-17 23:34:14', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (13, 2, '2022-04-17 23:34:15', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (14, 3, '2022-04-17 23:34:15', NULL, NULL, NULL, 1, NULL, NULL);
-INSERT INTO `bill` VALUES (15, 4, '2022-04-17 23:34:15', NULL, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `bill` VALUES (1, 2, '2022-04-21 23:24:33', NULL, NULL, NULL, 1, NULL, 465000);
+INSERT INTO `bill` VALUES (2, 3, '2022-04-21 23:24:50', NULL, NULL, NULL, 1, NULL, 200000);
+INSERT INTO `bill` VALUES (3, 4, '2022-04-21 23:25:41', NULL, NULL, NULL, 1, NULL, 280000);
+INSERT INTO `bill` VALUES (4, 2, '2022-04-21 23:43:31', NULL, NULL, NULL, 1, NULL, 67000);
+INSERT INTO `bill` VALUES (5, 3, '2022-04-21 23:43:41', NULL, NULL, NULL, 1, NULL, 24000);
+INSERT INTO `bill` VALUES (6, 4, '2022-04-21 23:43:51', NULL, NULL, NULL, 1, NULL, 87000);
+INSERT INTO `bill` VALUES (7, 2, '2022-04-21 23:44:10', NULL, NULL, NULL, 1, NULL, 347000);
+INSERT INTO `bill` VALUES (8, 3, '2022-04-21 23:44:27', NULL, NULL, NULL, 1, NULL, 255000);
+INSERT INTO `bill` VALUES (9, 4, '2022-04-21 23:45:08', NULL, NULL, NULL, 1, NULL, 87000);
+INSERT INTO `bill` VALUES (10, 2, '2022-04-21 23:45:21', NULL, NULL, NULL, 1, NULL, 98000);
+INSERT INTO `bill` VALUES (11, 3, '2022-04-21 23:45:33', NULL, NULL, NULL, 1, NULL, 228000);
+INSERT INTO `bill` VALUES (12, 4, '2022-04-21 23:45:51', NULL, NULL, NULL, 1, NULL, 177000);
+INSERT INTO `bill` VALUES (13, 2, '2022-04-21 23:46:39', NULL, NULL, NULL, 1, NULL, 236000);
+INSERT INTO `bill` VALUES (14, 3, '2022-04-21 23:46:52', NULL, NULL, NULL, 1, NULL, 214000);
+INSERT INTO `bill` VALUES (15, 4, '2022-04-21 23:48:06', NULL, NULL, NULL, 1, NULL, 227000);
 
 -- ----------------------------
 -- Table structure for billdetail
@@ -364,17 +364,21 @@ CREATE TABLE `promotion`  (
   `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `discount` float NULL DEFAULT NULL,
-	`startDate` date NULL DEFAULT NULL,
+  `startDate` date NULL DEFAULT NULL,
   `endDate` date NULL DEFAULT NULL,
   `type` int NULL DEFAULT NULL,
   `status` int NULL DEFAULT NULL,
   PRIMARY KEY (`promotion_id`) USING BTREE,
   UNIQUE INDEX `name_UNIQUE`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of promotion
 -- ----------------------------
+INSERT INTO `promotion` VALUES (1, 'Khuyến mãi tháng một', 'Khuyến mãi giảm giá tiền trên tổng hóa đơn', 5, '2022-01-01', '2022-01-31', NULL, 0);
+INSERT INTO `promotion` VALUES (2, 'Khuyến mãi tháng hai', 'Khuyến mãi giảm giá tiền trên tổng hóa đơn', 5, '2022-02-01', '2022-02-28', NULL, 0);
+INSERT INTO `promotion` VALUES (3, 'Khuyến mãi tháng ba', 'Khuyến mãi giảm giá tiền trên tổng hóa đơn', 5, '2022-03-01', '2022-03-31', NULL, 0);
+INSERT INTO `promotion` VALUES (4, 'Khuyến mãi tháng bốn', 'Khuyến mãi giảm giá tiền trên tổng hóa đơn', 5, '2022-04-01', '2022-04-30', NULL, 1);
 
 -- ----------------------------
 -- Table structure for table
