@@ -83,4 +83,16 @@ public class AccountDAO {
         stmt.setInt(3,type);
         return stmt.executeUpdate();
     }
+
+    public static int updateType(String email, int type) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `account`\n" +
+                "SET type = ?\n" +
+                "WHERE username = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setInt(1, type);
+        stmt.setString(2, email);
+        return stmt.executeUpdate();
+    }
 }

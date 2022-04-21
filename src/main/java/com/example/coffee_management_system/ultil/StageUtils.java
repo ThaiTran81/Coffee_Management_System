@@ -1,5 +1,6 @@
 package com.example.coffee_management_system.ultil;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -38,16 +39,29 @@ public class StageUtils {
     }
 
     public static FXMLLoader switchTo(URL url, ActionEvent event, StageStyle stageStyle) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
         Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        prevStage.close();
+//        prevStage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+//        Stage stage = new Stage();
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load());
+//        prevStage.initStyle(stageStyle);
+        prevStage.sizeToScene();
+        prevStage.setScene(scene);
+        prevStage.show();
 
-        stage.initStyle(stageStyle);
-        stage.setScene(scene);
-        stage.show();
+
 
         return fxmlLoader;
     }

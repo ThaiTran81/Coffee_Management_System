@@ -1,5 +1,6 @@
 package com.example.coffee_management_system.controller;
 
+import com.example.coffee_management_system.DTO.PromotionDTO;
 import com.example.coffee_management_system.DTO.UserDTO;
 import com.example.coffee_management_system.ultil.UDHandler;
 import javafx.event.ActionEvent;
@@ -7,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class UserCardController {
+public class PromotionCardController {
     @FXML
     private Button btnDelete;
 
@@ -18,37 +19,29 @@ public class UserCardController {
     private Label lbName;
 
     @FXML
-    private Label lbPosition;
+    private Label lbDiscount;
 
-    private UserDTO userDTO;
+    private PromotionDTO promotionDTO;
 
     private UDHandler callback;
 
 
-    void setData(UserDTO user, UDHandler callback){
-        this.userDTO = user;
+    void setData(PromotionDTO promotion, UDHandler callback){
+        this.promotionDTO = promotion;
 
-        lbName.setText(userDTO.getFullname());
-
-        String pos = "Chức vụ: ";
-        if (userDTO.getType() == 1) {
-            pos += "Nhân viên phục vụ";
-        }
-        else {
-            pos += "Nhân viên bếp";
-        }
-        lbPosition.setText(pos);
+        lbName.setText(promotionDTO.getName());
+        lbDiscount.setText("Giảm giá " + String.valueOf(promotionDTO.getDiscount()) + "% trên tổng hóa đơn");
         this.callback = callback;
-        this.userDTO = user;
+        this.promotionDTO = promotion;
     }
 
     @FXML
     void onDeleteButtonClick(ActionEvent event) {
-        callback.delete(userDTO, event);
+        callback.delete(promotionDTO, event);
     }
 
     @FXML
     void onDetailButtonClick(ActionEvent event) {
-        callback.update(userDTO, event);
+        callback.update(promotionDTO, event);
     }
 }

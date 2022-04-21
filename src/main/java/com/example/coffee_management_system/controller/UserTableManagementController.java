@@ -59,6 +59,7 @@ public class UserTableManagementController implements Initializable {
 
     @FXML
     private TextField txtSearch;
+    SimpleHandler simpleHandler;
 
 
     List<TableDTO> itemList;

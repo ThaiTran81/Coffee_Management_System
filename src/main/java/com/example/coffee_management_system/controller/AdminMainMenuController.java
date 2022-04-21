@@ -71,7 +71,7 @@ public class AdminMainMenuController implements Initializable {
     void onUserManagementButtonClick(ActionEvent event) {
         FXMLLoader fxmlLoader;
         try {
-            fxmlLoader = StageUtils.switchTo(Main.class.getResource("management_menu.fxml"), event, StageStyle.DECORATED);
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("user_management.fxml"));
             managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
@@ -79,7 +79,6 @@ public class AdminMainMenuController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -147,6 +146,19 @@ public class AdminMainMenuController implements Initializable {
             fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("table_management.fxml"));
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onStatsManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("revenue_statistics.fxml"));
             managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
         } catch (IOException e) {
             e.printStackTrace();

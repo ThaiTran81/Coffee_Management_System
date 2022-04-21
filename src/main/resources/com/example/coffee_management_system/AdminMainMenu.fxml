@@ -53,7 +53,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" ">
+                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onStatsManagementButtonClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" ">
                                  <graphic>
                                     <StackPane>
                                        <VBox alignment="CENTER" spacing="20.0">
