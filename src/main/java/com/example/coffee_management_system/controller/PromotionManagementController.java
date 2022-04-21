@@ -101,6 +101,11 @@ public class PromotionManagementController implements Initializable {
             public void delete(Object obj, ActionEvent event) {
                 editor_layout.getChildren().clear();
             }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+
+            }
         };
 
         promotionEditorHandler = new UDHandler() {
@@ -119,6 +124,11 @@ public class PromotionManagementController implements Initializable {
             @Override
             public void delete(Object obj, ActionEvent event) {
                 editor_layout.getChildren().clear();
+            }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+
             }
         };
 
@@ -151,6 +161,11 @@ public class PromotionManagementController implements Initializable {
                         e.printStackTrace();
                     }
                 }
+            }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+
             }
         };
 

@@ -64,7 +64,7 @@ public class UserTableManagementController implements Initializable {
 
     List<TableDTO> itemList;
     ObservableList<AreaDTO> options = FXCollections.observableArrayList();
-    SimpleHandler simpleHandler;
+//    SimpleHandler simpleHandler;
 
     void getData() {
         List<AreaDTO> areas;

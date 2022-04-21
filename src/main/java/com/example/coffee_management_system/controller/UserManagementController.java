@@ -102,6 +102,11 @@ public class UserManagementController implements Initializable {
             public void delete(Object obj, ActionEvent event) {
                 editor_layout.getChildren().clear();
             }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+
+            }
         };
 
         userEditorHandler = new UDHandler() {
@@ -122,6 +127,11 @@ public class UserManagementController implements Initializable {
             @Override
             public void delete(Object obj, ActionEvent event) {
                 editor_layout.getChildren().clear();
+            }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+
             }
         };
         
