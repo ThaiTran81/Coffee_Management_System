@@ -123,4 +123,28 @@ public class ItemDAO {
 
         return stmt.executeUpdate();
     }
+
+    public static ItemDTO findById(int item_id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM item WHERE item_id='"+item_id+"'";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs = stmt.executeQuery(sql);
+        ItemDTO itemDTO = null;
+
+        if (rs.next()){
+            itemDTO = new ItemDTO();
+
+            itemDTO.setItem_id(rs.getInt("item_id"));
+            itemDTO.setName(rs.getString("name"));
+            itemDTO.setDescription(rs.getString("description"));
+            itemDTO.setCategory(rs.getInt("category"));
+            itemDTO.setPrice(rs.getDouble("price"));
+
+        }
+
+        return itemDTO;
+    }
+
 }

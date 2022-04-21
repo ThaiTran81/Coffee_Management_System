@@ -4,9 +4,11 @@ import com.example.coffee_management_system.DAO.CategoryDAO;
 import com.example.coffee_management_system.DAO.ItemDAO;
 import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.DTO.ItemDTO;
+import com.example.coffee_management_system.DTO.TableDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDHandler;
+import com.example.coffee_management_system.values.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -27,6 +30,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.PropertySheet;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,9 +68,12 @@ public class ItemManagementController implements Initializable {
 
     List<ItemDTO> itemList;
     ObservableList<CategoryDTO> options = FXCollections.observableArrayList();
+    private TableDTO tableDTO;
     UDHandler itemHandler;
     UDHandler itemDetailHandler;
     UDHandler newItemHandler;
+
+    public ItemManagementController(){};
 
     void getData() {
         List<CategoryDTO> categories;
@@ -122,6 +129,11 @@ public class ItemManagementController implements Initializable {
            public void delete(Object obj, ActionEvent event) {
                 leftLayout.getChildren().clear();
            }
+
+           @Override
+           public void addToBill(Object obj, ActionEvent event) {
+
+           }
        };
 
        newItemHandler = new UDHandler() {
@@ -150,6 +162,11 @@ public class ItemManagementController implements Initializable {
            @Override
            public void delete(Object obj, ActionEvent event) {
                leftLayout.getChildren().clear();
+           }
+
+           @Override
+           public void addToBill(Object obj, ActionEvent event) {
+
            }
        };
 
@@ -183,9 +200,34 @@ public class ItemManagementController implements Initializable {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+                System.out.println("hahaha");
+            }
         };
 
         setData2Grid(itemList);
+    }
+
+    public void setScreenData(){
+        if(User.role == 0){
+            btnAddNewItem.setVisible(true);
+            rightLayout.getChildren().clear();
+        }else{
+            btnAddNewItem.setVisible(false);
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("bill_management.fxml"));
+                Parent parent = fxmlLoader.load();
+                BillManagementController billManagementController = fxmlLoader.getController();
+                billManagementController.pullData(this.tableDTO);
+                billManagementController.setData();
+                rightLayout.getChildren().removeAll();
+                rightLayout.getChildren().setAll(parent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -261,5 +303,9 @@ public class ItemManagementController implements Initializable {
         }
     }
 
+    @FXML
+    public void setTableDTO(TableDTO tableDTO){
+        this.tableDTO = tableDTO;
+    }
 
 }

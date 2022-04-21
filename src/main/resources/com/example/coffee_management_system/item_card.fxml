@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="259.0" prefWidth="214.0" styleClass="transparent-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ItemCardController">
+<AnchorPane prefHeight="259.0" prefWidth="214.0" styleClass="transparent-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ItemCardController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="244.0" prefWidth="210.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -52,6 +52,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
+                  <JFXButton fx:id="btnAddItemBill" onAction="#onAddItemToBillButtonClick" styleClass="bg-blue" stylesheets="@css/style.css" text="Thêm" visible="false" />
                   <JFXButton fx:id="btnUpdate" onAction="#onUpdateButtonClick" styleClass="bg-green" text="Cập nhật" textFill="WHITE" />
                   <JFXButton fx:id="btnDelete" onAction="#onDeleteButtonClick" styleClass="bg-red" text="Xoá" textFill="WHITE" />
                </children>

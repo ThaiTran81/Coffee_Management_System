@@ -103,6 +103,11 @@ public class UserManagementController implements Initializable {
                     }
                 }
             }
+
+            @Override
+            public void addToBill(Object obj, ActionEvent event) {
+
+            }
         };
 
         pullData();

@@ -9,9 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="126.5" prefWidth="242.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ItemBillCardController">
+<AnchorPane prefWidth="280.0" style="-fx-border-width: 0px 0px 1px 0px; -fx-border-color: #000000;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.ItemBillCardController">
    <children>
       <ImageView fitHeight="75.0" fitWidth="75.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.5" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="12.5">
          <image>
@@ -51,6 +50,5 @@
          </children>
       </VBox>
       <JFXButton layoutX="24.0" layoutY="88.0" onMouseClicked="#onDeleteButtonClick" styleClass="bg-red" stylesheets="@css/style.css" text="Xóa" AnchorPane.topAnchor="90.0" />
-      <Line endX="242.0" endY="125.0" startY="125.0" />
    </children>
 </AnchorPane>

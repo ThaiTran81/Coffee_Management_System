@@ -6,7 +6,7 @@ import com.example.coffee_management_system.DTO.AreaDTO;
 import com.example.coffee_management_system.DTO.TableDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.SimpleHandler;
-import com.example.coffee_management_system.ultil.UDHandler;
+import com.example.coffee_management_system.ultil.StageUtils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.value.ChangeListener;
@@ -14,22 +14,28 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,7 +63,7 @@ public class UserTableManagementController implements Initializable {
 
     List<TableDTO> itemList;
     ObservableList<AreaDTO> options = FXCollections.observableArrayList();
-    UDHandler itemHandler;
+    SimpleHandler simpleHandler;
 
     void getData() {
         List<AreaDTO> areas;
@@ -94,9 +100,21 @@ public class UserTableManagementController implements Initializable {
 
         simpleHandler = new SimpleHandler() {
             @Override
-            public void handle(Object[] obj) {
-                rightLayout.getChildren().clear();
-                rightLayout.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            public void handle(Object obj, MouseEvent event) {
+                TableDTO tableDTO = (TableDTO) obj;
+                FXMLLoader fxmlLoader;
+                try {
+                    fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+                    ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+//                    FXMLLoader fxmlLoader1 = new FXMLLoader(Main.class.getResource("item_management.fxml"));
+//                    managmentMenuController.setContentArea(Main.class.getResource("item_management.fxml"));
+                    managmentMenuController.setContentArea(Main.class.getResource("item_management.fxml"), tableDTO);
+                    managmentMenuController.setBackSatge(Main.class.getResource("UserMainMenu.fxml"));
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
@@ -111,6 +129,22 @@ public class UserTableManagementController implements Initializable {
         setData2Grid(itemList);
     }
 
+    FXMLLoader switchTo(URL url, MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        prevStage.hide();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.hide();
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+        return fxmlLoader;
+    }
+
     private void setData2Grid(List<TableDTO> list) {
         try {
             flow.getChildren().clear();
@@ -120,8 +154,8 @@ public class UserTableManagementController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 UserTableCardController  itemController = fxmlLoader.getController();
-//                itemController.setData(TableDTO, itemHandler);
-                itemController.setData(itemDTO);
+                itemController.setData(itemDTO, simpleHandler);
+//                itemController.setData(itemDTO);
                 flow.getChildren().add(anchorPane);
             }
         } catch (IOException e) {

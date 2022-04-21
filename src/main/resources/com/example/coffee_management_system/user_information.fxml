@@ -78,12 +78,12 @@
          <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="changeInfoBtn" onAction="#changeInfoClick" text="Thay đổi thông tin cá nhân">
+                  <JFXButton fx:id="changeInfoBtn" onAction="#changeInfoClick" styleClass="bg-green" stylesheets="@css/style.css" text="Thay đổi thông tin cá nhân">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#changePasswordClick" text="Đổi mật khẩu">
+                  <JFXButton onAction="#changePasswordClick" styleClass="bg-blue" stylesheets="@css/style.css" text="Đổi mật khẩu">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
