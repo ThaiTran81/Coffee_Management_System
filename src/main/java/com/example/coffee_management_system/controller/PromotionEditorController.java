@@ -7,10 +7,7 @@ import com.example.coffee_management_system.ultil.UDHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.Objects;
@@ -27,7 +24,7 @@ public class PromotionEditorController implements Initializable {
     private DatePicker txtPromotionEndDate;
 
     @FXML
-    private TextField txtPromotionDescription;
+    private TextArea txtPromotionDescription;
 
     @FXML
     private TextField txtPromotionDiscount;

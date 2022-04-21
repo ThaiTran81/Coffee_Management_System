@@ -175,7 +175,7 @@
                                     </StackPane>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton onAction="#onTableManagementButtonClick" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.rowIndex="1">
+                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onTableManagementButtonClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.rowIndex="1">
                                  <graphic>
                                     <StackPane>
                                        <children>
@@ -206,7 +206,7 @@
                                     </StackPane>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onInfomationAdminClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <JFXButton alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onInfomationAdminClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <graphic>
                                     <StackPane>
                                        <children>
@@ -225,6 +225,37 @@
                                                 <HBox alignment="CENTER">
                                                    <children>
                                                       <Label alignment="CENTER" styleClass="label-btn" text="Thông tin cá nhân">
+                                                         <font>
+                                                            <Font name="Roboto Medium" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </StackPane>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="btnPromotionManagement" alignment="CENTER" focusTraversable="false" layoutX="158.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onPromotionManagementButtonClick" prefWidth="165.0" styleClass="btn-menu-item" stylesheets="@css/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <StackPane>
+                                       <children>
+                                          <VBox alignment="CENTER" spacing="20.0">
+                                             <children>
+                                                <StackPane styleClass="drop-shadow" stylesheets="@css/style.css">
+                                                   <children>
+                                                      <Circle fill="WHITE" radius="24.0" />
+                                                      <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@asset/group.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </StackPane>
+                                                <HBox alignment="CENTER">
+                                                   <children>
+                                                      <Label alignment="CENTER" styleClass="label-btn" text="Quản lý khuyến mãi">
                                                          <font>
                                                             <Font name="Roboto Medium" size="13.0" />
                                                          </font>
