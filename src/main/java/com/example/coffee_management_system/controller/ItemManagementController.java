@@ -73,7 +73,7 @@ public class ItemManagementController implements Initializable {
     UDHandler itemDetailHandler;
     UDHandler newItemHandler;
 
-    public ItemManagementController(){};
+    private BillManagementController billManagementController;
 
     void getData() {
         List<CategoryDTO> categories;
@@ -203,7 +203,8 @@ public class ItemManagementController implements Initializable {
 
             @Override
             public void addToBill(Object obj, ActionEvent event) {
-                System.out.println("hahaha");
+
+                billManagementController.addItemToBill(obj);
             }
         };
 
@@ -222,6 +223,7 @@ public class ItemManagementController implements Initializable {
                 BillManagementController billManagementController = fxmlLoader.getController();
                 billManagementController.pullData(this.tableDTO);
                 billManagementController.setData();
+                this.billManagementController = billManagementController;
                 rightLayout.getChildren().removeAll();
                 rightLayout.getChildren().setAll(parent);
             } catch (IOException e) {

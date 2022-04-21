@@ -12,228 +12,245 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="350.0" style="-fx-border-image-width: 1px 1px 1px 1px; -fx-border-color: #000000;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.BillManagementController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" style="-fx-border-image-width: 1px 1px 1px 1px; -fx-border-color: #000000;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.BillManagementController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="300.0" layoutY="47.0" prefHeight="640.0" prefWidth="300.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="The Great Restaurant">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label prefHeight="66.0" prefWidth="300.0" text="69 floor, landmark building, 208 Nguyen Huu Canh, Binh Thanh district, HCM city" textAlignment="CENTER" wrapText="true" />
-            <Line endX="100.0" startX="-100.0" />
-            <Label text="Hóa đơn">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+      <ScrollPane fx:id="parentScroll" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="620.0" prefWidth="350.0">
+         <content>
+            <VBox fx:id="layoutParent" alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefWidth="334.0">
                <children>
-                  <Label prefWidth="90.0" text="Mã hóa đơn:">
+                  <Label text="Hóa đơn">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbIdBill" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Khu vực:">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbArea" text="Label">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefWidth="90.0" text="Ngày tạo:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbDateTime" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Tên bàn:">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbNameTable" text="Label">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefWidth="90.0" text="Nhân viên:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbEmployee" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefWidth="90.0" text="Khách hàng:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Mã hóa đơn:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbIdBill" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Khu vực:">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbArea" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Ngày tạo:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbDateTime" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Tên bàn:">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbNameTable" text="Label">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Nhân viên:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbEmployee" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Khách hàng:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="tfCustomer" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Số điện thoại:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="tfPhoneCustomer">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <ScrollPane fx:id="scroll" prefHeight="250.0">
+                     <content>
+                        <VBox fx:id="itemBillArea" prefHeight="250.0" />
+                     </content>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </ScrollPane>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Tổng tiền:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbTotalPrice" prefWidth="100.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Khuyến mãi:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox fx:id="cbDiscount" prefHeight="26.0" prefWidth="100.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
+                     <VBox.margin>
+                        <Insets right="20.0" top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label prefWidth="90.0" text="Giảm:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbDiscount" prefWidth="100.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="90.0" text="Thành tiền:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="lbTotalPricePay" prefWidth="100.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="20.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <JFXButton onMouseClicked="#onPayButtonClick" prefWidth="280.0" styleClass="bg-green" stylesheets="@css/style.css" text="Thanh toán">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton onMouseClicked="#onCancelButtonClick" prefWidth="280.0" styleClass="bg-red" stylesheets="@css/style.css" text="Hủy">
+                     <opaqueInsets>
                         <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="tfCustomer" />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </JFXButton>
                </children>
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefWidth="90.0" text="Số điện thoại:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="tfPhoneCustomer">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin></TextField>
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <Line endX="100.0" startX="-100.0">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></Line>
-            <ScrollPane fx:id="scroll" prefHeight="250.0">
-               <content>
-                  <VBox fx:id="itemBillArea" prefHeight="250.0" />
-               </content>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </ScrollPane>
-            <Line endX="100.0" startX="-100.0">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Line>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefWidth="90.0" text="Tổng tiền:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="tfTotalPrice" prefWidth="100.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets right="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefWidth="90.0" text="Khuyến mãi:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <JFXComboBox fx:id="cbDiscount" prefHeight="26.0" prefWidth="100.0" />
-               </children>
-               <VBox.margin>
-                  <Insets right="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <Line endX="100.0" startX="-100.0">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Line>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="300.0">
-               <children>
-                  <Label prefHeight="20.0" prefWidth="90.0" text="Thành tiền:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="tfFinalTotalPrice" prefWidth="100.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets right="20.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-            <JFXButton onMouseClicked="#onPayButtonClick" prefWidth="280.0" styleClass="bg-green" stylesheets="@css/style.css" text="Thanh toán">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </JFXButton>
-            <JFXButton onMouseClicked="#onCancelButtonClick" prefWidth="280.0" styleClass="bg-red" stylesheets="@css/style.css" text="Hủy">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></JFXButton>
-         </children>
-      </VBox>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

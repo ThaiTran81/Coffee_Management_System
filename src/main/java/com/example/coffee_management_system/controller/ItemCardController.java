@@ -73,6 +73,7 @@ public class ItemCardController implements Initializable {
         callback.update(m_itemDTO, event);
     }
 
+    @FXML
     public void onAddItemToBillButtonClick(ActionEvent event) {
         callback.addToBill(m_itemDTO, event);
     }
