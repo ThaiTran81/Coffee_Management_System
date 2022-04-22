@@ -7,9 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ItemCardController implements Initializable {
@@ -35,17 +38,27 @@ public class ItemCardController implements Initializable {
     UDHandler callback;
 
     ItemDTO m_itemDTO;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    void setData(ItemDTO itemDTO, UDHandler callback){
+    void setData(ItemDTO itemDTO, UDHandler callback) {
         lbTitle.setText(itemDTO.getName());
         lbDescription.setText(itemDTO.getDescription());
-        lbPrice.setText(String.valueOf(itemDTO.getPrice())+"VNĐ");
+        lbPrice.setText(String.valueOf(itemDTO.getPrice()) + "VNĐ");
         this.callback = callback;
         this.m_itemDTO = itemDTO;
+
+        if (m_itemDTO.getImg()!=null){
+            try {
+                InputStream inputStream = m_itemDTO.getImg().getBinaryStream();
+                imgAvatar.setImage(new Image(inputStream));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

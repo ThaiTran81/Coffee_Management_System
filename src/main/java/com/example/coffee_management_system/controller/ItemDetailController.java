@@ -12,9 +12,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -42,9 +47,14 @@ public class ItemDetailController implements Initializable {
     @FXML
     private TextField txtPrice;
 
+    @FXML
+    private JFXButton btnChangeImg;
+
     UDHandler callback;
 
-    private ItemDTO m_item;
+    String img_url = null;
+
+    private ItemDTO m_item = null;
     ObservableList<CategoryDTO> options;
 
     @Override
@@ -55,6 +65,7 @@ public class ItemDetailController implements Initializable {
             categories = CategoryDAO.getAll();
             options.addAll(categories);
             cbCategory.setItems(options);
+            m_item = new ItemDTO();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -74,15 +85,33 @@ public class ItemDetailController implements Initializable {
         }
         CategoryDTO categoryDTO = cbCategory.getSelectionModel().getSelectedItem();
         ItemDTO item = new ItemDTO();
-        if(m_item!=null)
+        if (m_item != null)
             item.setItem_id(m_item.getItem_id());
         item.setName(txtName.getText());
         item.setPrice(Double.parseDouble(txtPrice.getText()));
         item.setCategory(categoryDTO.getId());
         item.setDescription(taDescription.getText());
+        item.setImg_url(m_item.getImg_url());
+
+        System.out.println(m_item.getImg_url());
 
         callback.update(item, event);
 
+    }
+
+    @FXML
+    void onChangeImgButtonClick(ActionEvent event){
+        FileChooser fileChooser  = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter
+                = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if(selectedFile !=null){
+            m_item.setImg_url(selectedFile.getPath());
+            ivItem.setImage(new Image(selectedFile.toURI().toString()));
+        }
     }
 
     boolean validate() {
@@ -104,7 +133,8 @@ public class ItemDetailController implements Initializable {
         this.callback = callback;
     }
 
-    void setUpdateButtonLabel(String label){
+    void setUpdateButtonLabel(String label) {
         btnUpdate.setText(label);
     }
+
 }

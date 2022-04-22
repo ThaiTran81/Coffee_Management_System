@@ -1,11 +1,15 @@
 package com.example.coffee_management_system.DTO;
 
+import java.sql.Blob;
+
 public class ItemDTO {
     int item_id;
     String name;
     String description;
     int category;
     double price;
+    Blob img = null;
+    String img_url= null;
 
     public ItemDTO() {
     }
@@ -56,5 +60,21 @@ public class ItemDTO {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Blob getImg() {
+        return img;
+    }
+
+    public void setImg(Blob img) {
+        this.img = img;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 }

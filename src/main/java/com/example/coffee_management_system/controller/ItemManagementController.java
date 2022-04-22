@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -108,10 +109,12 @@ public class ItemManagementController implements Initializable {
 
                ItemDTO itemDTO = (ItemDTO) obj;
                try {
-                   ItemDAO.update(itemDTO);
+                   if (itemDTO.getImg_url()!=null)
+                       ItemDAO.update(itemDTO, itemDTO.getImg_url());
+                   else ItemDAO.update(itemDTO);
                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Cập nhật thành công");
                    onCategoryCBClick(null);
-               } catch (SQLException | ClassNotFoundException e) {
+               } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
                    e.printStackTrace();
                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể cập nhật " + itemDTO.getName() + " vào thực đơn lúc này");
 
@@ -135,12 +138,13 @@ public class ItemManagementController implements Initializable {
                        return;
                    }
 
-
-                   ItemDAO.insert(itemDTO);
+                   if (itemDTO.getImg_url()!=null)
+                       ItemDAO.insert(itemDTO, itemDTO.getImg_url());
+                   else ItemDAO.insert(itemDTO);
                    onCategoryCBClick(null);
                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Đã thêm "+itemDTO.getName()+" thành công");
                    leftLayout.getChildren().clear();
-               } catch (SQLException | ClassNotFoundException e) {
+               } catch (SQLException | ClassNotFoundException | FileNotFoundException e) {
                    e.printStackTrace();
                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể thêm " + itemDTO.getName() + " vào thực đơn lúc này");
 

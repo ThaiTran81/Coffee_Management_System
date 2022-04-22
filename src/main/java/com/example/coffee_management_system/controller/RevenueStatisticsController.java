@@ -8,16 +8,24 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class RevenueStatisticsController implements Initializable {
 
@@ -35,6 +43,9 @@ public class RevenueStatisticsController implements Initializable {
 
     @FXML
     private VBox usageLayout;
+
+    @FXML
+    private ScrollPane scroll;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -116,24 +127,33 @@ public class RevenueStatisticsController implements Initializable {
 
             profitLayout.getChildren().add(linechart);
 
+            int max = 1;
+            if(lst_usage.size()!=0){
+                max = lst_usage.get(lst_usage.size()-1).getUsage()+1;
+            }
 
-
-            NumberAxis uxAxis = new NumberAxis();
+            NumberAxis uxAxis = new NumberAxis(0, max,1);
             uxAxis.setLabel("Lượng mua");
 
 //Defining y axis
             CategoryAxis uyAxis = new CategoryAxis();
             uyAxis.setLabel("Món");
+            uyAxis.tickLabelFontProperty().set(Font.font(15));
 
             BarChart<Number, String> bc_usage = new BarChart<Number, String>(uxAxis, uyAxis);
 
-            XYChart.Series<Number, String> uSeries = new XYChart.Series();
+            XYChart.Series<Number, String> uSeries;
+//            int limit = 10;
 
             for(ItemUsage item: lst_usage){
+                uSeries = new XYChart.Series();
+                uSeries.setName(item.getName());
                 uSeries.getData().add(new XYChart.Data(item.getUsage(), item.getName()));
+                bc_usage.getData().add(uSeries);
+//                if(--limit==0) break;
             }
 
-            bc_usage.getData().add(uSeries);
+            usageLayout.setPrefWidth(scroll.getWidth());
             usageLayout.getChildren().add(bc_usage);
         } catch (SQLException e) {
             e.printStackTrace();
