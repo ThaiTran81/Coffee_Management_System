@@ -34,7 +34,6 @@ public class AreaDAO {
         ArrayList<String> listAreaName = new ArrayList<String>();
         if (rs.next()){
             listAreaName.add(rs.getString(2));
-            System.out.println("hehehehehe");
         }
 
         return listAreaName;

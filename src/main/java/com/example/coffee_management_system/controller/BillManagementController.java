@@ -102,7 +102,6 @@ public class BillManagementController implements Initializable {
         itemBillHandler = new UDHandler() {
             @Override
             public void update(Object obj, ActionEvent event) {
-                System.out.println("Hehehehe");
             }
             @Override
             public void delete(Object obj, ActionEvent event) {
@@ -111,8 +110,7 @@ public class BillManagementController implements Initializable {
                     if(itemDTO.equals(items.get(i))){
                         itemBillArea.getChildren().remove(i);
                         items.remove(i);
-                        System.out.println(itemDTO.toString());
-                        System.out.println(i);
+
                     }
                 }
             }
