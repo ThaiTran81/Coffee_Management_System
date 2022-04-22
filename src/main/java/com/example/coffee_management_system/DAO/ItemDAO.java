@@ -174,7 +174,6 @@ public class ItemDAO {
         stmt.setString(3, itemDTO.getDescription());
         stmt.setDouble(4, itemDTO.getPrice());
         stmt.setBlob(5, in);
-
         return stmt.executeUpdate();
     }
 

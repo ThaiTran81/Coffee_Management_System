@@ -64,14 +64,6 @@ public class ItemCardController implements Initializable {
         lbPrice.setText(String.valueOf(itemDTO.getPrice()) + "VNĐ");
         this.callback = callback;
         this.m_itemDTO = itemDTO;
-         if (m_itemDTO.getImg()!=null){
-            try {
-                InputStream inputStream = m_itemDTO.getImg().getBinaryStream();
-                imgAvatar.setImage(new Image(inputStream));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
 
         if (m_itemDTO.getImg()!=null){
             try {

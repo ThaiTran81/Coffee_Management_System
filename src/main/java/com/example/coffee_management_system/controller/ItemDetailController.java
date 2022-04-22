@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -93,8 +94,6 @@ public class ItemDetailController implements Initializable {
         item.setDescription(taDescription.getText());
         item.setImg_url(m_item.getImg_url());
 
-        System.out.println(m_item.getImg_url());
-
         callback.update(item, event);
 
     }
@@ -129,6 +128,15 @@ public class ItemDetailController implements Initializable {
                 if (categoryDTO.getId() == m_item.getCategory())
                     cbCategory.getSelectionModel().select(categoryDTO);
             }
+            if (m_item.getImg()!=null){
+                try {
+                    InputStream inputStream = m_item.getImg().getBinaryStream();
+                    ivItem.setImage(new Image(inputStream));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
         this.callback = callback;
     }
