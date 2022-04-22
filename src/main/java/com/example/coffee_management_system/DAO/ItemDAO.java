@@ -2,6 +2,9 @@ package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.ItemDTO;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,6 +178,7 @@ public class ItemDAO {
         return stmt.executeUpdate();
     }
 
+
     public static ItemDTO findById(int item_id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM item WHERE item_id='"+item_id+"'";
         Connection connection = DBConnection.getDbConnection().getConnection();
@@ -197,5 +201,6 @@ public class ItemDAO {
 
         return itemDTO;
     }
+
 
 }
