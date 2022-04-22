@@ -204,7 +204,13 @@ public class ItemManagementController implements Initializable {
             @Override
             public void addToBill(Object obj, ActionEvent event) {
 
-                billManagementController.addItemToBill(obj);
+                try {
+                    billManagementController.addItemToBill(obj);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         };
 

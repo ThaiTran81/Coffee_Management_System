@@ -125,38 +125,22 @@ public class BillDAO {
         }
     }
 
-    public static int countBill() {
-        String sql = "SELECT count(*) FROM bill";
-        Connection connection = null;
-        int size = 0;
-        try {
-            connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next()){
-
-                size = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return size;
-    }
-
     public static int insert(BillDTO billDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO `bill`(user_id, create_time, status) VALUES(?,?,?)";
         Connection connection = null;
         PreparedStatement stmt = null;
-
         connection = DBConnection.getDbConnection().getConnection();
-        stmt = connection.prepareStatement(sql);
+        stmt = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         stmt.setInt(1, billDTO.getUser_id());
         stmt.setDate(2,  new java.sql.Date(billDTO.getCreate_time().getTime()));
         stmt.setInt(3, billDTO.getStatus());
-        return stmt.executeUpdate();
-
+        stmt.executeUpdate();
+        ResultSet rs = stmt.getGeneratedKeys();
+        int key = 0;
+        if(rs.next()){
+            key = rs.getInt(1);
+        }
+        return key;
     }
 
     public static int getStatusBill(int bill_id) throws SQLException, ClassNotFoundException {

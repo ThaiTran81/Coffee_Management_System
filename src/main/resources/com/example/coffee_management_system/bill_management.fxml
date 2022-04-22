@@ -3,9 +3,12 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -137,6 +140,18 @@
                               <Insets />
                            </HBox.margin>
                         </TextField>
+                        <Button mnemonicParsing="false" onAction="#onLookUpButtonClick">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@asset/look-up-icon.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets left="20.0" top="5.0" />
@@ -167,7 +182,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbTotalPrice" prefWidth="100.0" text="Label">
+                        <Label fx:id="lbTotalPrice" prefWidth="150.0" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -187,7 +202,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXComboBox fx:id="cbDiscount" prefHeight="26.0" prefWidth="100.0" />
+                        <JFXComboBox fx:id="cbDiscount" prefHeight="26.0" prefWidth="150.0" />
                      </children>
                      <VBox.margin>
                         <Insets right="20.0" top="5.0" />
@@ -203,7 +218,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbDiscount" prefWidth="100.0" text="Label">
+                        <Label fx:id="lbDiscount" prefWidth="150.0" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -225,7 +240,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="lbTotalPricePay" prefWidth="100.0" text="Label">
+                        <Label fx:id="lbTotalPricePay" prefWidth="150.0" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>
