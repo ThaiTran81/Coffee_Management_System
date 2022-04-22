@@ -93,7 +93,6 @@ public class BillDAO {
             itemUsage.setName(rs.getString("name"));
             itemUsage.setUsage(rs.getInt("usage"));
 
-            System.out.println(itemUsage.getUsage());
 
             lst.add(itemUsage);
         }

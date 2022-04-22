@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -66,18 +67,22 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" stylesheets="@css/style.css" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox fx:id="usageLayout" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <Label text="Thống kê số lượng tiêu thụ món">
-                                 <font>
-                                    <Font name="Roboto Medium" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
-                        </VBox>
+                        <ScrollPane fx:id="scroll" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox fx:id="usageLayout" alignment="CENTER">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Thống kê số lượng tiêu thụ món">
+                                       <font>
+                                          <Font name="Roboto Medium" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
                      </children>
                   </AnchorPane>
                </children>

@@ -1,8 +1,6 @@
 package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.CategoryDTO;
-import com.example.coffee_management_system.values.User;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 public class CategoryDAO {
 
     public static List<CategoryDTO> getAll() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM category";
+        String sql = "SELECT * FROM category WHERE status !=-1";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
@@ -40,14 +38,14 @@ public class CategoryDAO {
     }
 
     public static int delete(CategoryDTO categoryDTO) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM category WHERE category_id = "+ categoryDTO.getId();
+        String sql = "UPDATE category SET status=-1 WHERE category_id = "+ categoryDTO.getId();
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
         return stmt.executeUpdate(sql);
     }
 
     public static CategoryDTO findByName(String name) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT * FROM category WHERE name='"+name+"'";
+        String sql = "SELECT * FROM category WHERE name='"+name+"' AND status !=-1";
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
 
