@@ -248,7 +248,7 @@
                                                       <Circle fill="WHITE" radius="24.0" />
                                                       <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@asset/group.png" />
+                                                            <Image url="@asset/voucher.png" />
                                                          </image>
                                                       </ImageView>
                                                    </children>
