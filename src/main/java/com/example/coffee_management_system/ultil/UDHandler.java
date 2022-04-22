@@ -5,4 +5,5 @@ import javafx.event.ActionEvent;
 public interface UDHandler {
     void update(Object obj, ActionEvent event);
     void delete(Object obj, ActionEvent event);
+    void addToBill(Object obj, ActionEvent event);
 }

@@ -2,6 +2,7 @@ package com.example.coffee_management_system.controller;
 
 import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.ultil.UDHandler;
+import com.example.coffee_management_system.values.User;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ItemCardController implements Initializable {
+
+    @FXML
+    public JFXButton btnAddItemBill;
 
     @FXML
     private JFXButton btnDelete;
@@ -41,7 +45,17 @@ public class ItemCardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if(User.userInfo.getType() == 0){
+            btnDelete.setVisible(true);
+            btnUpdate.setVisible(true);
+            btnAddItemBill.setVisible(false);
+        }else{
+            btnDelete.setVisible(false);
+            btnDelete.managedProperty().bind(btnDelete.visibleProperty());
+            btnUpdate.setVisible(false);
+            btnUpdate.managedProperty().bind(btnUpdate.visibleProperty());
+            btnAddItemBill.setVisible(true);
+        }
     }
 
     void setData(ItemDTO itemDTO, UDHandler callback) {
@@ -50,6 +64,14 @@ public class ItemCardController implements Initializable {
         lbPrice.setText(String.valueOf(itemDTO.getPrice()) + "VNĐ");
         this.callback = callback;
         this.m_itemDTO = itemDTO;
+         if (m_itemDTO.getImg()!=null){
+            try {
+                InputStream inputStream = m_itemDTO.getImg().getBinaryStream();
+                imgAvatar.setImage(new Image(inputStream));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (m_itemDTO.getImg()!=null){
             try {
@@ -70,5 +92,10 @@ public class ItemCardController implements Initializable {
     @FXML
     void onUpdateButtonClick(ActionEvent event) {
         callback.update(m_itemDTO, event);
+    }
+
+    @FXML
+    public void onAddItemToBillButtonClick(ActionEvent event) {
+        callback.addToBill(m_itemDTO, event);
     }
 }

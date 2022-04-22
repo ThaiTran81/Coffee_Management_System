@@ -1,12 +1,11 @@
 package com.example.coffee_management_system.DAO;
 
+import com.example.coffee_management_system.DTO.AreaDTO;
+import com.example.coffee_management_system.DTO.BillDTO;
 import com.example.coffee_management_system.DTO.ItemUsage;
 import com.example.coffee_management_system.DTO.Profit;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -53,7 +52,8 @@ public class BillDAO {
         }
 
         return lst;
-    }    public  static List<ItemUsage> getItemUsageByRangeDate(LocalDate startDate, LocalDate endDate) throws SQLException, ClassNotFoundException {
+    }    
+    public  static List<ItemUsage> getItemUsageByRangeDate(LocalDate startDate, LocalDate endDate) throws SQLException, ClassNotFoundException {
         String sql = "SELECT\n" +
                 "i.item_id,\n" +
                 "i.`name`,\n" +
@@ -101,4 +101,79 @@ public class BillDAO {
     }
 
 
+    public static BillDTO findById(int id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM bill where bill_id = ?";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1,id);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if (rs.next()){
+            return new BillDTO(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getDate(3),
+                    rs.getFloat(4),
+                    rs.getInt(5),
+                    rs.getString(6),
+                    rs.getInt(7),
+                    rs.getInt(8),
+                    rs.getFloat(9));
+        }else{
+            return null;
+        }
+    }
+
+    public static int countBill() {
+        String sql = "SELECT count(*) FROM bill";
+        Connection connection = null;
+        int size = 0;
+        try {
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+
+                size = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
+
+    public static int insert(BillDTO billDTO) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO `bill`(user_id, create_time, status) VALUES(?,?,?)";
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        connection = DBConnection.getDbConnection().getConnection();
+        stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, billDTO.getUser_id());
+        stmt.setDate(2,  new java.sql.Date(billDTO.getCreate_time().getTime()));
+        stmt.setInt(3, billDTO.getStatus());
+        return stmt.executeUpdate();
+
+    }
+
+    public static int getStatusBill(int bill_id) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT status FROM bill WHERE bill_id = " + bill_id;
+        Connection connection = null;
+        int status = 1;
+        try {
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+                status = rs.getInt("status");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 }

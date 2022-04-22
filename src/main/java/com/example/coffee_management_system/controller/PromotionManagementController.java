@@ -1,8 +1,7 @@
 package com.example.coffee_management_system.controller;
 
-import com.example.coffee_management_system.DAO.AccountDAO;
-import com.example.coffee_management_system.DAO.UserDAO;
-import com.example.coffee_management_system.DTO.UserDTO;
+import com.example.coffee_management_system.DAO.PromotionDAO;
+import com.example.coffee_management_system.DTO.PromotionDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDHandler;
@@ -16,18 +15,24 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class UserManagementController implements Initializable {
+public class PromotionManagementController implements Initializable {
 
     @FXML
     private VBox layout;
@@ -50,10 +55,10 @@ public class UserManagementController implements Initializable {
     @FXML
     private JFXButton btnAddNew;
 
-    private List<UserDTO> users;
-    UDHandler userHandle;
-    UDHandler userEditorHandler;
-    UDHandler newUserHandler;
+    private List<PromotionDTO> promotionDTOList;
+    UDHandler promotionHandle;
+    UDHandler promotionEditorHandler;
+    UDHandler newPromotionHandler;
 
     String email;
 
@@ -76,25 +81,19 @@ public class UserManagementController implements Initializable {
             }
         });
 
-        newUserHandler = new UDHandler() {
+        newPromotionHandler = new UDHandler() {
             @Override
             public void update(Object obj, ActionEvent event) {
-                UserDTO userDTO  = (UserDTO) obj;
+                PromotionDTO promotionDTO  = (PromotionDTO) obj;
                 try {
-                    if (UserDAO.findUserByUsername(userDTO.getEmail()) != null) {
-                        Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Nhân viên " + userDTO.getFullname() + " đã tồn tại!");
-                        return;
-                    }
-                    UserDAO.insert(userDTO);
+                    PromotionDAO.insert(promotionDTO);
 
-                    String password = BCrypt.hashpw(userDTO.createPassword(), BCrypt.gensalt());
-                    AccountDAO.insert(userDTO.getEmail(), password, userDTO.getType());
                     reload();
-                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Đã thêm "+userDTO.getFullname()+" thành công");
+                    Toast.showToast(Toast.TOAST_SUCCESS, btnSearch,"Đã thêm chương trình " + promotionDTO.getName() + " thành công");
                     editor_layout.getChildren().clear();
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
-                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể thêm nhân viên" + userDTO.getFullname() + " vào lúc này!");
+                    Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể thêm chương trình" + promotionDTO.getName() + " vào lúc này!");
                 }
             }
 
@@ -109,14 +108,12 @@ public class UserManagementController implements Initializable {
             }
         };
 
-        userEditorHandler = new UDHandler() {
+        promotionEditorHandler = new UDHandler() {
             @Override
             public void update(Object obj, ActionEvent event) {
-                UserDTO userDTO = (UserDTO) obj;
+                PromotionDTO promotionDTO = (PromotionDTO) obj;
                 try {
-                    UserDAO.update(userDTO);
-                    AccountDAO.updateByEmail(email, userDTO.getEmail());
-                    AccountDAO.updateType(userDTO.getEmail(), userDTO.getType());
+                    PromotionDAO.update(promotionDTO);
                     Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Cập nhật thành công");
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
@@ -134,33 +131,33 @@ public class UserManagementController implements Initializable {
 
             }
         };
-        
-        userHandle = new UDHandler() {
+
+        promotionHandle = new UDHandler() {
             @Override
             public void update(Object obj, ActionEvent event) {
-                UserDTO userDTO = (UserDTO) obj;
-                email = userDTO.getEmail();
-                FXMLLoader fxmlLoader = addItem(Main.class.getResource("user_editor.fxml"));
-                UserEditorController userEditorController = fxmlLoader.getController();
-                userEditorController.setData(userDTO, userEditorHandler);
+                PromotionDTO promotionDTO = (PromotionDTO) obj;
+
+                FXMLLoader fxmlLoader = addItem(Main.class.getResource("promotion_editor.fxml"));
+                PromotionEditorController promotionEditorController = fxmlLoader.getController();
+                promotionEditorController.setData(promotionDTO, promotionEditorHandler);
             }
 
             @Override
             public void delete(Object obj, ActionEvent event) {
-                UserDTO userDTO = (UserDTO) obj;
+                PromotionDTO promotionDTO = (PromotionDTO) obj;
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Xác nhận");
-                alert.setHeaderText("Xác nhận xóa " + userDTO.getFullname() + "?");
+                alert.setHeaderText("Xác nhận xóa " + promotionDTO.getName() + "?");
 
                 if (alert.showAndWait().get() == ButtonType.OK) {
                     try {
-                        AccountDAO.delete(userDTO);
+                        PromotionDAO.delete(promotionDTO);
 
                         reload();
-                        Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Đã xoá " + userDTO.getFullname() + " khỏi danh sách nhân viên");
+                        Toast.showToast(Toast.TOAST_SUCCESS, btnSearch, "Đã xoá " + promotionDTO.getName() + " khỏi danh sách nhân viên");
                     } catch (SQLException | ClassNotFoundException e) {
-                        Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể xoá " + userDTO.getFullname() + " khỏi danh sách nhân viên vào lúc này");
+                        Toast.showToast(Toast.TOAST_ERROR, btnSearch, "Không thể xoá " + promotionDTO.getName() + " khỏi danh sách nhân viên vào lúc này");
                         e.printStackTrace();
                     }
                 }
@@ -175,16 +172,16 @@ public class UserManagementController implements Initializable {
         reload();
     }
 
-    private void setData2Grid(List<UserDTO> list) {
+    private void setData2Grid(List<PromotionDTO> list) {
         try {
             flow.getChildren().clear();
-            for (UserDTO userDTO : list) {
+            for (PromotionDTO promotionDTO : list) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource("user_card.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("promotion_card.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
-                UserCardController userCardController = fxmlLoader.getController();
-                userCardController.setData(userDTO, userHandle);
+                PromotionCardController promotionCardController = fxmlLoader.getController();
+                promotionCardController.setData(promotionDTO, promotionHandle);
 
                 flow.getChildren().add(anchorPane);
             }
@@ -195,18 +192,16 @@ public class UserManagementController implements Initializable {
 
     void pullData() {
         try {
-            users = UserDAO.getAll();
+            promotionDTOList = PromotionDAO.getAll();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     void reload() {
         pullData();
-        setData2Grid(users);
+        setData2Grid(promotionDTOList);
     }
 
     FXMLLoader addItem(URL url) {
@@ -225,10 +220,10 @@ public class UserManagementController implements Initializable {
 
     @FXML
     void onAddButtonClick()  {
-        FXMLLoader fxmlLoader = addItem(Main.class.getResource("user_editor.fxml"));
-        UserEditorController userEditorController = fxmlLoader.getController();
-        userEditorController.setData(null, newUserHandler);
-        userEditorController.setUpdateButtonLabel("Thêm");
+        FXMLLoader fxmlLoader = addItem(Main.class.getResource("promotion_editor.fxml"));
+        PromotionEditorController promotionEditorController = fxmlLoader.getController();
+        promotionEditorController.setData(null, newPromotionHandler);
+        promotionEditorController.setUpdateButtonLabel("Thêm");
     }
 
     @FXML
@@ -240,9 +235,9 @@ public class UserManagementController implements Initializable {
 
     @FXML
     void onSearchButtonClick() {
-        List<UserDTO> copy = new ArrayList<>(users);
+        List<PromotionDTO> copy = new ArrayList<>(promotionDTOList);
         String key = txtSearch.getText();
-        copy.removeIf(item -> !key.isBlank() && !item.getFullname().toLowerCase().contains(key.toLowerCase()));
+        copy.removeIf(item -> !key.isBlank() && !item.getName().toLowerCase().contains(key.toLowerCase()));
 
         setData2Grid(copy);
     }

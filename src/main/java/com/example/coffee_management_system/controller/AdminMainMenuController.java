@@ -82,6 +82,20 @@ public class AdminMainMenuController implements Initializable {
     }
 
     @FXML
+    void onPromotionManagementButtonClick(ActionEvent event) {
+        FXMLLoader fxmlLoader;
+        try {
+            fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("promotion_management.fxml"));
+            managmentMenuController.setBackSatge(Main.class.getResource("AdminMainMenu.fxml"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void onCategoryManagementButtonClick(ActionEvent event) {
         FXMLLoader fxmlLoader;
         try {

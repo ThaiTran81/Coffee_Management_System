@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" styleClass="transparent-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.UserManagementController">
+<AnchorPane prefHeight="500.0" prefWidth="812.0" styleClass="transparent-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.PromotionManagementController">
     <children>
-      <BorderPane prefHeight="480.0" prefWidth="799.0">
+      <BorderPane prefHeight="480.0">
          <top>
                 <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="800.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" styleClass="drop-shadow" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
                     <children>
@@ -17,7 +17,7 @@
                                 <Font name="Roboto" size="17.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtSearch" prefHeight="30.0" prefWidth="470.0" promptText="Nhập tên nhân viên">
+                        <TextField fx:id="txtSearch" prefHeight="30.0" prefWidth="374.0" promptText="Nhập tên chương trình khuyến mãi">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -27,7 +27,7 @@
                                 <Font size="14.0" />
                             </font>
                         </JFXButton>
-                  <JFXButton fx:id="btnAddNew" layoutX="407.0" layoutY="28.0" onAction="#onAddButtonClick" prefHeight="30.0" prefWidth="124.0" styleClass="bg-blue" text="Thêm nhân viên" textFill="WHITE">
+                  <JFXButton fx:id="btnAddNew" layoutX="407.0" layoutY="28.0" onAction="#onAddButtonClick" prefHeight="30.0" prefWidth="219.0" styleClass="bg-blue" text="Thêm chương trình khuyến mãi" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>

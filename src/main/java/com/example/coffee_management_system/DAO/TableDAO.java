@@ -27,9 +27,9 @@ public class TableDAO {
         return listArea;
     }
 
-    public static List<TableDTO> findByAreaId(int id) throws SQLException, ClassNotFoundException {
+    public static List<TableDTO> findAvailableTableByAreaId(int id) throws SQLException, ClassNotFoundException {
 
-        String sql = "SELECT * FROM `table` where area_id = ?";
+        String sql = "SELECT * FROM `table` where area_id = ? and status = 1";
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1,id);
@@ -68,7 +68,6 @@ public class TableDAO {
 
     public static int insert(TableDTO tableDTO) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO `table`(area_id, name, bill_id, status) VALUES(?,?,?,?)";
-        System.out.println(tableDTO.getName());
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -82,13 +81,23 @@ public class TableDAO {
 
     public static int update(TableDTO tableDTO) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE `table`\n" +
-                "SET name = ?\n" +
+                "SET bill_id = ? and " +
+                "status = ? " +
                 "WHERE table_id = ?";
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1,tableDTO.getBill_id());
+        stmt.setInt(2,tableDTO.getStatus());
+        stmt.setInt(3, tableDTO.getTable_id());
+        return stmt.executeUpdate();
+    }
 
-        stmt.setString(1, tableDTO.getName());
-        stmt.setInt(2, tableDTO.getTable_id());
+    public static int setBillId(int tableId, int newBillId) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE `table`\n" +
+                "SET bill_id = " + newBillId +
+                " WHERE table_id = " + tableId;
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql);
         return stmt.executeUpdate();
     }
 
@@ -97,5 +106,25 @@ public class TableDAO {
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stmt = connection.createStatement();
         return stmt.executeUpdate(sql);
+    }
+
+    public static List<TableDTO> findAllAvailableTable() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM `table` WHERE status=1";
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs = stmt.executeQuery(sql);
+
+        List<TableDTO> listArea = new ArrayList<TableDTO>();
+        while (rs.next()){
+            listArea.add(new TableDTO(rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getInt(5)
+            ));
+        }
+
+        return listArea;
     }
 }

@@ -1,10 +1,5 @@
 package com.example.coffee_management_system.controller;
 
-import com.example.coffee_management_system.DAO.AccountDAO;
-import com.example.coffee_management_system.DAO.CategoryDAO;
-import com.example.coffee_management_system.DAO.UserDAO;
-import com.example.coffee_management_system.DTO.CategoryDTO;
-import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.DTO.UserDTO;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDHandler;
@@ -12,12 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.net.URL;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -76,6 +67,7 @@ public class UserEditorController implements Initializable {
             type = 2;
         }
         userDTO.setType(type);
+
 
         callback.update(userDTO, event);
     }
