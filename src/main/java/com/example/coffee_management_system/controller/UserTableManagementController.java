@@ -115,6 +115,7 @@ public class UserTableManagementController implements Initializable {
 
                         BillDTO billDTO = new BillDTO();
                         billDTO.setUser_id(User.userInfo.getUserID());
+                        billDTO.setDiscount(0);
                         int newBillId = BillDAO.insert(billDTO);
                         tableDTO.setBill_id(newBillId);
                         TableDAO.setBillId(tableDTO.getTable_id(), newBillId);

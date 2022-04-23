@@ -147,6 +147,15 @@ public class BillManagementController implements Initializable {
 //        ArrayList<Integer> quantity = new ArrayList<>();
         try {
             this.billDTO = BillDAO.findById(tableDTO.getBill_id());
+            PromotionDTO promotionDTO = PromotionDAO.findByPromotionId(billDTO.getPromotion());
+
+            options.forEach( promotion -> {
+                if(promotionDTO != null && promotion.getPromotionID() == promotionDTO.getPromotionID()){
+                    cbPromotion.getSelectionModel().select(promotion);
+                    System.out.println("haha");
+                    }
+                }
+            );
             List<BillDetailDTO> listBillDetail = BillDetailDAO.findByBillID(tableDTO.getBill_id());
             for(BillDetailDTO billDetailDTO : listBillDetail){
                 items.add(ItemDAO.findById(billDetailDTO.getItem_id()));
@@ -183,7 +192,8 @@ public class BillManagementController implements Initializable {
             lbDateTime.setText(String.valueOf(billDTO.getCreate_time()));
             lbEmployee.setText(User.userInfo.getFullname());
             lbTotalPrice.setText(String.valueOf(billDTO.getTotal()));
-            lbDiscount.setText("0.0");
+            lbDiscount.setText(String.valueOf(billDTO.getDiscount()));
+
             calAndSetTotalPricePayBill();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -238,7 +248,8 @@ public class BillManagementController implements Initializable {
     }
 
     public float calAndSetTotalPricePayBill(){
-        float discount = Float.parseFloat(lbDiscount.getText());
+
+        float discount = billDTO.getDiscount();
         lbTotalPricePay.setText(String.valueOf(billDTO.getTotal()*(100-discount)/100));
 
         return billDTO.getTotal();
@@ -260,7 +271,6 @@ public class BillManagementController implements Initializable {
     public void onPayButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
         BillDAO.updateStateBill(billDTO.getBill_id(), 1);
         TableDAO.setBillId(tableDTO.getTable_id(), 0);
-        System.out.println(billDTO.toString());
         StageUtils.switchTo(Main.class.getResource("UserMainMenu.fxml"), event, StageStyle.UNDECORATED);
 
     }
@@ -275,6 +285,9 @@ public class BillManagementController implements Initializable {
     public void onCbPromotionClick(ActionEvent event) {
         PromotionDTO promotionDTO = cbPromotion.getSelectionModel().getSelectedItem();
         lbDiscount.setText(String.valueOf(promotionDTO.getDiscount()));
+        billDTO.setDiscount(promotionDTO.getDiscount());
+        billDTO.setPromotion(promotionDTO.getPromotionID());
+        BillDAO.updatePromotionDiscount(billDTO.getBill_id(), billDTO.getDiscount(), promotionDTO.getPromotionID());
         calAndSetTotalPricePayBill();
     }
 }

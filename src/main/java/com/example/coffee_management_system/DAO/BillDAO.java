@@ -126,7 +126,7 @@ public class BillDAO {
     }
 
     public static int insert(BillDTO billDTO) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO `bill`(user_id, create_time, status) VALUES(?,?,?)";
+        String sql = "INSERT INTO `bill`(user_id, create_time, status, discount) VALUES(?,?,?,?)";
         Connection connection = null;
         PreparedStatement stmt = null;
         connection = DBConnection.getDbConnection().getConnection();
@@ -134,6 +134,7 @@ public class BillDAO {
         stmt.setInt(1, billDTO.getUser_id());
         stmt.setDate(2,  new java.sql.Date(billDTO.getCreate_time().getTime()));
         stmt.setInt(3, billDTO.getStatus());
+        stmt.setFloat(4,0.0f);
         stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
         int key = 0;
@@ -188,5 +189,21 @@ public class BillDAO {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.executeUpdate();
+    }
+
+    public static void updatePromotionDiscount(int bill_id, float discount, int promotion_id) {
+        String sql = "UPDATE bill " +
+                "SET discount = " + discount + ", promotion = " + promotion_id +
+                " WHERE bill_id = " + bill_id;
+        Connection connection = null;
+        try {
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

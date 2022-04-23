@@ -106,4 +106,26 @@ public class PromotionDAO {
 
         return stmt.executeUpdate(sql);
     }
+
+    public static PromotionDTO findByPromotionId(int promotion) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT * FROM promotion WHERE promotion_id = "+promotion;
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(sql);
+
+        if (res.next()){
+            int promotionID = res.getInt("promotion_id");
+            String name = res.getString("name");
+            String description = res.getString("description");
+            float discount = res.getFloat("discount");
+            Date startDate = res.getDate("startDate");
+            Date endDate = res.getDate("endDate");
+            int type = res.getInt("type");
+            int status = res.getInt("status");
+
+            PromotionDTO promotionDTO = new PromotionDTO(promotionID, name, description, discount, startDate, endDate, type, status);
+            return promotionDTO;
+        }
+        return null;
+    }
 }
