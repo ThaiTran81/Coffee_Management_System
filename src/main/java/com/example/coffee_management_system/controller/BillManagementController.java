@@ -6,10 +6,8 @@ import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.StageUtils;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDBillHandler;
-import com.example.coffee_management_system.ultil.UDHandler;
 import com.example.coffee_management_system.values.User;
 import com.jfoenix.controls.JFXComboBox;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,18 +17,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.controlsfx.control.PropertySheet;
 
 import java.io.IOException;
 import java.net.URL;
@@ -156,7 +148,6 @@ public class BillManagementController implements Initializable {
             options.forEach( promotion -> {
                 if(promotionDTO != null && promotion.getPromotionID() == promotionDTO.getPromotionID()){
                     cbPromotion.getSelectionModel().select(promotion);
-                    System.out.println("haha");
                     }
                 }
             );
@@ -281,7 +272,6 @@ public class BillManagementController implements Initializable {
             if(customerDTO == null){
                 customerDTO = new CustomerDTO(0,name,phone,0,null);
                 int newCustomerId = CustomerDAO.insert(customerDTO);
-                System.out.println(newCustomerId);
                 billDTO.setCustomer_id(newCustomerId);
             }
             BillDAO.updateStateBillCustomerId(billDTO.getBill_id(), 1, billDTO.getCustomer_id());

@@ -1,6 +1,5 @@
 package com.example.coffee_management_system.DAO;
 
-import com.example.coffee_management_system.DTO.ItemDTO;
 import com.example.coffee_management_system.DTO.UserDTO;
 import com.example.coffee_management_system.values.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -77,7 +76,6 @@ public class AccountDAO {
         PreparedStatement stmt = connection.prepareStatement(sql);
 
         String hashed_password = BCrypt.hashpw(password, BCrypt.gensalt());
-        System.out.println(hashed_password);
         stmt.setString(1, hashed_password);
         stmt.setString(2, email);
         stmt.setInt(3,type);

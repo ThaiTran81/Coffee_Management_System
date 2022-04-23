@@ -29,7 +29,6 @@ public class ChangePasswordController {
         }else if(!tfNewPassword.getText().equalsIgnoreCase(tfAuthNewPassword.getText())){
             Toast.showToast(Toast.TOAST_WARN, tfOldPassword,"Xác nhận mật khẩu mới không trùng khớp");
         }else{
-            System.out.println(tfAuthNewPassword.getText() + " " + tfNewPassword.getText());
             AccountDAO.updatePassword(User.userInfo.getEmail(), tfNewPassword.getText(), User.role);
             Toast.showToast(Toast.TOAST_SUCCESS, tfOldPassword,"Đổi mật khẩu thành công");
             Stage stage = (Stage) tfNewPassword.getScene().getWindow();

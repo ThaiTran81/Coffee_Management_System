@@ -6,10 +6,13 @@ import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDTableHandler;
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollBar;
+import javafx.geometry.Bounds;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +32,8 @@ public class TableManagementController implements Initializable {
 
     private List<TableDTO> tables;
     private UDTableHandler udTableHandler;
+    @FXML
+    private ScrollPane scroll;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,6 +61,14 @@ public class TableManagementController implements Initializable {
                 }
             }
         };
+
+        scroll.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
+            @Override
+            public void changed(ObservableValue<? extends Bounds> ov, Bounds oldBounds, Bounds bounds) {
+                layout.setPrefWidth(bounds.getWidth());
+                layout.setPrefHeight(bounds.getHeight());
+            }
+        });
         pullData();
         setData();
     }

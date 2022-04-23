@@ -8,7 +8,6 @@ import com.example.coffee_management_system.DTO.BillDTO;
 import com.example.coffee_management_system.DTO.TableDTO;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.SimpleHandler;
-import com.example.coffee_management_system.ultil.StageUtils;
 import com.example.coffee_management_system.values.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -17,7 +16,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,13 +31,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -147,15 +143,11 @@ public class UserTableManagementController implements Initializable {
     FXMLLoader switchTo(URL url, MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        prevStage.hide();
 
-        Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load());
-
-        stage.hide();
-        stage.initStyle(StageStyle.DECORATED);
-        stage.setScene(scene);
-        stage.show();
+//        stage.initStyle(StageStyle.DECORATED);
+        prevStage.setScene(scene);
+//        stage.show();
 
         return fxmlLoader;
     }

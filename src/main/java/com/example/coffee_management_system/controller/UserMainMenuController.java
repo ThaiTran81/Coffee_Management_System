@@ -59,11 +59,6 @@ public class UserMainMenuController implements Initializable {
 
     }
 
-    @FXML
-    public void onCloseButtonClick(ActionEvent event) {
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
-    }
 
     FXMLLoader switchTo(URL url, ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(url);
@@ -104,6 +99,15 @@ public class UserMainMenuController implements Initializable {
             ManagmentMenuController managmentMenuController = fxmlLoader.getController();
             managmentMenuController.setContentArea(Main.class.getResource("user_table_management.fxml"));
             managmentMenuController.setBackSatge(Main.class.getResource("UserMainMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onCloseButtonClick(ActionEvent event) {
+        try {
+            StageUtils.switchTo(Main.class.getResource("login.fxml"), event, StageStyle.UNDECORATED);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -51,7 +51,8 @@ public class RevenueStatisticsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         dpStartTime.setValue(LocalDate.now().minusDays(7));
         dpEndTine.setValue(LocalDate.now());
-        showStatistic(LocalDate.now().minusDays(7), LocalDate.now());
+        btnStatistic.fire();
+
 
     }
 
@@ -87,8 +88,8 @@ public class RevenueStatisticsController implements Initializable {
         profitLayout.getChildren().clear();
         usageLayout.getChildren().clear();
         try {
-            List<Profit> lst_profit = BillDAO.getProfitByRangeDate(start, end.plusDays(1));
             List<ItemUsage> lst_usage = BillDAO.getItemUsageByRangeDate(start, end.plusDays(1));
+            List<Profit> lst_profit = BillDAO.getProfitByRangeDate(start, end.plusDays(1));
 
             LinkedHashMap<LocalDate, Double> map_data = new LinkedHashMap<>();
 
@@ -129,7 +130,7 @@ public class RevenueStatisticsController implements Initializable {
 
             int max = 1;
             if(lst_usage.size()!=0){
-                max = lst_usage.get(lst_usage.size()-1).getUsage()+1;
+                max = lst_usage.get(0).getUsage()+1;
             }
 
             NumberAxis uxAxis = new NumberAxis(0, max,1);
