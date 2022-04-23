@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="parent" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.UserMainMenuController">
+<StackPane fx:id="parent" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coffee_management_system.controller.UserMainMenuController">
     <children>
         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="480.0" prefWidth="597.0" style="-fx-border-radius: 20px; -fx-background-color: #ffffff;">
             <top>
@@ -168,11 +168,6 @@
                                         </VBox>
                                     </children>
                                 </HBox>
-                                <JFXButton focusTraversable="false" layoutX="498.0" layoutY="42.0" style="-fx-background-color: #EC3E70;" styleClass="drop-shadow" text="Đăng xuất" textFill="WHITE">
-                                    <font>
-                                        <Font name="Roboto Medium" size="14.0" />
-                                    </font>
-                                </JFXButton>
                             </children>
                             <styleClass>
                                 <String fx:value="border-bottom" />

@@ -1,10 +1,8 @@
 package com.example.coffee_management_system.DAO;
 
-import com.example.coffee_management_system.DTO.AreaDTO;
 import com.example.coffee_management_system.DTO.BillDTO;
 import com.example.coffee_management_system.DTO.ItemUsage;
 import com.example.coffee_management_system.DTO.Profit;
-import org.controlsfx.control.spreadsheet.SpreadsheetCell;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -58,7 +56,7 @@ public class BillDAO {
         String sql = "SELECT\n" +
                 "i.item_id,\n" +
                 "i.`name`,\n" +
-                "COUNT(*) AS `usage` ,\n" +
+                "SUM(bd.quantity) AS `usage` ,\n" +
                 "SUM(bd.price)\n" +
                 "FROM\n" +
                 "( bill b JOIN billdetail bd ON b.bill_id = bd.bill_id )\n" +
@@ -70,7 +68,7 @@ public class BillDAO {
                 "GROUP BY\n" +
                 "i.item_id,\n" +
                 "i.`name` \n" +
-                "ORDER BY COUNT(*) ASC";
+                "ORDER BY SUM(bd.quantity) DESC LIMIT 10";
 
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
