@@ -182,7 +182,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbTotalPrice" prefWidth="150.0" text="Label">
+                        <Label fx:id="lbTotalPrice" alignment="CENTER_RIGHT" prefWidth="170.0" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -202,7 +202,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXComboBox fx:id="cbDiscount" prefHeight="26.0" prefWidth="150.0" />
+                        <JFXComboBox fx:id="cbPromotion" onAction="#onCbPromotionClick" prefHeight="26.0" prefWidth="170.0" />
                      </children>
                      <VBox.margin>
                         <Insets right="20.0" top="5.0" />
@@ -218,11 +218,12 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbDiscount" prefWidth="150.0" text="Label">
+                        <Label fx:id="lbDiscount" alignment="CENTER_RIGHT" prefWidth="156.4" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <Label alignment="CENTER" text=" %" />
                      </children>
                   </HBox>
                   <Line endX="100.0" startX="-100.0">
@@ -240,7 +241,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="lbTotalPricePay" prefWidth="150.0" text="Label">
+                        <Label fx:id="lbTotalPricePay" alignment="CENTER_RIGHT" prefWidth="170.0" text="Label" textAlignment="RIGHT">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -250,12 +251,12 @@
                         <Insets right="20.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <JFXButton onMouseClicked="#onPayButtonClick" prefWidth="280.0" styleClass="bg-green" stylesheets="@css/style.css" text="Thanh toán">
+                  <JFXButton onAction="#onPayButtonClick" prefWidth="280.0" styleClass="bg-green" stylesheets="@css/style.css" text="Thanh toán">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton onMouseClicked="#onCancelButtonClick" prefWidth="280.0" styleClass="bg-red" stylesheets="@css/style.css" text="Hủy">
+                  <JFXButton onAction="#onCancelButtonClick" prefWidth="280.0" styleClass="bg-red" stylesheets="@css/style.css" text="Hủy">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

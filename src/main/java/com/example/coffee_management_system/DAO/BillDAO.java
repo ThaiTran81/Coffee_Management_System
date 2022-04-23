@@ -4,6 +4,7 @@ import com.example.coffee_management_system.DTO.AreaDTO;
 import com.example.coffee_management_system.DTO.BillDTO;
 import com.example.coffee_management_system.DTO.ItemUsage;
 import com.example.coffee_management_system.DTO.Profit;
+import org.controlsfx.control.spreadsheet.SpreadsheetCell;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -159,5 +160,33 @@ public class BillDAO {
             e.printStackTrace();
         }
         return status;
+    }
+
+    public static void updateStateBill(int billId, int state) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE bill\n" +
+                "SET status = " + state +
+                " WHERE bill_id = " + billId;
+
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.executeUpdate();
+    }
+
+    public static void delete(int bill_id) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM bill WHERE bill_id = " + bill_id;
+
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    public static void updateTotalPrice(int id_bill, float total_price) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE bill " +
+                "SET total = " + total_price +
+                "WHERE bill_id = " + id_bill;
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
     }
 }

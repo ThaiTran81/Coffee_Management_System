@@ -1,19 +1,16 @@
 package com.example.coffee_management_system.controller;
 
-import com.example.coffee_management_system.DAO.BillDAO;
-import com.example.coffee_management_system.DAO.BillDetailDAO;
-import com.example.coffee_management_system.DAO.ItemDAO;
-import com.example.coffee_management_system.DAO.TableDAO;
-import com.example.coffee_management_system.DTO.BillDTO;
-import com.example.coffee_management_system.DTO.BillDetailDTO;
-import com.example.coffee_management_system.DTO.ItemDTO;
-import com.example.coffee_management_system.DTO.TableDTO;
+import com.example.coffee_management_system.DAO.*;
+import com.example.coffee_management_system.DTO.*;
 import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.StageUtils;
+import com.example.coffee_management_system.ultil.Toast;
 import com.example.coffee_management_system.ultil.UDBillHandler;
 import com.example.coffee_management_system.ultil.UDHandler;
 import com.example.coffee_management_system.values.User;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -28,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.StageStyle;
 import org.controlsfx.control.PropertySheet;
 
 import java.io.IOException;
@@ -64,29 +62,41 @@ public class BillManagementController implements Initializable {
     @FXML
     private VBox itemBillArea;
     @FXML
-    private JFXComboBox cbDiscount;
+    private JFXComboBox<PromotionDTO> cbPromotion;
     @FXML
     private ScrollPane scroll;
     @FXML
     private ScrollPane parentScroll;
+
+    private CustomerDTO customerDTO;
+
+
     BillDTO billDTO;
     List<ItemDTO> items = new ArrayList<>();
     private TableDTO tableDTO;
     UDBillHandler itemBillHandler;
-
-    @FXML
-    void onCancelButtonClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void onPayButtonClick(MouseEvent event) {
-
-    }
-
-
+    ObservableList<PromotionDTO> options = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        List<PromotionDTO> promotions;
+        PromotionDTO promotionDTO = new PromotionDTO(0,"Không có","",0,null,null,1);
+        options.add(promotionDTO);
+
+
+        try {
+            promotions = PromotionDAO.getAll();
+            for(int i = 0; i < promotions.size();++i){
+                if(promotions.get(i).getStatus() == 1) options.add(promotions.get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        cbPromotion.setItems(options);
+        cbPromotion.getSelectionModel().selectFirst();
 
         itemBillArea.setPadding(new Insets(5, 5, 5, 5));
         itemBillArea.setAlignment(Pos.TOP_CENTER);
@@ -103,14 +113,14 @@ public class BillManagementController implements Initializable {
 
         itemBillHandler = new UDBillHandler() {
             @Override
-            public void delete(Object obj, Object obj1,Event event, int quantityItem) {
+            public void delete(Object obj, Object obj1,Event event) {
                 ItemDTO itemDTO = (ItemDTO) obj;
                 BillDetailDTO billDetailDTO = (BillDetailDTO) obj1;
                 for(int i = 0; i < items.size();++i){
                     if(itemDTO.equals(items.get(i))){
                         itemBillArea.getChildren().remove(i);
                         items.remove(i);
-                        calAndSetTotalPriceBill((float) (itemDTO.getPrice() * (-1.0f * quantityItem)));
+                        calAndSetTotalPriceBill(billDetailDTO.getPrice() * -1.0f);
                         calAndSetTotalPricePayBill();
                     }
                 }
@@ -161,12 +171,19 @@ public class BillManagementController implements Initializable {
                 itemBillArea.getChildren().add(anchorPane);
             }
 
+            customerDTO = CustomerDAO.findById(billDTO.getCustomer_id());
+            if(customerDTO != null){
+                tfCustomer.setText(customerDTO.getFullname());
+                tfCustomer.setText(customerDTO.getPhone());
+            }
+
             lbArea.setText(String.valueOf(this.tableDTO.getArea_id()));
             lbNameTable.setText(tableDTO.getName());
             lbIdBill.setText(String.valueOf(billDTO.getBill_id()));
             lbDateTime.setText(String.valueOf(billDTO.getCreate_time()));
             lbEmployee.setText(User.userInfo.getFullname());
             lbTotalPrice.setText(String.valueOf(billDTO.getTotal()));
+            lbDiscount.setText("0.0");
             calAndSetTotalPricePayBill();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -210,15 +227,54 @@ public class BillManagementController implements Initializable {
     public float calAndSetTotalPriceBill(float amount){
         billDTO.setTotal((billDTO.getTotal() + amount));
         lbTotalPrice.setText(String.valueOf(billDTO.getTotal()));
+        try {
+            BillDAO.updateTotalPrice(billDTO.getBill_id(), billDTO.getTotal());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return billDTO.getTotal();
     }
 
     public float calAndSetTotalPricePayBill(){
-        lbTotalPricePay.setText(String.valueOf(billDTO.getTotal()));
+        float discount = Float.parseFloat(lbDiscount.getText());
+        lbTotalPricePay.setText(String.valueOf(billDTO.getTotal()*(100-discount)/100));
+
         return billDTO.getTotal();
     }
 
-    public void onLookUpButtonClick(ActionEvent event) {
+    public void onLookUpButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String name = tfCustomer.getText();
+        String phone = tfPhoneCustomer.getText();
+        if(phone.trim().length() != 0){
+            customerDTO = CustomerDAO.findByPhone(phone);
+            if(customerDTO != null){
+                tfCustomer.setText(customerDTO.getFullname());
+            }else{
+                Toast.showToast(Toast.TOAST_WARN, lbIdBill, "Customer is not available in system");
+            }
+        }
+    }
 
+    public void onPayButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+        BillDAO.updateStateBill(billDTO.getBill_id(), 1);
+        TableDAO.setBillId(tableDTO.getTable_id(), 0);
+        System.out.println(billDTO.toString());
+        StageUtils.switchTo(Main.class.getResource("UserMainMenu.fxml"), event, StageStyle.UNDECORATED);
+
+    }
+
+    public void onCancelButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+        TableDAO.setBillId(tableDTO.getTable_id(),0);
+        BillDetailDAO.deleteByBillId(billDTO.getBill_id());
+        BillDAO.delete(billDTO.getBill_id());
+        StageUtils.switchTo(Main.class.getResource("UserMainMenu.fxml"), event, StageStyle.UNDECORATED);
+    }
+
+    public void onCbPromotionClick(ActionEvent event) {
+        PromotionDTO promotionDTO = cbPromotion.getSelectionModel().getSelectedItem();
+        lbDiscount.setText(String.valueOf(promotionDTO.getDiscount()));
+        calAndSetTotalPricePayBill();
     }
 }

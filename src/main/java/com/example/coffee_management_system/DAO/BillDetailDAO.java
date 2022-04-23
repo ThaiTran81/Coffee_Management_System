@@ -107,4 +107,11 @@ public class BillDetailDAO {
             e.printStackTrace();
         }
     }
+
+    public static void deleteByBillId(int bill_id) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM billdetail where bill_id = " + bill_id;
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
 }

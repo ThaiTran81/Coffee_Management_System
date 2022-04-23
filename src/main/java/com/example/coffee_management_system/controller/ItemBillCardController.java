@@ -56,6 +56,6 @@ public class ItemBillCardController implements Initializable {
     }
 
     public void onDeleteButtonClick(ActionEvent event) {
-        this.callback.delete(this.itemDTO, this.billDetailDTO, event, (Integer) spQuantity.getValueFactory().getValue());
+        this.callback.delete(this.itemDTO, this.billDetailDTO, event);
     }
 }

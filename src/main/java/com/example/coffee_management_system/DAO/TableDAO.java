@@ -93,9 +93,17 @@ public class TableDAO {
     }
 
     public static int setBillId(int tableId, int newBillId) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE `table`\n" +
-                "SET bill_id = " + newBillId +
-                " WHERE table_id = " + tableId;
+        String sql;
+        if(newBillId == 0){
+            sql = "UPDATE `table`\n" +
+                    "SET bill_id = " + null +
+                    " WHERE table_id = " + tableId;
+        }else{
+            sql = "UPDATE `table`\n" +
+                    "SET bill_id = " + newBillId +
+                    " WHERE table_id = " + tableId;
+        }
+
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
         return stmt.executeUpdate();
