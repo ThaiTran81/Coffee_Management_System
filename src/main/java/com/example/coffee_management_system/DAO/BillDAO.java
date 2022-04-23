@@ -193,9 +193,18 @@ public class BillDAO {
     }
 
     public static void updatePromotionDiscount(int bill_id, float discount, int promotion_id) {
-        String sql = "UPDATE bill " +
-                "SET discount = " + discount + ", promotion = " + promotion_id +
-                " WHERE bill_id = " + bill_id;
+        String sql;
+        if(promotion_id != 0){
+            sql = "UPDATE bill " +
+                    "SET discount = " + discount + ", promotion = " + promotion_id +
+                    " WHERE bill_id = " + bill_id;
+        }else{
+            sql = "UPDATE bill " +
+                    "SET discount = " + discount + ", promotion = " + null +
+                    " WHERE bill_id = " + bill_id;
+        }
+
+
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
