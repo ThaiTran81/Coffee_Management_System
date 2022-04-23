@@ -2,8 +2,10 @@ package com.example.coffee_management_system.controller;
 
 import com.example.coffee_management_system.DTO.CategoryDTO;
 import com.example.coffee_management_system.DTO.TableDTO;
+import com.example.coffee_management_system.Main;
 import com.example.coffee_management_system.ultil.ComponentMenuListener;
 import com.example.coffee_management_system.ultil.StageUtils;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controlsfx.control.PropertySheet;
 
@@ -33,11 +36,10 @@ public class ManagmentMenuController {
     private Button btnBackToMainMenu;
 
     private URL backto_url;
-
     ComponentMenuListener addListener;
 
 
-    void setContentArea(URL url) {
+    public void setContentArea(URL url) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent parent = fxmlLoader.load();
@@ -65,13 +67,18 @@ public class ManagmentMenuController {
     @FXML
     void onBackToMainMenuButtonClick(ActionEvent event) {
         try {
-            StageUtils.switchTo(backto_url, event, StageStyle.UNDECORATED);
-        } catch (IOException e) {
-            e.printStackTrace();
+            if(backto_url != null) {
+                StageUtils.switchTo(backto_url, event, StageStyle.UNDECORATED);
+            }else{
+                StageUtils.switchToUserTableManagement(event, StageStyle.UNDECORATED);
+            }
+            } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
-    void setBackSatge(URL url){
+    public void setBackSatge(URL url){
         this.backto_url = url;
     }
+
 }

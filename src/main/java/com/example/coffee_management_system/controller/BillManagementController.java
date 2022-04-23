@@ -9,6 +9,7 @@ import com.example.coffee_management_system.ultil.UDBillHandler;
 import com.example.coffee_management_system.ultil.UDHandler;
 import com.example.coffee_management_system.values.User;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -25,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controlsfx.control.PropertySheet;
 
@@ -268,10 +272,24 @@ public class BillManagementController implements Initializable {
         }
     }
 
+
     public void onPayButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
-        BillDAO.updateStateBill(billDTO.getBill_id(), 1);
-        TableDAO.setBillId(tableDTO.getTable_id(), 0);
-        StageUtils.switchTo(Main.class.getResource("UserMainMenu.fxml"), event, StageStyle.UNDECORATED);
+        String name = tfCustomer.getText().trim();
+        String phone = tfPhoneCustomer.getText().trim();
+        if(name.length() != 0 && phone.length() != 0){
+            CustomerDTO customerDTO = CustomerDAO.findByPhone(phone);
+            if(customerDTO == null){
+                customerDTO = new CustomerDTO(0,name,phone,0,null);
+                int newCustomerId = CustomerDAO.insert(customerDTO);
+                System.out.println(newCustomerId);
+                billDTO.setCustomer_id(newCustomerId);
+            }
+            BillDAO.updateStateBillCustomerId(billDTO.getBill_id(), 1, billDTO.getCustomer_id());
+            TableDAO.setBillId(tableDTO.getTable_id(), 0);
+            StageUtils.switchToUserTableManagement(event,StageStyle.UNDECORATED);
+        }else{
+            Toast.showToast(Toast.TOAST_WARN, lbIdBill, "Customer is empty!!!");
+        }
 
     }
 
@@ -279,10 +297,10 @@ public class BillManagementController implements Initializable {
         TableDAO.setBillId(tableDTO.getTable_id(),0);
         BillDetailDAO.deleteByBillId(billDTO.getBill_id());
         BillDAO.delete(billDTO.getBill_id());
-        StageUtils.switchTo(Main.class.getResource("UserMainMenu.fxml"), event, StageStyle.UNDECORATED);
+        StageUtils.switchToUserTableManagement(event,StageStyle.UNDECORATED);
     }
 
-    public void onCbPromotionClick(ActionEvent event) {
+    public void onCbPromotionClick(ActionEvent event) throws IOException {
         PromotionDTO promotionDTO = cbPromotion.getSelectionModel().getSelectedItem();
         lbDiscount.setText(String.valueOf(promotionDTO.getDiscount()));
         billDTO.setDiscount(promotionDTO.getDiscount());

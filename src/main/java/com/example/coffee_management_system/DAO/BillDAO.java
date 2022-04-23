@@ -163,9 +163,10 @@ public class BillDAO {
         return status;
     }
 
-    public static void updateStateBill(int billId, int state) throws SQLException, ClassNotFoundException {
+    public static void updateStateBillCustomerId(int billId, int state, int customerid) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE bill\n" +
                 "SET status = " + state +
+                ", customer_id = " + customerid +
                 " WHERE bill_id = " + billId;
 
         Connection connection = DBConnection.getDbConnection().getConnection();

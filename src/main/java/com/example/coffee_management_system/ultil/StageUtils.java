@@ -1,5 +1,7 @@
 package com.example.coffee_management_system.ultil;
 
+import com.example.coffee_management_system.Main;
+import com.example.coffee_management_system.controller.ManagmentMenuController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -61,7 +63,33 @@ public class StageUtils {
         prevStage.setScene(scene);
         prevStage.show();
 
+        return fxmlLoader;
+    }
 
+    public static FXMLLoader switchToUserTableManagement(ActionEvent event, StageStyle stageStyle) throws IOException {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {}
+        });
+        Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        prevStage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("management_menu.fxml"));
+
+//        Stage stage = new Stage();
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+            ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+            managmentMenuController.setContentArea(Main.class.getResource("user_table_management.fxml"));
+            managmentMenuController.setBackSatge(Main.class.getResource("UserMainMenu.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        prevStage.initStyle(stageStyle);
+        prevStage.sizeToScene();
+        prevStage.setScene(scene);
+        prevStage.show();
 
         return fxmlLoader;
     }

@@ -111,6 +111,7 @@ public class UserTableManagementController implements Initializable {
                 try {
                     fxmlLoader = switchTo(Main.class.getResource("management_menu.fxml"), event);
                     ManagmentMenuController managmentMenuController = fxmlLoader.getController();
+
                     if(tableDTO.getBill_id() == 0){
 
                         BillDTO billDTO = new BillDTO();
@@ -121,7 +122,7 @@ public class UserTableManagementController implements Initializable {
                         TableDAO.setBillId(tableDTO.getTable_id(), newBillId);
                     }
                     managmentMenuController.setContentArea(Main.class.getResource("item_management.fxml"), tableDTO);
-                    managmentMenuController.setBackSatge(Main.class.getResource("UserMainMenu.fxml"));
+                    managmentMenuController.setBackSatge(null);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {

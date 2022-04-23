@@ -2,10 +2,7 @@ package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.CustomerDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CustomerDAO {
 
@@ -41,5 +38,22 @@ public class CustomerDAO {
             );
         }
         return null;
+    }
+
+    public static int insert(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO `customer`(fullname, phone) VALUES(?,?)";
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        connection = DBConnection.getDbConnection().getConnection();
+        stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        stmt.setString(1, customerDTO.getFullname());
+        stmt.setString(2, customerDTO.getPhone());
+        stmt.executeUpdate();
+        ResultSet rs = stmt.getGeneratedKeys();
+        int key = 0;
+        if(rs.next()){
+            key = rs.getInt(1);
+        }
+        return key;
     }
 }
