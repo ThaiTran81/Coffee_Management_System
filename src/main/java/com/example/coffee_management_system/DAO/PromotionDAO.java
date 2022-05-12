@@ -1,7 +1,6 @@
 package com.example.coffee_management_system.DAO;
 
 import com.example.coffee_management_system.DTO.PromotionDTO;
-import com.example.coffee_management_system.DTO.UserDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class PromotionDAO {
     }
 
     public static int insert(PromotionDTO promotionDTO) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO user(name, descriptor, discount, startDate, endDate, type, status) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO promotion(name, description, discount, startDate, endDate, type, status) VALUES(?,?,?,?,?,?,?)";
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement stmt = connection.prepareStatement(sql);
 

@@ -23,7 +23,7 @@ public class PromotionDTO {
         this.startDate = null;
         this.endDate = null;
         this.type = -1;
-        this.status = -1;
+        this.status = 1;
     }
 
     public PromotionDTO(int promotionID, String name, String description, float discount, Date startDate, Date endDate, int type, int status) {
